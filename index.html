@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>imgsfix — Privacy-First Client-Side Utility &amp; Image Hub</title>
+  <meta name="description" content="Compress, resize, convert, crop, enhance, remove backgrounds, scan QR codes, and edit images 100% locally in your browser. Explore 6 client-side utility categories with zero uploads and zero tracking.">
+  <meta property="og:title" content="imgsfix — Privacy-First Client-Side Utility &amp; Image Hub">
+  <meta property="og:description" content="Compress, resize, convert, crop, enhance, remove backgrounds, scan QR codes, and edit images 100% locally in your browser.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#1a5fff">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/png" href="/assets/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
+  <link rel="stylesheet" href="/assets/cairo.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="badge">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <span data-i18n="hero_badge">100% Client-Side · No Uploads · Private</span>
+        </span>
+        <h1 data-i18n="hero_title" style="margin-top:var(--s-4)">Fix &amp; Transform Your Images Right in the Browser</h1>
+        <p class="hero-lead" data-i18n="hero_lead">Compress, resize, convert, crop, enhance, and edit images with zero server round-trips. Your files never leave your device — privacy guaranteed.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary btn-lg" href="#categories" data-i18n="cta_browse">Browse Tools</a>
+          <a class="btn btn-secondary btn-lg" href="pages/advanced-editor.html" data-i18n="cta_start">Start Editing</a>
+        </div>
+        <div class="hero-stats">
+          <span class="stat-badge"><span class="dot"></span><span data-i18n="hero_stat1">6 Utility Categories</span></span>
+          <span class="stat-badge"><span class="dot"></span><span data-i18n="hero_stat2">Zero Uploads</span></span>
+          <span class="stat-badge"><span class="dot"></span><span data-i18n="hero_stat3">Free Forever</span></span>
+          <span class="stat-badge"><span class="dot"></span><span data-i18n="hero_stat4">No Sign-Up</span></span>
+          <span class="stat-badge"><span class="dot"></span><span data-i18n="hero_stat5">EN / AR</span></span>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="orbit"></div>
+        <div class="orbit"></div>
+        <div class="core">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="3"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <path d="M21 15l-5-5L5 21"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 Main Category Hub Cards + Global Search -->
+  <section class="section" id="categories" style="background:var(--bg-subtle)">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:var(--s-6)">
+        <span class="badge" data-i18n="tools_badge">Utility Hub</span>
+        <h2 data-i18n="tools_title" style="margin-top:var(--s-3)">Explore Tools by Category</h2>
+      </div>
+
+      <div class="search-box">
+        <span class="s-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+          </svg>
+        </span>
+        <input type="search" id="toolSearch" data-i18n-ph="tools_search_ph" placeholder="Search all tools across 6 categories…" aria-label="Search tools">
+      </div>
+
+      <div class="categories-grid" id="categoriesGrid">
+        <!-- 1. Images & Design -->
+        <a class="card card-hover category-card reveal" href="pages/categories/images.html">
+          <div class="category-card-top">
+            <div class="icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>
+              </svg>
+            </div>
+            <span class="cat-meta-pill is-live" data-i18n="cat_images_meta">9 Live Tools</span>
+          </div>
+          <h3 data-i18n="cat_images_t">Images &amp; Design</h3>
+          <p data-i18n="cat_images_d">Compress, resize, convert, crop, remove backgrounds, cartoonize, enhance, apply filters, and edit multi-layer designs.</p>
+          <span class="cat-explore-link">
+            <span data-i18n="cat_explore">Explore Tools</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </a>
+
+        <!-- 2. Smart Studio -->
+        <a class="card card-hover category-card reveal" href="pages/categories/ai-design.html">
+          <div class="category-card-top">
+            <div class="icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m12 3 1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3Z"/>
+              </svg>
+            </div>
+            <span class="cat-meta-pill is-live" data-i18n="cat_ai_meta">8 Live Tools</span>
+          </div>
+          <h3 class="cat-title-row">
+            <span data-i18n="cat_ai_t">Smart Studio</span>
+            <span class="cat-ai-badge" data-i18n="cat_ai_powered">AI-Powered</span>
+          </h3>
+          <p data-i18n="cat_ai_d">Create passport &amp; visa photos, edit YouTube &amp; social thumbnails, design die-cut stickers, memes, greeting &amp; quote cards, store promo badges, convert photos into coloring pages, generate 4K wallpapers &amp; seamless patterns, design studio profile pictures (PFP), showcase screenshots &amp; branding in 33+ product &amp; device mockups, and build smart photo collages directly in your browser with maximum privacy.</p>
+          <span class="cat-explore-link">
+            <span data-i18n="cat_explore">Explore Tools</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </a>
+
+        <!-- 3. Text & Content -->
+        <a class="card card-hover category-card reveal" href="pages/categories/text.html">
+          <div class="category-card-top">
+            <div class="icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/>
+              </svg>
+            </div>
+            <span class="cat-meta-pill is-live" data-i18n="cat_text_meta">3 Live · 1 Soon</span>
+          </div>
+          <h3 data-i18n="cat_text_t">Text &amp; Content</h3>
+          <p data-i18n="cat_text_d">Generate stylish Unicode fonts, count words &amp; SEO keyword density, clean formatting, and summarize text in-browser.</p>
+          <span class="cat-explore-link">
+            <span data-i18n="cat_explore">Explore Tools</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </a>
+
+        <!-- 4. Business & E-Commerce -->
+        <a class="card card-hover category-card reveal" href="pages/categories/business.html">
+          <div class="category-card-top">
+            <div class="icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3z"/><path d="M19 14h2v2h-2z"/><path d="M14 19h2v2h-2z"/><path d="M18 18h3v3h-3z"/>
+              </svg>
+            </div>
+            <span class="cat-meta-pill is-live" data-i18n="cat_business_meta">1 Live · 3 Soon</span>
+          </div>
+          <h3 data-i18n="cat_business_t">Business &amp; E-Commerce</h3>
+          <p data-i18n="cat_business_d">Scan QR codes &amp; barcodes offline, create custom QR codes, generate WhatsApp links, and build receipts.</p>
+          <span class="cat-explore-link">
+            <span data-i18n="cat_explore">Explore Tools</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </a>
+
+        <!-- 5. Video & Media -->
+        <a class="card card-hover category-card reveal" href="pages/categories/media.html">
+          <div class="category-card-top">
+            <div class="icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2" y="4" width="20" height="16" rx="3"/><polygon points="10 9 16 12 10 15 10 9"/>
+              </svg>
+            </div>
+            <span class="cat-meta-pill is-live" data-i18n="cat_media_meta">2 Live · 2 Soon</span>
+          </div>
+          <h3 data-i18n="cat_media_t">Video &amp; Media</h3>
+          <p data-i18n="cat_media_d">Grab MaxRes HD YouTube thumbnails &amp; Shorts covers, capture crisp frame-by-frame video snapshots &amp; bursts, extract audio from video, and trim or boost audio locally.</p>
+          <span class="cat-explore-link">
+            <span data-i18n="cat_explore">Explore Tools</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </a>
+
+        <!-- 6. PDF & Utilities -->
+        <a class="card card-hover category-card reveal" href="pages/categories/pdf-utils.html">
+          <div class="category-card-top">
+            <div class="icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/>
+              </svg>
+            </div>
+            <span class="cat-meta-pill" data-i18n="cat_pdf_meta">5 Tools · Soon</span>
+          </div>
+          <h3 data-i18n="cat_pdf_t">PDF &amp; Utilities</h3>
+          <p data-i18n="cat_pdf_d">Merge &amp; split PDFs, convert images &amp; PDFs, e-sign documents, generate strong passwords, and stay focused.</p>
+          <span class="cat-explore-link">
+            <span data-i18n="cat_explore">Explore Tools</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </a>
+      </div>
+
+      <!-- Dynamic Global Search Results Container -->
+      <div class="tools-grid hide" id="searchResultsGrid" aria-live="polite"></div>
+      <p class="search-empty hide" data-i18n="no_tools">No tools match your search.</p>
+    </div>
+  </section>
+
+  <!-- Workflow -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:var(--s-7)">
+        <span class="badge" data-i18n="workflow_badge">How It Works</span>
+        <h2 data-i18n="workflow_title" style="margin-top:var(--s-3)">Three Simple Steps</h2>
+      </div>
+      <div class="steps-grid">
+        <div class="card step-card reveal">
+          <div class="step-num">1</div>
+          <h3 data-i18n="step1_t">Pick a Tool</h3>
+          <p data-i18n="step1_d">Browse our 6 utility categories, pick an image tool, scan QR codes, or open the editor.</p>
+        </div>
+        <div class="card step-card reveal">
+          <div class="step-num">2</div>
+          <h3 data-i18n="step2_t">Drop Your File</h3>
+          <p data-i18n="step2_d">Drag &amp; drop or browse — your image stays on your device, never uploaded.</p>
+        </div>
+        <div class="card step-card reveal">
+          <div class="step-num">3</div>
+          <h3 data-i18n="step3_t">Download Result</h3>
+          <p data-i18n="step3_d">Process instantly and download the result. No waiting, no accounts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section" style="background:var(--bg-subtle)">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:var(--s-7)">
+        <span class="badge" data-i18n="features_badge">Why imgsfix</span>
+        <h2 data-i18n="features_title" style="margin-top:var(--s-3)">Built for Privacy &amp; Speed</h2>
+      </div>
+      <div class="features-grid">
+        <div class="card feature-card reveal">
+          <div class="f-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+          </div>
+          <h3 data-i18n="f1_t">100% Private</h3>
+          <p data-i18n="f1_d">Files never leave your browser. No uploads, no servers.</p>
+        </div>
+        <div class="card feature-card reveal">
+          <div class="f-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+          </div>
+          <h3 data-i18n="f2_t">Lightning Fast</h3>
+          <p data-i18n="f2_d">Instant processing with Canvas API. No queues.</p>
+        </div>
+        <div class="card feature-card reveal">
+          <div class="f-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>
+            </svg>
+          </div>
+          <h3 data-i18n="f3_t">Free Forever</h3>
+          <p data-i18n="f3_d">No subscriptions, no hidden costs, no sign-up required.</p>
+        </div>
+        <div class="card feature-card reveal">
+          <div class="f-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <h3 data-i18n="f4_t">Bilingual</h3>
+          <p data-i18n="f4_d">Full English and Arabic support with RTL layout.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-sm">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <h2 data-i18n="cta_title">Ready to Fix Your Images?</h2>
+        <p data-i18n="cta_desc">Start using imgsfix now — no downloads, no accounts, just open and go.</p>
+        <div class="cta-actions">
+          <a class="btn btn-primary btn-lg" href="#categories" data-i18n="cta_go">Launch Tools</a>
+          <a class="btn btn-secondary btn-lg" href="pages/advanced-editor.html" data-i18n="cta_editor">Open Editor</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

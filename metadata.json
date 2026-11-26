@@ -1,0 +1,10 @@
+{
+  "name": "imgsfix",
+  "description": "Privacy-first 100% client-side image toolkit, QR/barcode reader, and advanced canvas editor PWA.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
