@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compress Image — imgsfix</title>
+  <meta name="description" content="Shrink image file size while keeping quality. 100% local browser processing.">
+  <link rel="stylesheet" href="/assets/cairo.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <section class="page-head">
+    <div class="container">
+      <span class="badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14h6v6"/><path d="M20 10h-6V4"/><path d="M14 10l7-7"/><path d="M3 21l7-7"/></svg><span data-i18n="t_compress_t">Compress</span></span>
+      <h1 data-i18n="t_compress_t">Compress</h1>
+      <p data-i18n="t_compress_d">Shrink image file size while keeping quality.</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html" data-i18n="bc_home">Home</a><span class="sep">/</span>
+        <a href="../../index.html#categories" data-i18n="nav_tools">Tools</a><span class="sep">/</span>
+        <a href="../categories/images.html" data-i18n="cat_images_t">Images &amp; Design</a><span class="sep">/</span>
+        <span data-i18n="t_compress_t">Compress</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container tool-shell">
+      <aside class="tool-panel">
+        <div class="panel-section">
+          <h4 data-i18n="tc_compress_settings">Compress Settings</h4>
+          <div class="setting-row">
+            <label data-i18n="tc_presets">Presets</label>
+            <div class="compress-presets" id="compressPresets" role="group" aria-label="Compression presets">
+              <button type="button" class="compress-preset-btn" data-quality="90">
+                <span class="cp-name" data-i18n="tc_preset_hq">High Quality</span>
+                <span class="cp-meta">90%</span>
+              </button>
+              <button type="button" class="compress-preset-btn active" data-quality="75">
+                <span class="cp-name" data-i18n="tc_preset_balanced">Balanced</span>
+                <span class="cp-meta">75% · <span data-i18n="tc_recommended">Recommended</span></span>
+              </button>
+              <button type="button" class="compress-preset-btn" data-quality="50">
+                <span class="cp-name" data-i18n="tc_preset_ultra">Ultra Small</span>
+                <span class="cp-meta">50%</span>
+              </button>
+            </div>
+          </div>
+          <div class="setting-row">
+            <label for="quality"><span data-i18n="tc_quality">Quality</span>: <span id="qualityVal">75</span>%</label>
+            <input type="range" id="quality" class="range-input" min="10" max="100" value="75">
+          </div>
+          <div class="setting-row">
+            <label for="maxWidth" data-i18n="tc_max_width">Max Width (px)</label>
+            <input type="number" id="maxWidth" class="num-input" min="16" max="16384" value="1920">
+          </div>
+          <div class="setting-row">
+            <label for="targetSizeKB" data-i18n="tc_target_size">Target Size (KB) — Optional</label>
+            <input type="number" id="targetSizeKB" class="num-input" min="1" max="102400" step="1" data-i18n-ph="tc_target_size_ph" placeholder="e.g. 200">
+          </div>
+          <button type="button" class="btn btn-primary btn-block" id="btnApply" style="margin-top:8px" data-i18n="t_compress_t">Compress</button>
+        </div>
+        <div class="panel-section" id="sizeInfo" style="display:none">
+          <h4 data-i18n="tc_size">Size</h4>
+          <div class="setting-row" style="display:flex;justify-content:space-between;font-size:13px">
+            <span data-i18n="tc_before">Before</span><span id="sizeBefore">—</span>
+          </div>
+          <div class="setting-row" style="display:flex;justify-content:space-between;font-size:13px">
+            <span data-i18n="tc_after">After</span><span id="sizeAfter">—</span>
+          </div>
+          <div class="setting-row" style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:var(--c-success-500)">
+            <span data-i18n="tc_saved">Saved</span><span id="sizeSaved">—</span>
+          </div>
+          <div id="compressStatus" class="compress-status hide" role="status" aria-live="polite"></div>
+        </div>
+      </aside>
+
+      <div class="tool-stage" id="toolStage">
+        <div class="tool-stage-header">
+          <h3 data-i18n="t_compress_t">Compress</h3>
+          <div class="result-actions" id="resultActions" style="display:none">
+            <button type="button" class="btn btn-primary btn-sm" id="btnDownload" data-i18n="tc_download">Download</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnClear" data-i18n="tc_clear">Clear</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnReset" data-i18n="tc_reset">Reset</button>
+          </div>
+        </div>
+        <div class="tool-stage-body">
+          <div class="empty-state" id="emptyState">
+            <div class="es-icon">
+              <svg class="ic-upload" viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 20h14"/></svg>
+            </div>
+            <p data-i18n="tc_drop">Drop your image here or click to browse</p>
+            <p style="font-size:12px;color:var(--text-faint)" data-i18n="tc_supported">JPG · PNG · WebP · GIF · BMP</p>
+            <button type="button" class="btn btn-primary btn-sm" id="btnUpload" data-i18n="t_upload">Upload Image</button>
+          </div>
+          <div class="ba-wrap hide" id="baWrap">
+            <canvas id="beforeCanvas"></canvas>
+            <div class="ba-clip" style="width:50%">
+              <canvas id="afterCanvas"></canvas>
+            </div>
+            <div class="ba-slider" style="left:50%"></div>
+            <div class="ba-handle" aria-hidden="true">⇄</div>
+            <span class="ba-label ba-label-before" data-i18n="tc_original">Before</span>
+            <span class="ba-label ba-label-after" data-i18n="tc_result">After</span>
+          </div>
+          <input type="file" id="fileInput" accept="image/*" class="hide">
+          <div class="drop-zone hide" id="dropZone" style="margin-top:16px">
+            <span class="dz-icon">
+              <svg class="ic-upload" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 20h14"/></svg>
+            </span>
+            <span data-i18n="tc_drop">Drop your image here or click to browse</span>
+          </div>
+          <div class="progress hide" id="progress" style="max-width:400px">
+            <div class="progress-bar"></div>
+            <div class="progress-text" id="progressText"></div>
+          </div>
+          <div id="infoBar" style="font-size:13px;color:var(--text-faint)"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="/js/main.js"></script>
+  <script type="module" src="/js/compress.js"></script>
+</body>
+</html>

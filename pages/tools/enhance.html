@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhance Image Quality — imgsfix</title>
+  <meta name="description" content="Automatically boost photo clarity, lighting, and vibrancy in one click with smart denoising and detail recovery. 100% local browser processing.">
+  <link rel="stylesheet" href="/assets/cairo.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <section class="page-head">
+    <div class="container">
+      <span class="badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+        </svg>
+        <span data-i18n="t_enhance_t">Enhance Image Quality</span>
+      </span>
+      <h1 data-i18n="t_enhance_t">Enhance Image Quality</h1>
+      <p data-i18n="t_enhance_d">Automatically boost photo clarity, lighting, and vibrancy in one click with smart denoising and detail recovery.</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html" data-i18n="bc_home">Home</a><span class="sep">/</span>
+        <a href="../../index.html#categories" data-i18n="nav_tools">Tools</a><span class="sep">/</span>
+        <a href="../categories/images.html" data-i18n="cat_images_t">Images &amp; Design</a><span class="sep">/</span>
+        <span data-i18n="t_enhance_t">Enhance Image Quality</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container tool-shell">
+      <aside class="tool-panel">
+        <div class="panel-section">
+          <h4 data-i18n="tc_enhance_modes">Smart Modes</h4>
+          <button type="button" class="btn btn-primary btn-block enhance-auto-btn" id="btnAutoEnhance" disabled>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+            </svg>
+            <span data-i18n="tc_auto_enhance">Auto Enhance</span>
+          </button>
+          <div class="enhance-modes-grid" id="enhanceModes" role="group" aria-label="Smart Enhancement Modes" style="margin-top:10px">
+            <button type="button" class="enhance-mode-btn" data-mode="auto" disabled>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/>
+              </svg>
+              <span data-i18n="tc_mode_auto">Auto Balance</span>
+            </button>
+            <button type="button" class="enhance-mode-btn" data-mode="clarity" disabled>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="12 2 19 21 12 17 5 21 12 2"/>
+              </svg>
+              <span data-i18n="tc_mode_clarity">HD Clarity &amp; Crisp</span>
+            </button>
+            <button type="button" class="enhance-mode-btn" data-mode="portrait" disabled>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/>
+              </svg>
+              <span data-i18n="tc_mode_portrait">Portrait Glow</span>
+            </button>
+            <button type="button" class="enhance-mode-btn" data-mode="lowlight" disabled>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+              </svg>
+              <span data-i18n="tc_mode_lowlight">Low-Light Fix</span>
+            </button>
+            <button type="button" class="enhance-mode-btn" data-mode="old_photo" style="grid-column:1 / -1;justify-content:center" disabled>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 15-5-5L5 20"/>
+              </svg>
+              <span data-i18n="tc_mode_old_photo">Old Photo Clarity</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h4 data-i18n="tc_enhance_settings">Enhance Settings</h4>
+          <div class="setting-row">
+            <label for="brightness"><span data-i18n="tc_brightness">Brightness</span>: <span id="briVal">100</span></label>
+            <input type="range" id="brightness" class="range-input" min="50" max="150" value="100">
+          </div>
+          <div class="setting-row">
+            <label for="contrast"><span data-i18n="tc_contrast">Contrast</span>: <span id="conVal">100</span></label>
+            <input type="range" id="contrast" class="range-input" min="50" max="150" value="100">
+          </div>
+          <div class="setting-row">
+            <label for="saturation"><span data-i18n="tc_vibrance">Vibrance / Saturation</span>: <span id="satVal">100</span></label>
+            <input type="range" id="saturation" class="range-input" min="50" max="150" value="100">
+          </div>
+          <div class="setting-row">
+            <label for="sharpness"><span data-i18n="tc_clarity">Clarity / Sharpness</span>: <span id="shpVal">0</span></label>
+            <input type="range" id="sharpness" class="range-input" min="0" max="100" value="0">
+          </div>
+          <div class="setting-row">
+            <label for="denoise"><span data-i18n="tc_denoise">Denoise</span>: <span id="denVal">0</span></label>
+            <input type="range" id="denoise" class="range-input" min="0" max="100" value="0">
+          </div>
+          <button type="button" class="btn btn-secondary btn-block" id="btnApply" style="margin-top:8px" disabled data-i18n="tc_apply">Apply</button>
+        </div>
+      </aside>
+
+      <div class="tool-stage" id="toolStage">
+        <div class="tool-stage-header">
+          <h3 data-i18n="t_enhance_t">Enhance Image Quality</h3>
+          <div class="result-actions" id="resultActions" style="display:none">
+            <button type="button" class="btn btn-primary btn-sm" id="btnDownload" data-i18n="tc_download">Download</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnClear" data-i18n="tc_clear">Clear</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnReset" data-i18n="tc_reset">Reset</button>
+          </div>
+        </div>
+        <div class="tool-stage-body">
+          <div class="empty-state" id="emptyState">
+            <div class="es-icon">
+              <svg class="ic-upload" viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 20h14"/>
+              </svg>
+            </div>
+            <p data-i18n="tc_drop">Drop your image here or click to browse</p>
+            <p style="font-size:12px;color:var(--text-faint)" data-i18n="tc_supported">JPG · PNG · WebP · GIF · BMP</p>
+            <button type="button" class="btn btn-primary btn-sm" id="btnUpload" data-i18n="t_upload">Upload Image</button>
+          </div>
+
+          <div class="ba-wrap hide" id="baWrap">
+            <canvas id="beforeCanvas"></canvas>
+            <div class="ba-clip" style="width:50%">
+              <canvas id="afterCanvas"></canvas>
+            </div>
+            <div class="ba-slider" style="left:50%"></div>
+            <div class="ba-handle" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m7 16-4-4 4-4"/><path d="m17 8 4 4-4 4"/><path d="M3 12h18"/>
+              </svg>
+            </div>
+            <span class="ba-label ba-label-before" data-i18n="tc_original">Before</span>
+            <span class="ba-label ba-label-after" data-i18n="tc_result">After</span>
+          </div>
+
+          <input type="file" id="fileInput" accept="image/*" class="hide">
+          <div class="drop-zone hide" id="dropZone" style="margin-top:16px">
+            <span class="dz-icon">
+              <svg class="ic-upload" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 20h14"/>
+              </svg>
+            </span>
+            <span data-i18n="tc_drop">Drop your image here or click to browse</span>
+          </div>
+          <div class="progress hide" id="progress" style="max-width:400px">
+            <div class="progress-bar"></div>
+            <div class="progress-text" id="progressText"></div>
+          </div>
+          <div id="infoBar" style="font-size:13px;color:var(--text-faint)"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="/js/main.js"></script>
+  <script type="module" src="/js/enhance.js"></script>
+</body>
+</html>

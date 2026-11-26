@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stickers, Memes &amp; Cards Studio — Die-Cut Sticker Maker, Meme &amp; Comic Maker, Greeting &amp; Quote Cards, Store Promo Badges — imgsfix</title>
+  <meta name="description" content="100% client-side 4-in-1 creative studio: Die-Cut Sticker Maker for WhatsApp &amp; print sheets, Meme &amp; Comic Maker with 18+ templates, Greeting &amp; Quote Cards, and Store Promo Badges.">
+  <link rel="stylesheet" href="/assets/cairo.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Almarai:wght@700;800&family=Amiri:wght@700&family=Anton&family=Aref+Ruqaa:wght@400;700&family=Bangers&family=Bebas+Neue&family=Changa:wght@700;800&family=El+Messiri:wght@600;700&family=IBM+Plex+Sans+Arabic:wght@700&family=Lalezar&family=Lemonada:wght@600;700&family=Luckiest+Guy&family=Montserrat:wght@800;900&family=Oswald:wght@700&family=Pacifico&family=Permanent+Marker&family=Playfair+Display:wght@700;900&family=Poppins:wght@800&family=Readex+Pro:wght@700&family=Reem+Kufi:wght@600;700&family=Roboto:wght@900&family=Tajawal:wght@700;800&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <section class="page-head ss-page-head">
+    <div class="container">
+      <span class="badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9Z"/>
+          <path d="M15 3v6h6"/>
+          <path d="M8 13h8"/>
+          <path d="M8 17h5"/>
+        </svg>
+        <span data-i18n="t_sticker_studio_t">Stickers, Memes &amp; Cards Studio</span>
+      </span>
+      <h1 data-i18n="t_sticker_studio_t">Stickers, Memes &amp; Cards Studio</h1>
+      <p data-i18n="t_sticker_studio_d">Create die-cut WhatsApp &amp; printable stickers with AI background removal, design viral memes, craft ornate greeting &amp; quote cards, and stamp store promo badges 100% locally in your browser.</p>
+      <p class="ss-subtools-line" data-i18n="t_sticker_studio_sub">Die-Cut Sticker Maker · Meme &amp; Comic Maker · Greeting &amp; Quote Cards · Store Promo Badges</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html" data-i18n="bc_home">Home</a><span class="sep">/</span>
+        <a href="../../index.html#categories" data-i18n="nav_tools">Tools</a><span class="sep">/</span>
+        <a href="../categories/ai-design.html" data-i18n="cat_ai_t">Smart Studio</a><span class="sep">/</span>
+        <span data-i18n="t_sticker_studio_t">Stickers, Memes &amp; Cards Studio</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section-sm ss-section">
+    <div class="container ss-container">
+      <!-- Step-by-Step Usage Hint Banner -->
+      <div class="ss-usage-banner" role="note">
+        <svg class="ss-usage-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+        </svg>
+        <p data-i18n="ss_usage_hint">How to use: 1. Choose a studio mode above (Die-Cut Stickers, Memes, Greeting Cards, or Promo Badges) → 2. Pick a ready template, phrase, or upload your own photo (Ctrl+V supported) → 3. Customize outlines, captions, frames &amp; layers → 4. Preview in chat or download crisp PNG/JPG/PDF.</p>
+      </div>
+
+      <!-- 4-in-1 Top Mode Switcher Bar -->
+      <div class="ss-mode-bar" id="ssModeBar" role="tablist" aria-label="Creative studio modes">
+        <button type="button" class="ss-mode-btn active" data-mode="sticker" role="tab" aria-selected="true">
+          <span class="ss-mode-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9Z"/><path d="M15 3v6h6"/>
+            </svg>
+          </span>
+          <span class="ss-mode-text">
+            <strong data-i18n="ss_mode_sticker_t">Die-Cut Stickers</strong>
+            <small data-i18n="ss_mode_sticker_s">AI cutout, white border, phrases &amp; WhatsApp 512px</small>
+          </span>
+        </button>
+
+        <button type="button" class="ss-mode-btn" data-mode="meme" role="tab" aria-selected="false">
+          <span class="ss-mode-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>
+            </svg>
+          </span>
+          <span class="ss-mode-text">
+            <strong data-i18n="ss_mode_meme_t">Meme &amp; Comic Maker</strong>
+            <small data-i18n="ss_mode_meme_s">18+ meme layouts, Impact/Cairo text &amp; bubbles</small>
+          </span>
+        </button>
+
+        <button type="button" class="ss-mode-btn" data-mode="card" role="tab" aria-selected="false">
+          <span class="ss-mode-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+          </span>
+          <span class="ss-mode-text">
+            <strong data-i18n="ss_mode_card_t">Greeting &amp; Quote Cards</strong>
+            <small data-i18n="ss_mode_card_s">Ornate borders, occasions, quotes &amp; A4 print</small>
+          </span>
+        </button>
+
+        <button type="button" class="ss-mode-btn" data-mode="badge" role="tab" aria-selected="false">
+          <span class="ss-mode-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/>
+            </svg>
+          </span>
+          <span class="ss-mode-text">
+            <strong data-i18n="ss_mode_badge_t">Store Promo Badges</strong>
+            <small data-i18n="ss_mode_badge_s">16+ sale tags, seals &amp; product photo stamps</small>
+          </span>
+        </button>
+      </div>
+
+      <!-- Three-Zone Creative Studio Grid -->
+      <div class="ss-studio" id="ssStudio">
+        <!-- LEFT DOCK: Mode-specific Controls -->
+        <aside class="ss-dock" aria-label="Studio controls dock">
+          <!-- MODE 1: DIE-CUT STICKERS -->
+          <div class="ss-mode-panel active" data-mode-panel="sticker">
+            <div class="ss-dock-tabs" role="tablist" aria-label="Sticker tabs">
+              <button type="button" class="ss-dock-tab active" data-subtab="st_phrases" role="tab" aria-selected="true" data-i18n="ss_st_tab_phrases">Phrases &amp; Text</button>
+              <button type="button" class="ss-dock-tab" data-subtab="st_pack" role="tab" aria-selected="false" data-i18n="ss_st_tab_pack">Sticker Pack</button>
+              <button type="button" class="ss-dock-tab" data-subtab="st_cutout" role="tab" aria-selected="false" data-i18n="ss_st_tab_cutout">Cutout &amp; Brush</button>
+              <button type="button" class="ss-dock-tab" data-subtab="st_outline" role="tab" aria-selected="false" data-i18n="ss_st_tab_outline">Outline &amp; Finish</button>
+            </div>
+
+            <div class="ss-dock-body">
+              <!-- Subtab 1.1: Cutout & Brush -->
+              <div class="ss-subpane" data-subpane="st_cutout">
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_upload_photo_t">Upload Photo or Image</h3>
+                  </div>
+                  <div class="ss-btn-grid-2">
+                    <button type="button" class="btn btn-primary btn-sm" id="btnStUploadPhoto" data-i18n="ss_btn_upload_photo">+ Upload Photo</button>
+                    <button type="button" class="btn btn-secondary btn-sm" id="btnStAddOverlayImg" data-i18n="ss_btn_add_layer_img">+ Extra Layer</button>
+                  </div>
+                  <button type="button" class="btn btn-secondary btn-block" id="btnStAutoCutout" disabled>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="m12 3 1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3Z"/>
+                    </svg>
+                    <span data-i18n="ss_btn_ai_cutout">Auto Remove Background (AI)</span>
+                  </button>
+                  <div class="ss-btn-grid-2 hide" id="ssStPhotoActionRow">
+                    <button type="button" class="btn btn-secondary btn-sm" id="btnStRestoreOrig" data-i18n="ss_btn_restore_orig">Restore Original</button>
+                    <button type="button" class="btn btn-secondary btn-sm" id="btnStRemoveMain" data-i18n="ss_btn_remove_photo">Remove Photo</button>
+                  </div>
+                </div>
+
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_geom_cutout_t">Geometric Shape Cutout</h3>
+                  </div>
+                  <div class="ss-chip-grid" id="ssStShapeCutGrid">
+                    <button type="button" class="ss-chip-btn active" data-cutshape="none" data-i18n="ss_shape_free">Free / AI</button>
+                    <button type="button" class="ss-chip-btn" data-cutshape="circle" data-i18n="ss_shape_circle">Circle</button>
+                    <button type="button" class="ss-chip-btn" data-cutshape="rounded" data-i18n="ss_shape_rounded">Rounded</button>
+                    <button type="button" class="ss-chip-btn" data-cutshape="heart" data-i18n="ss_shape_heart">Heart</button>
+                    <button type="button" class="ss-chip-btn" data-cutshape="star" data-i18n="ss_shape_star">Star</button>
+                    <button type="button" class="ss-chip-btn" data-cutshape="hex" data-i18n="ss_shape_hex">Hexagon</button>
+                  </div>
+                </div>
+
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_brush_t">Restore / Erase Brush</h3>
+                  </div>
+                  <p class="ss-note" id="ssStBrushHint" data-i18n="ss_brush_hint_empty">Upload a photo to refine edges with Restore/Erase brush.</p>
+                  <div class="ss-seg-row" id="ssBrushModeRow">
+                    <button type="button" class="ss-seg-btn active" data-brush="move" data-i18n="ss_tool_move">Move</button>
+                    <button type="button" class="ss-seg-btn" data-brush="restore" disabled data-i18n="ss_tool_restore">Restore</button>
+                    <button type="button" class="ss-seg-btn" data-brush="erase" disabled data-i18n="ss_tool_erase">Erase</button>
+                  </div>
+                  <div class="ss-slider-row">
+                    <div class="ss-slider-head">
+                      <label for="ssStBrushSize" data-i18n="ss_brush_size">Brush Size</label>
+                      <span class="ss-val" id="ssStBrushSizeVal">32 px</span>
+                    </div>
+                    <input type="range" id="ssStBrushSize" class="range-input" min="8" max="96" step="2" value="32" disabled>
+                  </div>
+                  <div class="ss-btn-grid-2">
+                    <button type="button" class="btn btn-secondary btn-sm" id="btnStBrushUndo" disabled data-i18n="ss_brush_undo">Undo Brush</button>
+                    <button type="button" class="btn btn-secondary btn-sm" id="btnStBrushRedo" disabled data-i18n="ss_brush_redo">Redo Brush</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Subtab 1.2: Die-Cut Outline Engine -->
+              <div class="ss-subpane" data-subpane="st_outline">
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_outline_engine_t">Die-Cut Outline Engine</h3>
+                  </div>
+                  <p class="ss-note" data-i18n="ss_outline_note">Smooth outline wraps around both your cutout photo and fused die-cut text.</p>
+                  <div class="ss-slider-row">
+                    <div class="ss-slider-head">
+                      <label for="ssStOutlineWidth" data-i18n="ss_outline_w">Outline Thickness</label>
+                      <span class="ss-val" id="ssStOutlineWidthVal">18 px</span>
+                    </div>
+                    <input type="range" id="ssStOutlineWidth" class="range-input" min="0" max="40" step="1" value="18">
+                  </div>
+                  <div class="ss-swatch-row">
+                    <span class="ss-field-lbl" data-i18n="ss_outline_c">Outline Color</span>
+                    <div class="ss-swatches" id="ssOutlineSwatches">
+                      <button type="button" class="ss-swatch active" data-ocolor="#FFFFFF" style="background:#FFFFFF" title="White" aria-label="White"></button>
+                      <button type="button" class="ss-swatch" data-ocolor="#111827" style="background:#111827" title="Black" aria-label="Black"></button>
+                      <button type="button" class="ss-swatch" data-ocolor="#FACC15" style="background:#FACC15" title="Gold" aria-label="Gold"></button>
+                      <button type="button" class="ss-swatch" data-ocolor="#22D3EE" style="background:#22D3EE" title="Neon Cyan" aria-label="Neon Cyan"></button>
+                      <button type="button" class="ss-swatch" data-ocolor="#F472B6" style="background:#F472B6" title="Neon Pink" aria-label="Neon Pink"></button>
+                      <input type="color" id="ssStOutlineColor" value="#FFFFFF" aria-label="Custom outline color">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_sticker_finish_t">3D Shadow &amp; Vinyl Finish</h3>
+                  </div>
+                  <div class="ss-slider-row">
+                    <div class="ss-slider-head">
+                      <label for="ssStShadow" data-i18n="ss_drop_shadow">3D Drop Shadow</label>
+                      <span class="ss-val" id="ssStShadowVal">18 px</span>
+                    </div>
+                    <input type="range" id="ssStShadow" class="range-input" min="0" max="48" step="2" value="18">
+                  </div>
+                  <label class="ss-check-row">
+                    <input type="checkbox" id="ssStVinylGloss" checked>
+                    <span data-i18n="ss_vinyl_gloss">Vinyl Gloss Highlight</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Subtab: Framed Text & Massive Phrase Library -->
+              <div class="ss-subpane active" data-subpane="st_phrases">
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_framed_text_t">Framed Sticker Text</h3>
+                  </div>
+                  <div class="ss-seg-row" id="ssTextFrameStyleRow">
+                    <button type="button" class="ss-seg-btn active" data-tframe="fused" data-i18n="ss_tf_fused">Die-Cut Fused</button>
+                    <button type="button" class="ss-seg-btn" data-tframe="pill" data-i18n="ss_tf_pill">Pill Ribbon</button>
+                    <button type="button" class="ss-seg-btn" data-tframe="bubble" data-i18n="ss_tf_bubble">Speech Bubble</button>
+                  </div>
+                  <button type="button" class="btn btn-primary btn-block" id="btnStAddText" data-i18n="ss_btn_add_text">+ Add Custom Sticker Text</button>
+                </div>
+
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_phrases_t">Phrase Library (EN / AR)</h3>
+                  </div>
+                  <div class="ss-phrase-cats" id="ssPhraseCats">
+                    <button type="button" class="ss-pill-btn active" data-pcat="greetings" data-i18n="ss_pcat_greetings">Daily Greetings</button>
+                    <button type="button" class="ss-pill-btn" data-pcat="reactions" data-i18n="ss_pcat_reactions">Chat Reactions</button>
+                    <button type="button" class="ss-pill-btn" data-pcat="store" data-i18n="ss_pcat_store">Store &amp; Offers</button>
+                    <button type="button" class="ss-pill-btn" data-pcat="occasions" data-i18n="ss_pcat_occasions">Holidays &amp; Occasions</button>
+                  </div>
+                  <div class="ss-phrase-grid" id="ssPhraseGrid"></div>
+                </div>
+              </div>
+
+              <!-- Subtab: Massive Graphic Stickers Library -->
+              <div class="ss-subpane" data-subpane="st_pack">
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_pack_title">Ready-Made Graphic Stickers (42)</h3>
+                  </div>
+                  <p class="ss-note" data-i18n="ss_pack_note">Tap any graphic sticker to place it on canvas with automatic die-cut outline — no photo upload needed.</p>
+                  <div class="ss-sticker-pack-grid" id="ssStickerPackGrid"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MODE 2: MEME & COMIC MAKER -->
+          <div class="ss-mode-panel" data-mode-panel="meme">
+            <div class="ss-dock-tabs" role="tablist" aria-label="Meme tabs">
+              <button type="button" class="ss-dock-tab active" data-subtab="mm_templates" role="tab" aria-selected="true" data-i18n="ss_mm_tab_tpl">Meme Templates (18)</button>
+              <button type="button" class="ss-dock-tab" data-subtab="mm_captions" role="tab" aria-selected="false" data-i18n="ss_mm_tab_cap">Captions &amp; Bubbles</button>
+              <button type="button" class="ss-dock-tab" data-subtab="mm_media" role="tab" aria-selected="false" data-i18n="ss_mm_tab_media">Custom Media</button>
+            </div>
+
+            <div class="ss-dock-body">
+              <div class="ss-subpane active" data-subpane="mm_templates">
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_mm_tpl_title">Classic Meme Layouts</h3>
+                  </div>
+                  <div class="ss-tpl-grid" id="ssMemeTplGrid"></div>
+                </div>
+              </div>
+
+              <div class="ss-subpane" data-subpane="mm_captions">
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_mm_quick_cap">Top &amp; Bottom Meme Captions</h3>
+                  </div>
+                  <label class="ss-field">
+                    <span data-i18n="ss_mm_top_lbl">Top Caption</span>
+                    <input type="text" id="ssMemeTopInput" class="text-input" placeholder="WHEN CODE WORKS FIRST TRY">
+                  </label>
+                  <label class="ss-field">
+                    <span data-i18n="ss_mm_bot_lbl">Bottom Caption</span>
+                    <input type="text" id="ssMemeBotInput" class="text-input" placeholder="WAIT... WHY DID IT WORK?">
+                  </label>
+                  <div class="ss-btn-grid-2">
+                    <button type="button" class="btn btn-primary btn-sm" id="btnMmAddText" data-i18n="ss_mm_add_txt">+ Extra Caption</button>
+                    <button type="button" class="btn btn-secondary btn-sm" id="btnMmSyncCaps" data-i18n="ss_mm_reset_caps">Reset Layout Text</button>
+                  </div>
+                </div>
+
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_mm_bubbles_t">Comic Speech &amp; Thought Bubbles</h3>
+                  </div>
+                  <div class="ss-chip-grid" id="ssMmBubbleGrid">
+                    <button type="button" class="ss-chip-btn" data-add-bubble="speech" data-i18n="ss_bubble_speech">Speech Bubble</button>
+                    <button type="button" class="ss-chip-btn" data-add-bubble="thought" data-i18n="ss_bubble_thought">Thought Cloud</button>
+                    <button type="button" class="ss-chip-btn" data-add-bubble="shout" data-i18n="ss_bubble_shout">Shout Burst</button>
+                    <button type="button" class="ss-chip-btn" data-add-bubble="pill" data-i18n="ss_bubble_box">Caption Pill</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ss-subpane" data-subpane="mm_media">
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_mm_custom_img_t">Custom Background or Reaction Photo</h3>
+                  </div>
+                  <button type="button" class="btn btn-primary btn-block" id="btnMmUploadBg" data-i18n="ss_mm_upload_bg">Use My Photo as Meme Base</button>
+                  <button type="button" class="btn btn-secondary btn-block" id="btnMmAddLayerImg" data-i18n="ss_btn_add_layer_img">+ Add Sticker / Reaction Layer</button>
+                  <button type="button" class="btn btn-secondary btn-sm btn-block hide" id="btnMmClearBg" data-i18n="ss_mm_clear_bg">Back to Template Art</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MODE 3: GREETING & QUOTE CARDS -->
+          <div class="ss-mode-panel" data-mode-panel="card">
+            <div class="ss-dock-tabs" role="tablist" aria-label="Card tabs">
+              <button type="button" class="ss-dock-tab active" data-subtab="cd_frames" role="tab" aria-selected="true" data-i18n="ss_cd_tab_frames">Themes &amp; Frames</button>
+              <button type="button" class="ss-dock-tab" data-subtab="cd_quotes" role="tab" aria-selected="false" data-i18n="ss_cd_tab_quotes">Greetings &amp; Quotes</button>
+              <button type="button" class="ss-dock-tab" data-subtab="cd_photo" role="tab" aria-selected="false" data-i18n="ss_cd_tab_photo">Photo &amp; Signature</button>
+            </div>
+
+            <div class="ss-dock-body">
+              <div class="ss-subpane active" data-subpane="cd_frames">
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_cd_bg_t">Luxury Backdrops (8)</h3>
+                  </div>
+                  <div class="ss-tpl-grid" id="ssCardBgGrid"></div>
+                </div>
+
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_cd_border_t">Ornate &amp; Minimal Frames (8)</h3>
+                  </div>
+                  <div class="ss-chip-grid" id="ssCardBorderGrid"></div>
+                  <div class="ss-color-pair">
+                    <label class="ss-color-field">
+                      <span data-i18n="ss_cd_accent">Frame Accent</span>
+                      <input type="color" id="ssCardAccentColor" value="#FBBF24">
+                    </label>
+                    <label class="ss-color-field">
+                      <span data-i18n="ss_cd_bg_upload_lbl">Custom BG</span>
+                      <button type="button" class="btn btn-secondary btn-sm" id="btnCdUploadBg" data-i18n="ss_btn_upload_short">Upload</button>
+                    </label>
+                  </div>
+                  <button type="button" class="btn btn-secondary btn-sm btn-block hide" id="btnCdClearBg" data-i18n="ss_cd_clear_bg">Remove Custom Background</button>
+                </div>
+              </div>
+
+              <div class="ss-subpane" data-subpane="cd_quotes">
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_cd_library_t">Ready Greetings &amp; Quotes (EN / AR)</h3>
+                  </div>
+                  <div class="ss-phrase-cats" id="ssCardCatRow">
+                    <button type="button" class="ss-pill-btn active" data-ccat="holidays" data-i18n="ss_pcat_occasions">Holidays &amp; Occasions</button>
+                    <button type="button" class="ss-pill-btn" data-ccat="quotes" data-i18n="ss_cd_cat_quotes">Wisdom &amp; Motivation</button>
+                  </div>
+                  <div class="ss-quote-list" id="ssCardQuoteList"></div>
+                  <button type="button" class="btn btn-primary btn-block" id="btnCdAddText" data-i18n="ss_cd_add_text">+ Add Custom Quote Text</button>
+                </div>
+              </div>
+
+              <div class="ss-subpane" data-subpane="cd_photo">
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_cd_sig_t">Recipient &amp; Sender Signature</h3>
+                  </div>
+                  <label class="ss-field">
+                    <span data-i18n="ss_cd_recipient">To / Recipient</span>
+                    <input type="text" id="ssCardRecipient" class="text-input" maxlength="60" placeholder="Dear Friend / إلى صديقي العزيز">
+                  </label>
+                  <label class="ss-field">
+                    <span data-i18n="ss_cd_sender">From / Sender</span>
+                    <input type="text" id="ssCardSender" class="text-input" maxlength="60" placeholder="With warm wishes / مع أطيب التمنيات">
+                  </label>
+                </div>
+
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_cd_photo_frame_t">Insert Framed Photo</h3>
+                  </div>
+                  <button type="button" class="btn btn-primary btn-block" id="btnCdInsertPhoto" data-i18n="ss_cd_insert_photo">+ Upload Framed Photo / Logo</button>
+                  <div class="ss-chip-grid" id="ssCardPhotoShapeRow">
+                    <button type="button" class="ss-chip-btn active" data-pframe="arch" data-i18n="ss_pframe_arch">Arch</button>
+                    <button type="button" class="ss-chip-btn" data-pframe="circle" data-i18n="ss_shape_circle">Circle</button>
+                    <button type="button" class="ss-chip-btn" data-pframe="rounded" data-i18n="ss_shape_rounded">Rounded</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MODE 4: STORE PROMO BADGES -->
+          <div class="ss-mode-panel" data-mode-panel="badge">
+            <div class="ss-dock-tabs" role="tablist" aria-label="Store promo badge tabs">
+              <button type="button" class="ss-dock-tab active" data-subtab="bd_shapes" role="tab" aria-selected="true" data-i18n="ss_bd_tab_shapes">Shapes (16)</button>
+              <button type="button" class="ss-dock-tab" data-subtab="bd_copy" role="tab" aria-selected="false" data-i18n="ss_bd_tab_copy">Offer Text &amp; Presets</button>
+              <button type="button" class="ss-dock-tab" data-subtab="bd_product" role="tab" aria-selected="false" data-i18n="ss_bd_tab_product">Product Photo</button>
+            </div>
+
+            <div class="ss-dock-body">
+              <div class="ss-subpane active" data-subpane="bd_shapes">
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_bd_shapes_t">Badge &amp; Seal Geometries (16)</h3>
+                  </div>
+                  <div class="ss-tpl-grid" id="ssBadgeShapeGrid"></div>
+                </div>
+
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_bd_themes_t">Store Color Themes</h3>
+                  </div>
+                  <div class="ss-theme-dots" id="ssBadgeThemeDots"></div>
+                  <div class="ss-color-pair">
+                    <label class="ss-color-field">
+                      <span data-i18n="ss_bd_col1">Primary</span>
+                      <input type="color" id="ssBadgeCol1" value="#DC2626">
+                    </label>
+                    <label class="ss-color-field">
+                      <span data-i18n="ss_bd_col2">Secondary</span>
+                      <input type="color" id="ssBadgeCol2" value="#991B1B">
+                    </label>
+                    <label class="ss-color-field">
+                      <span data-i18n="ss_bd_col_txt">Text</span>
+                      <input type="color" id="ssBadgeColTxt" value="#FFFFFF">
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ss-subpane" data-subpane="bd_copy">
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_bd_text_t">Promo Headline &amp; Sublabel</h3>
+                  </div>
+                  <label class="ss-field">
+                    <span data-i18n="ss_bd_main_lbl">Main Offer / %</span>
+                    <input type="text" id="ssBadgeMainText" class="text-input" maxlength="24" value="50% OFF">
+                  </label>
+                  <label class="ss-field">
+                    <span data-i18n="ss_bd_sub_lbl">Secondary Tagline</span>
+                    <input type="text" id="ssBadgeSubText" class="text-input" maxlength="28" value="LIMITED TIME">
+                  </label>
+                  <button type="button" class="btn btn-secondary btn-sm btn-block" id="btnBdAddExtraText" data-i18n="ss_bd_add_extra">+ Add Extra Label Layer</button>
+                </div>
+
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_bd_presets_t">Instant Store Presets (EN / AR)</h3>
+                  </div>
+                  <div class="ss-phrase-grid" id="ssBadgePresetGrid"></div>
+                </div>
+              </div>
+
+              <div class="ss-subpane" data-subpane="bd_product">
+                <div class="ss-group">
+                  <div class="ss-group-head">
+                    <h3 data-i18n="ss_bd_prod_t">Stamp onto Product Photo</h3>
+                  </div>
+                  <p class="ss-note" data-i18n="ss_bd_prod_note">Export standalone transparent promo badges or upload a product photo to stamp your badge cleanly onto it.</p>
+                  <button type="button" class="btn btn-primary btn-block" id="btnBdUploadProduct" data-i18n="ss_bd_upload_prod">+ Upload Product Photo</button>
+                  <button type="button" class="btn btn-secondary btn-block hide" id="btnBdCutoutProd" data-i18n="ss_btn_ai_cutout">Auto Remove Background (AI)</button>
+                  <button type="button" class="btn btn-secondary btn-sm btn-block hide" id="btnBdClearProduct" data-i18n="ss_bd_clear_prod">Remove Product Photo</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- CENTER STAGE: Top Size Bar, Interactive Canvas, Mobile Quickbar & Footer -->
+        <div class="ss-stage-col">
+          <div class="ss-stage-card">
+            <div class="ss-stage-topbar">
+              <div class="ss-preset-strip" id="ssPresetStrip" role="tablist" aria-label="Canvas aspect presets"></div>
+              <div class="ss-stage-top-actions">
+                <span class="ss-dim-badge" id="ssDimMeta">1024 × 1024 px</span>
+                <button type="button" class="btn btn-secondary btn-sm active" id="btnToggleChecker" aria-pressed="true" data-i18n="ss_checker_btn">Transparent Grid</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnTopChatPreview" data-i18n="ss_btn_chat_short">Chat Preview</button>
+                <button type="button" class="btn btn-primary btn-sm" id="btnOpenExportModal" data-i18n="studio_export_print">Export &amp; Print</button>
+              </div>
+            </div>
+
+            <div class="ss-viewport is-checker" id="ssViewport">
+              <div class="ss-canvas-wrap" id="ssCanvasWrap">
+                <canvas id="ssMainCanvas"></canvas>
+                <canvas id="ssOverlayCanvas" class="ss-overlay-canvas" aria-hidden="true"></canvas>
+                <div class="ss-brush-cursor hide" id="ssBrushCursor" aria-hidden="true"></div>
+              </div>
+
+              <!-- AI Processing Overlay -->
+              <div class="ss-ai-overlay hide" id="ssAiOverlay" role="status" aria-live="polite">
+                <div class="ai-sweep" aria-hidden="true"></div>
+                <div class="ss-ai-pill">
+                  <span class="ss-ai-spinner" aria-hidden="true"></span>
+                  <span id="ssAiStatus" data-i18n="ss_ai_working">Removing background locally…</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mobile Thumb Quickbar (<= 900px) -->
+            <div class="ss-mobile-quickbar" id="ssMobileQuickbar" aria-label="Mobile quick actions">
+              <button type="button" class="ss-mq-btn" id="btnMqAddText">
+                <span aria-hidden="true">T+</span>
+                <span data-i18n="ss_mq_text">Add Text</span>
+              </button>
+              <button type="button" class="ss-mq-btn" id="btnMqUpload">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                <span data-i18n="ss_mq_upload">Upload</span>
+              </button>
+              <button type="button" class="ss-mq-btn" id="btnMqPreview">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+                <span data-i18n="ss_mq_chat">Chat View</span>
+              </button>
+              <button type="button" class="ss-mq-btn" id="btnMqPeek">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>
+                </svg>
+                <span data-i18n="ss_mq_peek">Peek</span>
+              </button>
+              <button type="button" class="ss-mq-btn" id="btnMqUndo" disabled>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/>
+                </svg>
+                <span data-i18n="tc_undo">Undo</span>
+              </button>
+              <button type="button" class="ss-mq-btn ss-mq-primary" id="btnMqDownload">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span data-i18n="ss_mq_download">Download / Export</span>
+              </button>
+            </div>
+
+            <!-- Stage Footer & Shortcuts -->
+            <div class="ss-stage-footer">
+              <div class="ss-footer-btns">
+                <button type="button" class="btn btn-secondary btn-sm" id="btnUndo" disabled data-i18n="tc_undo">Undo</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnRedo" disabled data-i18n="tc_redo">Redo</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnPeekOriginal" data-i18n="tc_peek_original">Hold to Compare</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnDupSelected" disabled data-i18n="ss_btn_dup">Duplicate</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnDelSelected" disabled data-i18n="ss_btn_del">Delete</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnResetMode" data-i18n="tc_reset">Reset</button>
+              </div>
+              <div class="ss-shortcuts-bar" data-i18n="ss_shortcuts_legend">
+                Arrows Nudge (Shift 10px) · Del Remove Layer · Ctrl+D Duplicate · Ctrl+Z/Y Undo/Redo · C Chat Preview · Hold Space Peek · Ctrl+S Export
+              </div>
+            </div>
+          </div>
+
+          <!-- Hidden File Inputs -->
+          <input type="file" id="ssPhotoInput" accept="image/jpeg,image/png,image/webp,image/bmp,image/gif" class="hide">
+          <input type="file" id="ssLayerImgInput" accept="image/jpeg,image/png,image/webp,image/bmp,image/gif" multiple class="hide">
+          <input type="file" id="ssCustomBgInput" accept="image/jpeg,image/png,image/webp,image/bmp,image/gif" class="hide">
+        </div>
+
+        <!-- RIGHT INSPECTOR & LAYERS MANAGER -->
+        <aside class="ss-inspector" aria-label="Selected layer inspector and layer stack">
+          <div class="ss-inspector-card">
+            <div class="ss-insp-head">
+              <h3 data-i18n="ss_insp_title">Layer Properties</h3>
+              <span class="ss-type-tag hide" id="ssSelectedTag">Text</span>
+            </div>
+
+            <div class="ss-insp-empty" id="ssNoSelection">
+              <p data-i18n="ss_no_selection">Select any layer on the canvas to edit text, font, colors, frame style, scale, or rotation.</p>
+            </div>
+
+            <!-- Text / Bubble Properties -->
+            <div class="ss-prop-group hide" id="ssTextProps">
+              <label class="ss-field">
+                <span data-i18n="ss_prop_text">Text Content (EN / AR)</span>
+                <textarea id="ssPropText" class="text-input ss-textarea" rows="2" placeholder="Type text…"></textarea>
+              </label>
+
+              <div class="ss-field">
+                <span data-i18n="ss_prop_font">Font Family (AR / EN)</span>
+                <div class="ss-font-picker" id="ssFontPicker">
+                  <button type="button" class="ss-font-trigger" id="ssFontTrigger" aria-expanded="false" aria-controls="ssFontMenu">
+                    <span id="ssFontTriggerLabel">Cairo</span>
+                    <span class="ss-font-caret" aria-hidden="true">▾</span>
+                  </button>
+                  <div class="ss-font-menu hide" id="ssFontMenu" role="listbox" aria-label="Select font family"></div>
+                </div>
+              </div>
+
+              <div class="ss-two-col">
+                <label class="ss-field">
+                  <span data-i18n="ss_prop_size">Font Size</span>
+                  <input type="number" id="ssPropFontSize" class="num-input" min="20" max="220" step="2" value="76">
+                </label>
+                <label class="ss-field">
+                  <span data-i18n="ss_prop_tframe">Frame Style</span>
+                  <select id="ssPropTextFrame" class="select-input">
+                    <option value="none" data-i18n="ss_tf_plain">Plain / Meme Outline</option>
+                    <option value="fused" data-i18n="ss_tf_fused">Die-Cut Fused</option>
+                    <option value="pill" data-i18n="ss_tf_pill">Pill Ribbon</option>
+                    <option value="bubble" data-i18n="ss_tf_bubble">Speech Bubble</option>
+                    <option value="thought" data-i18n="ss_bubble_thought">Thought Cloud</option>
+                    <option value="shout" data-i18n="ss_bubble_shout">Shout Burst</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="ss-color-pair">
+                <label class="ss-color-field">
+                  <span data-i18n="ss_prop_fill">Text Color</span>
+                  <input type="color" id="ssPropTextColor" value="#FFFFFF">
+                </label>
+                <label class="ss-color-field">
+                  <span data-i18n="ss_prop_stroke_c">Stroke</span>
+                  <input type="color" id="ssPropStrokeColor" value="#111827">
+                </label>
+                <label class="ss-color-field">
+                  <span data-i18n="ss_prop_frame_bg">Frame BG</span>
+                  <input type="color" id="ssPropFrameBg" value="#2563EB">
+                </label>
+              </div>
+
+              <div class="ss-slider-row">
+                <div class="ss-slider-head">
+                  <label for="ssPropStrokeW" data-i18n="ss_prop_stroke_w">Text Stroke Width</label>
+                  <span class="ss-val" id="ssPropStrokeWVal">8 px</span>
+                </div>
+                <input type="range" id="ssPropStrokeW" class="range-input" min="0" max="24" step="1" value="8">
+              </div>
+
+              <label class="ss-check-row" id="ssFuseCheckWrap">
+                <input type="checkbox" id="ssPropFuseOutline" checked>
+                <span data-i18n="ss_prop_fuse">Include in Die-Cut Outline</span>
+              </label>
+            </div>
+
+            <!-- Common Layer Transform Controls -->
+            <div class="ss-prop-group hide" id="ssTransformProps">
+              <div class="ss-slider-row">
+                <div class="ss-slider-head">
+                  <label for="ssPropScale" data-i18n="ss_prop_scale">Scale</label>
+                  <span class="ss-val" id="ssPropScaleVal">100%</span>
+                </div>
+                <input type="range" id="ssPropScale" class="range-input" min="20" max="280" step="2" value="100">
+              </div>
+              <div class="ss-slider-row">
+                <div class="ss-slider-head">
+                  <label for="ssPropRot" data-i18n="ss_prop_rot">Rotation</label>
+                  <span class="ss-val" id="ssPropRotVal">0°</span>
+                </div>
+                <input type="range" id="ssPropRot" class="range-input" min="-180" max="180" step="1" value="0">
+              </div>
+              <div class="ss-slider-row">
+                <div class="ss-slider-head">
+                  <label for="ssPropOpacity" data-i18n="ss_prop_opacity">Opacity</label>
+                  <span class="ss-val" id="ssPropOpacityVal">100%</span>
+                </div>
+                <input type="range" id="ssPropOpacity" class="range-input" min="15" max="100" step="5" value="100">
+              </div>
+              <div class="ss-btn-grid-2">
+                <button type="button" class="btn btn-secondary btn-sm" id="btnLayerFlipH" data-i18n="tc_flip_h">Flip H</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnLayerCenter" data-i18n="ss_btn_center">Center</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Layers Stack Card -->
+          <div class="ss-inspector-card">
+            <div class="ss-insp-head">
+              <h3 data-i18n="ss_layers_t">Layers Manager</h3>
+              <span class="ss-val" id="ssLayersCount">0</span>
+            </div>
+            <div class="ss-layer-list" id="ssLayerList"></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live WhatsApp / Telegram Chat Bubble Preview Modal -->
+  <div class="ss-modal-backdrop hide" id="ssChatModal" role="dialog" aria-modal="true" aria-labelledby="ssChatModalTitle">
+    <div class="ss-modal-dialog">
+      <div class="ss-modal-head">
+        <div>
+          <h2 id="ssChatModalTitle" data-i18n="ss_chat_modal_t">WhatsApp &amp; Telegram Sticker Preview</h2>
+          <p data-i18n="ss_chat_modal_d">Inspect your sticker edges, outline contrast, and text legibility in real light and dark chat wallpapers.</p>
+        </div>
+        <button type="button" class="ss-modal-close" id="btnCloseChatModal" aria-label="Close">×</button>
+      </div>
+      <div class="ss-chat-toolbar">
+        <div class="ss-seg-group" role="tablist" aria-label="Chat theme">
+          <button type="button" class="ss-seg-item active" data-chat-theme="light" data-i18n="ss_chat_light">Light Chat</button>
+          <button type="button" class="ss-seg-item" data-chat-theme="dark" data-i18n="ss_chat_dark">Dark Chat</button>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" id="btnModalExportWa" data-i18n="ss_btn_export_wa">Download 512×512 PNG</button>
+      </div>
+      <div class="ss-chat-stage is-light" id="ssChatStage">
+        <div class="ss-chat-bubble-in" data-i18n="ss_chat_sample_in">Did you make a new sticker pack? 😍</div>
+        <div class="ss-chat-sticker-out">
+          <img id="ssChatStickerImg" alt="Sticker preview in chat" referrerpolicy="no-referrer">
+          <span class="ss-chat-time">14:22 ✓✓</span>
+        </div>
+        <div class="ss-chat-bubble-out" data-i18n="ss_chat_sample_out">100% made locally in imgsfix! 🔥</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dedicated Mode-Aware Export & Print Modal -->
+  <div class="ss-modal-backdrop hide" id="ssExportModal" role="dialog" aria-modal="true" aria-labelledby="ssExportModalTitle">
+    <div class="ss-modal-dialog ss-export-dialog">
+      <div class="ss-modal-head">
+        <div>
+          <h2 id="ssExportModalTitle" data-i18n="studio_export_print">Export &amp; Print</h2>
+          <p data-i18n="ss_export_modal_d">Download high-resolution transparent PNG, JPG, WhatsApp 512×512 sticker, or 300 DPI printable sheet.</p>
+        </div>
+        <button type="button" class="ss-modal-close" id="btnCloseExportModal" aria-label="Close">×</button>
+      </div>
+      <div class="ss-export-modal-body">
+        <div class="ss-export-section" data-export-mode="sticker">
+          <div class="ss-group">
+            <div class="ss-group-head">
+              <h3 data-i18n="ss_st_export_t">WhatsApp &amp; Full-Res Export</h3>
+            </div>
+            <button type="button" class="btn btn-primary btn-block" id="btnStExportWa" data-i18n="ss_btn_export_wa">Download WhatsApp / Telegram (512×512 PNG)</button>
+            <button type="button" class="btn btn-secondary btn-block" id="btnStExportFull" data-i18n="ss_btn_export_full">Download Full-Res Transparent PNG</button>
+            <button type="button" class="btn btn-secondary btn-block" id="btnStChatPreview" data-i18n="ss_btn_chat_preview">Preview in WhatsApp / Telegram Chat</button>
+          </div>
+          <div class="ss-group">
+            <div class="ss-group-head">
+              <h3 data-i18n="ss_print_sheet_t">Printable Sticker Sheet (300 DPI)</h3>
+            </div>
+            <div class="ss-seg-row" id="ssPrintPaperRow">
+              <button type="button" class="ss-seg-btn active" data-paper="a4">A4 (210×297mm)</button>
+              <button type="button" class="ss-seg-btn" data-paper="4x6">4×6 in</button>
+            </div>
+            <div class="ss-two-col">
+              <label class="ss-field">
+                <span data-i18n="ss_sheet_cols">Columns</span>
+                <input type="number" id="ssSheetCols" class="num-input" min="2" max="6" value="3">
+              </label>
+              <label class="ss-field">
+                <span data-i18n="ss_sheet_rows">Rows</span>
+                <input type="number" id="ssSheetRows" class="num-input" min="2" max="8" value="4">
+              </label>
+            </div>
+            <div class="ss-btn-grid-2">
+              <button type="button" class="btn btn-secondary btn-sm" id="btnStSheetPng" data-i18n="ss_btn_sheet_png">Sheet PNG</button>
+              <button type="button" class="btn btn-primary btn-sm" id="btnStSheetPdf" data-i18n="ss_btn_sheet_pdf">Sheet PDF</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="ss-export-section hide" data-export-mode="meme">
+          <div class="ss-group">
+            <div class="ss-group-head">
+              <h3 data-i18n="ss_mm_export_t">Export Meme</h3>
+            </div>
+            <button type="button" class="btn btn-primary btn-block" id="btnMmExportJpg" data-i18n="ss_btn_dl_jpg">Download JPG (Social Ready)</button>
+            <button type="button" class="btn btn-secondary btn-block" id="btnMmExportPng" data-i18n="ss_btn_dl_png">Download PNG (Lossless)</button>
+          </div>
+        </div>
+
+        <div class="ss-export-section hide" data-export-mode="card">
+          <div class="ss-group">
+            <div class="ss-group-head">
+              <h3 data-i18n="ss_cd_export_t">Export Card or Printable Poster</h3>
+            </div>
+            <button type="button" class="btn btn-primary btn-block" id="btnCdExportPng" data-i18n="ss_btn_dl_png">Download PNG (Lossless)</button>
+            <button type="button" class="btn btn-secondary btn-block" id="btnCdExportJpg" data-i18n="ss_btn_dl_jpg">Download JPG (Social Ready)</button>
+            <button type="button" class="btn btn-secondary btn-block" id="btnCdExportPdf" data-i18n="ss_btn_dl_pdf">Download Printable PDF</button>
+          </div>
+        </div>
+
+        <div class="ss-export-section hide" data-export-mode="badge">
+          <div class="ss-group">
+            <div class="ss-group-head">
+              <h3 data-i18n="ss_bd_export_t">Export Store Promo Asset</h3>
+            </div>
+            <button type="button" class="btn btn-primary btn-block" id="btnBdExportPng" data-i18n="ss_btn_dl_trans_png">Download Transparent PNG</button>
+            <button type="button" class="btn btn-secondary btn-block" id="btnBdExportJpg" data-i18n="ss_btn_dl_jpg">Download JPG (White BG)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script type="module" src="/js/sticker-studio.js"></script>
+</body>
+</html>

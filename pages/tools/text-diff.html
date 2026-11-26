@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Diff &amp; Compare Tool — imgsfix</title>
+  <meta name="description" content="Compare two texts word-by-word or line-by-line locally in your browser. Spot additions, deletions, contract edits, and code changes with zero server uploads.">
+  <link rel="stylesheet" href="/assets/cairo.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <section class="page-head">
+    <div class="container">
+      <span class="badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="4" width="8" height="16" rx="1.5"/><rect x="13" y="4" width="8" height="16" rx="1.5"/><path d="M6 9h2"/><path d="M16 9h2"/><path d="M16 13h2"/>
+        </svg>
+        <span data-i18n="t_diff_t">Text Diff &amp; Compare</span>
+      </span>
+      <h1 data-i18n="t_diff_t">Text Diff &amp; Compare</h1>
+      <p data-i18n="t_diff_d">Compare two texts word-by-word or line-by-line locally in your browser to highlight additions, deletions, and exact edits instantly.</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html" data-i18n="bc_home">Home</a><span class="sep">/</span>
+        <a href="../../index.html#categories" data-i18n="nav_tools">Tools</a><span class="sep">/</span>
+        <a href="../categories/text.html" data-i18n="cat_text_t">Text &amp; Content</a><span class="sep">/</span>
+        <span data-i18n="t_diff_t">Text Diff &amp; Compare</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container">
+      <!-- Sticky Top Action Toolbar + Comparison Mode & Filter Toggles -->
+      <div class="td-controls-bar" id="diffToolbar">
+        <div class="td-main-actions">
+          <button type="button" class="btn btn-primary btn-sm" id="btnCompare">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/><path d="M9 12h6"/><path d="M12 9v6"/>
+            </svg>
+            <span data-i18n="td_btn_compare">Compare Texts</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm" id="btnSwap">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m7 16-4-4 4-4"/><path d="M3 12h18"/><path d="m17 8 4 4-4 4"/>
+            </svg>
+            <span data-i18n="td_btn_swap">Swap Texts</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm" id="btnSample" data-i18n="td_btn_sample">Sample Texts</button>
+          <button type="button" class="btn btn-secondary btn-sm ts-btn-clear" id="btnClear" data-i18n="td_btn_clear_both">Clear Both</button>
+        </div>
+
+        <div class="td-options-group">
+          <div class="ts-ratio-group" id="diffModeToggle" role="group" aria-label="Comparison Mode">
+            <button type="button" class="ts-ratio-btn active" data-mode="word" aria-pressed="true" data-i18n="td_mode_word">Word-by-Word</button>
+            <button type="button" class="ts-ratio-btn" data-mode="line" aria-pressed="false" data-i18n="td_mode_line">Line-by-Line</button>
+          </div>
+          <label class="td-check-label">
+            <input type="checkbox" id="optIgnoreWs">
+            <span data-i18n="td_opt_ignore_ws">Ignore Extra Whitespace</span>
+          </label>
+          <label class="td-check-label">
+            <input type="checkbox" id="optIgnoreCase">
+            <span data-i18n="td_opt_ignore_case">Ignore Case (EN)</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Dual-Pane Input Workspace -->
+      <div class="td-inputs-grid">
+        <!-- Left/First Panel: Original Text -->
+        <div class="ts-panel td-input-panel">
+          <div class="ts-panel-head">
+            <h3>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>
+              </svg>
+              <span data-i18n="td_orig_title">Original Text</span>
+            </h3>
+            <div class="td-mini-actions">
+              <button type="button" class="btn btn-secondary btn-sm" id="btnOrigPaste" data-i18n="ts_btn_paste">Paste</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btnOrigUpload" data-i18n="wc_btn_upload">Upload .txt / .md</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btnOrigSelectAll" data-i18n="ts_btn_select_all">Select All</button>
+              <button type="button" class="btn btn-secondary btn-sm ts-btn-clear" id="btnOrigClear" data-i18n="tc_clear">Clear</button>
+              <input type="file" id="origFileInput" accept=".txt,.md" class="hide">
+            </div>
+          </div>
+          <textarea id="originalText" class="ts-textarea td-textarea" dir="auto" data-i18n-ph="td_orig_ph" placeholder="Paste or type the original text here (Arabic or English)…"></textarea>
+        </div>
+
+        <!-- Right/Second Panel: Modified Text -->
+        <div class="ts-panel td-input-panel">
+          <div class="ts-panel-head">
+            <h3>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+              </svg>
+              <span data-i18n="td_mod_title">Modified Text</span>
+            </h3>
+            <div class="td-mini-actions">
+              <button type="button" class="btn btn-secondary btn-sm" id="btnModPaste" data-i18n="ts_btn_paste">Paste</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btnModUpload" data-i18n="wc_btn_upload">Upload .txt / .md</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btnModSelectAll" data-i18n="ts_btn_select_all">Select All</button>
+              <button type="button" class="btn btn-secondary btn-sm ts-btn-clear" id="btnModClear" data-i18n="tc_clear">Clear</button>
+              <input type="file" id="modFileInput" accept=".txt,.md" class="hide">
+            </div>
+          </div>
+          <textarea id="modifiedText" class="ts-textarea td-textarea" dir="auto" data-i18n-ph="td_mod_ph" placeholder="Paste or type the modified text here (Arabic or English)…"></textarea>
+        </div>
+      </div>
+
+      <!-- Visual Diff Output Card -->
+      <div class="td-output-card">
+        <div class="ts-panel-head">
+          <h3>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M16 3h5v5"/><path d="M8 3H3v5"/><path d="M12 22v-8.3a4 4 0 0 0-1.172-2.872L3 3"/><path d="m15 9 6-6"/>
+            </svg>
+            <span data-i18n="td_diff_title">Comparison Result</span>
+          </h3>
+          <div class="ts-export-bar">
+            <button type="button" class="btn btn-secondary btn-sm" id="btnCopyReport" disabled data-i18n="td_copy_report">Copy Diff Report</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnDownloadReport" disabled data-i18n="tf_btn_download_txt">Download .txt</button>
+          </div>
+        </div>
+
+        <!-- Live Diff Summary Stats Bar -->
+        <div class="td-stats-strip" id="diffStatsBar" aria-live="polite">
+          <span class="td-stat-tag is-add" id="statAdds">+0 Additions</span>
+          <span class="td-stat-tag is-del" id="statDels">-0 Deletions</span>
+          <span class="td-stat-tag" id="statSame">0 Unchanged</span>
+          <span class="td-stat-tag is-identical hide" id="statIdentical" data-i18n="td_identical">Texts are 100% identical!</span>
+        </div>
+
+        <div class="td-output-body" id="diffOutput" aria-live="polite">
+          <div class="ts-empty-output" id="diffEmptyState">
+            <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="4" width="8" height="16" rx="1.5"/><rect x="13" y="4" width="8" height="16" rx="1.5"/><path d="M6 9h2"/><path d="M16 9h2"/><path d="M16 13h2"/>
+            </svg>
+            <p data-i18n="td_empty_hint">Enter or paste texts above and click Compare Texts (or press Ctrl+Enter) to view differences.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="/js/main.js"></script>
+  <script type="module" src="/js/text-diff.js"></script>
+</body>
+</html>

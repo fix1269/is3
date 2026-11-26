@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fancy Text &amp; Symbols Generator — imgsfix</title>
+  <meta name="description" content="Convert plain text into stylish Unicode fonts, Arabic Kashida ornate calligraphy, 24+ decorative frames, and expressive emojis 100% locally in your browser.">
+  <link rel="stylesheet" href="/assets/cairo.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <section class="page-head">
+    <div class="container">
+      <span class="badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/>
+        </svg>
+        <span data-i18n="txt_fancy_t">Fancy Text Generator</span>
+      </span>
+      <h1 data-i18n="txt_fancy_t">Fancy Text Generator</h1>
+      <p data-i18n="txt_fancy_d">Convert plain text into stylish Unicode fonts, ornate Arabic Kashida calligraphy, gaming tags, and decorative symbols for social bios.</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html" data-i18n="bc_home">Home</a><span class="sep">/</span>
+        <a href="../../index.html#categories" data-i18n="nav_tools">Tools</a><span class="sep">/</span>
+        <a href="../categories/text.html" data-i18n="cat_text_t">Text &amp; Content</a><span class="sep">/</span>
+        <span data-i18n="txt_fancy_t">Fancy Text Generator</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container">
+      <div class="ft-studio-grid">
+        <!-- Primary Compact Sticky Control Column (Zero Nested Vertical Scrollbars) -->
+        <aside class="ft-control-col" aria-label="Typography Controls">
+          <!-- 1. Compact 2-Row Text Input Box -->
+          <div class="ft-control-section" id="inputSection">
+            <div class="ft-input-head">
+              <h2>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/>
+                </svg>
+                <span data-i18n="ft_input_title">Your Text or Name</span>
+              </h2>
+              <div class="ft-input-actions">
+                <button type="button" class="btn btn-secondary btn-sm" id="btnSample" data-i18n="ts_btn_sample">Sample Text</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnPaste" data-i18n="ts_btn_paste">Paste</button>
+                <button type="button" class="btn btn-secondary btn-sm ts-btn-clear" id="btnClear" data-i18n="tc_clear">Clear</button>
+              </div>
+            </div>
+
+            <textarea id="fancyInput" class="ft-main-input" rows="2" dir="auto" maxlength="300" data-i18n-ph="ft_input_ph" placeholder="Type any English or Arabic name, bio, or phrase here…"></textarea>
+
+            <div class="ft-input-meta">
+              <span data-i18n="ts_chars">Characters</span>
+              <span><strong id="charCount">0</strong> / 300</span>
+            </div>
+          </div>
+
+          <!-- 2. Single-Row Horizontal Frame Strip -->
+          <div class="ft-control-section" id="framesSection">
+            <div class="ft-strip-head">
+              <h3 class="ft-section-title">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 3v18"/><path d="M15 3v18"/>
+                </svg>
+                <span data-i18n="ft_frame_label">Quick Prefix / Suffix Frame</span>
+              </h3>
+              <div class="ft-strip-tools">
+                <button type="button" class="ft-scroll-arrow" id="btnFramePrev" data-i18n-aria-label="ft_prev" aria-label="Previous">&#8249;</button>
+                <button type="button" class="ft-scroll-arrow" id="btnFrameNext" data-i18n-aria-label="ft_next" aria-label="Next">&#8250;</button>
+              </div>
+            </div>
+
+            <div class="ft-hstrip" id="frameSelector" role="group" aria-label="Quick Prefix and Suffix Frames"></div>
+          </div>
+
+          <!-- 3. Compact Expressive Emoji & Symbol Studio (6 Tabs + Single-Row Strip) -->
+          <div class="ft-control-section" id="symbolStudio">
+            <div class="ft-strip-head">
+              <h3 class="ft-section-title">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>
+                </svg>
+                <span data-i18n="ft_sym_title">Quick-Insert Symbols &amp; Emojis</span>
+              </h3>
+              <div class="ft-strip-tools">
+                <button type="button" class="ft-scroll-arrow" id="btnSymPrev" data-i18n-aria-label="ft_prev" aria-label="Previous">&#8249;</button>
+                <button type="button" class="ft-scroll-arrow" id="btnSymNext" data-i18n-aria-label="ft_next" aria-label="Next">&#8250;</button>
+              </div>
+            </div>
+
+            <div class="ft-symbol-tabs" id="symbolGroupTabs" role="tablist" aria-label="Emoji and Symbol Categories">
+              <button type="button" class="ft-sym-tab active" role="tab" aria-selected="true" data-symgroup="faces" data-i18n="ft_sym_faces">Faces &amp; Emotions</button>
+              <button type="button" class="ft-sym-tab" role="tab" aria-selected="false" data-symgroup="hands" data-i18n="ft_sym_hands">Hands &amp; Gestures</button>
+              <button type="button" class="ft-sym-tab" role="tab" aria-selected="false" data-symgroup="stars" data-i18n="ft_sym_stars">Stars &amp; Sparkles</button>
+              <button type="button" class="ft-sym-tab" role="tab" aria-selected="false" data-symgroup="brackets" data-i18n="ft_sym_brackets">Brackets &amp; Dividers</button>
+              <button type="button" class="ft-sym-tab" role="tab" aria-selected="false" data-symgroup="nature" data-i18n="ft_sym_nature">Royal &amp; Celebration</button>
+              <button type="button" class="ft-sym-tab" role="tab" aria-selected="false" data-symgroup="hearts" data-i18n="ft_sym_hearts">Hearts &amp; Marks</button>
+            </div>
+
+            <div class="ft-sym-strip-wrap">
+              <div class="ft-hstrip" id="symbolsStrip"></div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Independent Live Scrollable Results Column -->
+        <div class="ft-gallery-col">
+          <div class="ft-tabs-bar">
+            <div class="ft-cat-tabs" id="fancyCategoryTabs" role="tablist" aria-label="Style Categories">
+              <button type="button" class="ft-cat-tab active" role="tab" aria-selected="true" data-cat="all" data-i18n="ft_tab_all">All</button>
+              <button type="button" class="ft-cat-tab" role="tab" aria-selected="false" data-cat="social" data-i18n="ft_tab_social">Modern Social &amp; Bio</button>
+              <button type="button" class="ft-cat-tab" role="tab" aria-selected="false" data-cat="arabic" data-i18n="ft_tab_arabic">Arabic Ornate &amp; Calligraphy</button>
+              <button type="button" class="ft-cat-tab" role="tab" aria-selected="false" data-cat="gaming" data-i18n="ft_tab_gaming">Gaming &amp; Clans</button>
+              <button type="button" class="ft-cat-tab" role="tab" aria-selected="false" data-cat="favorites">
+                <span data-i18n="ft_tab_favs">Favorites</span>
+                <span id="favCountBadge">(0)</span>
+              </button>
+            </div>
+            <span class="ft-count-note" id="stylesCountNote">0 Styles</span>
+          </div>
+
+          <div class="ft-cards-grid" id="fancyCardsGrid" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="/js/main.js"></script>
+  <script type="module" src="/js/fancy-text.js"></script>
+</body>
+</html>

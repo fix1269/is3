@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Picture (PFP) Maker — Avatar &amp; Social Identity Studio — imgsfix</title>
+  <meta name="description" content="Create studio-grade profile pictures 100% locally in your browser with AI background removal, edge refine brush, 46 curated backdrops, 24 frames &amp; 3D pop-out rings, curved text badges, live 10-platform social preview, and 1080px PNG/JPG/ZIP pack export.">
+  <link rel="stylesheet" href="/assets/cairo.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Almarai:wght@700;800&family=Amiri:wght@700&family=Anton&family=Aref+Ruqaa:wght@400;700&family=Bangers&family=Bebas+Neue&family=Changa:wght@700;800&family=El+Messiri:wght@600;700&family=IBM+Plex+Sans+Arabic:wght@700&family=Lalezar&family=Lemonada:wght@600;700&family=Luckiest+Guy&family=Montserrat:wght@800;900&family=Oswald:wght@700&family=Pacifico&family=Permanent+Marker&family=Playfair+Display:wght@700;900&family=Poppins:wght@800&family=Readex+Pro:wght@700&family=Reem+Kufi:wght@600;700&family=Roboto:wght@900&family=Tajawal:wght@700;800&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="pfp-page">
+  <section class="page-head pfp-page-head">
+    <div class="container">
+      <span class="badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><circle cx="12" cy="9.5" r="3"/><path d="M7 18.2a6 6 0 0 1 10 0"/>
+        </svg>
+        <span data-i18n="t_pfp_t">Profile Picture (PFP) Maker</span>
+      </span>
+      <h1 data-i18n="t_pfp_t">Profile Picture (PFP) Maker</h1>
+      <p data-i18n="t_pfp_d">Design studio profile avatars locally with AI background cutout, edge refine brush, 46 curated backdrops, 24 frames &amp; 3D pop-out rings, curved badges, live social platform preview, and multi-platform ZIP export.</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html" data-i18n="bc_home">Home</a><span class="sep">/</span>
+        <a href="../../index.html#categories" data-i18n="nav_tools">Tools</a><span class="sep">/</span>
+        <a href="../categories/ai-design.html" data-i18n="cat_ai_t">Smart Studio</a><span class="sep">/</span>
+        <span data-i18n="t_pfp_t">Profile Picture (PFP) Maker</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section-sm pfp-section">
+    <div class="container pfp-container">
+      <!-- Step-by-Step Usage Hint Banner -->
+      <div class="pfp-usage-banner" role="note">
+        <svg class="pfp-usage-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+        </svg>
+        <p data-i18n="pfp_usage_hint">How to use: 1. Upload your portrait photo → 2. Click 'Auto Remove Background (AI)' and refine hair edges if needed → 3. Choose a studio backdrop (46+), 3D pop-out ring, and status badge → 4. Preview on LinkedIn/Instagram/X/Discord and export 1080px PNG or Social Pack (.ZIP).</p>
+      </div>
+
+      <div class="pfp-studio" id="pfpStudio">
+        <!-- Left / Top Avatar Stage -->
+        <div class="pfp-stage-col">
+          <div class="pfp-stage-card">
+            <div class="pfp-stage-topbar">
+              <div class="pfp-stage-info">
+                <span class="pfp-shape-label" id="pfpShapeBadge" data-i18n="pfp_shape_circle">Circle</span>
+                <span class="pfp-meta-sep" aria-hidden="true">·</span>
+                <span class="pfp-meta-text" id="pfpSpecMeta">1080 × 1080 px</span>
+              </div>
+              <div class="pfp-stage-top-actions">
+                <button type="button" class="btn btn-secondary btn-sm" id="btnOpenSocialModal" data-i18n="pfp_btn_social_preview">Social Preview</button>
+                <button type="button" class="btn btn-secondary btn-sm hide" id="btnReplacePhoto" data-i18n="pfp_btn_replace">Replace Photo</button>
+                <button type="button" class="btn btn-primary btn-sm" id="btnOpenExportModal" data-i18n="pfp_btn_export">Export &amp; Download</button>
+              </div>
+            </div>
+
+            <div class="pfp-viewport" id="pfpViewport">
+              <input type="file" id="pfpFileInput" accept="image/jpeg,image/png,image/webp,image/bmp,image/gif,image/svg+xml,.svg" hidden>
+
+              <!-- Empty Dropzone State -->
+              <div class="pfp-empty-state" id="pfpEmptyState">
+                <div class="pfp-empty-ring" aria-hidden="true">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9"/><circle cx="12" cy="9.5" r="2.8"/><path d="M7.5 17.5a5.5 5.5 0 0 1 9 0"/>
+                  </svg>
+                </div>
+                <h2 data-i18n="pfp_drop_title">Upload Portrait for Your Profile Picture</h2>
+                <p data-i18n="pfp_drop_desc">JPG, PNG, WebP, BMP, or GIF · Processed 100% privately inside your browser</p>
+                <button type="button" class="btn btn-primary" id="btnUploadEmpty" data-i18n="pfp_btn_upload">Choose Portrait Photo</button>
+              </div>
+
+              <!-- Interactive Canvas Wrap -->
+              <div class="pfp-canvas-wrap hide" id="pfpCanvasWrap">
+                <canvas id="pfpPreviewCanvas" width="640" height="640"></canvas>
+                <canvas id="pfpOrigPeekCanvas" class="hide" width="640" height="640"></canvas>
+                <div class="pfp-brush-cursor hide" id="pfpBrushCursor" aria-hidden="true"></div>
+              </div>
+
+              <!-- Local AI Loading Overlay -->
+              <div class="pfp-ai-overlay hide" id="pfpAiOverlay" role="status" aria-live="polite">
+                <div class="pfp-spinner" aria-hidden="true"></div>
+                <p id="pfpAiStatusText" data-i18n="pfp_ai_running">Removing background locally (AI)...</p>
+              </div>
+            </div>
+
+            <!-- Mobile Quick-Shortcut Bar (<= 900px) -->
+            <div class="pfp-mobile-quickbar" id="pfpMobileQuickbar" aria-label="Mobile quick actions">
+              <button type="button" class="pfp-mq-btn pfp-mq-primary" id="btnMqExport">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span data-i18n="pfp_mq_export">Export / ZIP</span>
+              </button>
+              <button type="button" class="pfp-mq-btn" id="btnMqSocial">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/>
+                </svg>
+                <span data-i18n="pfp_mq_social">Social Preview</span>
+              </button>
+              <button type="button" class="pfp-mq-btn" id="btnMqCenter">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="3"/><path d="M3 12h3m12 0h3M12 3v3m0 12v3"/>
+                </svg>
+                <span data-i18n="pfp_mq_center">Auto-Center</span>
+              </button>
+              <button type="button" class="pfp-mq-btn" id="btnMqUndo" disabled>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/>
+                </svg>
+                <span data-i18n="tc_undo">Undo</span>
+              </button>
+            </div>
+
+            <!-- Stage Footer & Desktop Keyboard Shortcuts Legend -->
+            <div class="pfp-stage-footer">
+              <div class="pfp-stage-actions">
+                <button type="button" class="btn btn-secondary btn-sm" id="btnStagePeek" data-i18n="pfp_btn_peek">Hold to Peek Original</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnStageCenter" data-i18n="pfp_btn_center">Auto-Center</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnResetFraming" data-i18n="pfp_btn_reset_frame">Reset Framing</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnClearAll" data-i18n="tc_clear">Clear</button>
+              </div>
+              <div class="pfp-shortcuts-bar" data-i18n="pfp_shortcuts_legend">
+                Arrows Nudge · +/- Zoom · C Auto-Center · P Social Preview · Hold Space Peek · Ctrl+Z/Y Undo/Redo · Ctrl+S Export
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 3-Tab Studio Dock -->
+        <aside class="pfp-dock" aria-label="Avatar &amp; Social Identity Studio Controls">
+          <div class="pfp-dock-tabs" role="tablist" aria-label="Studio tabs">
+            <button type="button" class="pfp-dock-tab active" data-tab="photo" role="tab" aria-selected="true">
+              <span class="pfp-tab-num">1</span>
+              <span data-i18n="pfp_tab_photo">Photo &amp; Cutout</span>
+            </button>
+            <button type="button" class="pfp-dock-tab" data-tab="bg" role="tab" aria-selected="false">
+              <span class="pfp-tab-num">2</span>
+              <span data-i18n="pfp_tab_bg">Backgrounds (46)</span>
+            </button>
+            <button type="button" class="pfp-dock-tab" data-tab="rings" role="tab" aria-selected="false">
+              <span class="pfp-tab-num">3</span>
+              <span data-i18n="pfp_tab_rings">Rings, 3D &amp; Badges</span>
+            </button>
+          </div>
+
+          <div class="pfp-dock-body">
+            <!-- TAB 1: PHOTO, AI CUTOUT, EDGE BRUSH & RETOUCH -->
+            <div class="pfp-step-pane active" data-pane="photo">
+              <div class="pfp-group">
+                <div class="pfp-group-head">
+                  <h3 data-i18n="pfp_cutout_title">Local AI Background Cutout</h3>
+                </div>
+                <div class="pfp-btn-stack">
+                  <button type="button" class="btn btn-primary btn-block" id="btnAutoCutout" data-i18n="pfp_btn_ai_cutout">Auto Remove Background (Local AI)</button>
+                  <button type="button" class="btn btn-secondary btn-sm btn-block" id="btnKeepOriginalBg" data-i18n="pfp_btn_keep_orig">Keep Original Background</button>
+                </div>
+              </div>
+
+              <div class="pfp-group" id="pfpBrushGroup">
+                <div class="pfp-group-head">
+                  <h3 data-i18n="pfp_brush_title">Edge Refine Brush</h3>
+                </div>
+                <p class="pfp-note" id="pfpBrushHint" data-i18n="pfp_brush_hint">Run AI cutout first, then paint to restore hair strands or erase missed edges.</p>
+                <div class="pfp-chip-row">
+                  <button type="button" class="pfp-chip-btn active" id="btnToolPan" data-i18n="pfp_tool_pan">Pan / Move</button>
+                  <button type="button" class="pfp-chip-btn" id="btnBrushRestore" disabled data-i18n="pfp_tool_restore">Restore</button>
+                  <button type="button" class="pfp-chip-btn" id="btnBrushErase" disabled data-i18n="pfp_tool_erase">Erase</button>
+                </div>
+                <div class="pfp-slider-row">
+                  <div class="pfp-slider-head">
+                    <label for="pfpBrushSize" data-i18n="pfp_brush_size">Brush Size</label>
+                    <span class="pfp-val-num" id="pfpBrushSizeVal">28 px</span>
+                  </div>
+                  <input type="range" id="pfpBrushSize" class="range-input" min="6" max="90" step="1" value="28">
+                </div>
+                <div class="pfp-btn-2">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnUndoMask" disabled data-i18n="tc_undo">Undo</button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnRedoMask" disabled data-i18n="pfp_redo">Redo</button>
+                </div>
+              </div>
+
+              <div class="pfp-group">
+                <div class="pfp-group-head pfp-group-split">
+                  <h3 data-i18n="pfp_framing_title">Framing &amp; Portrait Lighting</h3>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnAutoCenter" data-i18n="pfp_btn_center">Auto-Center</button>
+                </div>
+
+                <div class="pfp-slider-row">
+                  <div class="pfp-slider-head">
+                    <label for="pfpZoom" data-i18n="pfp_zoom">Zoom</label>
+                    <span class="pfp-val-num" id="pfpZoomVal">100%</span>
+                  </div>
+                  <input type="range" id="pfpZoom" class="range-input" min="50" max="260" step="1" value="100">
+                </div>
+
+                <div class="pfp-slider-row">
+                  <div class="pfp-slider-head">
+                    <label for="pfpTilt" data-i18n="pfp_rotate">Tilt / Rotate</label>
+                    <span class="pfp-val-num" id="pfpTiltVal">0°</span>
+                  </div>
+                  <input type="range" id="pfpTilt" class="range-input" min="-45" max="45" step="1" value="0">
+                </div>
+
+                <div class="pfp-btn-2">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnRot90" data-i18n="pfp_btn_rot90">Rotate 90°</button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnFlipH" data-i18n="pfp_btn_flip">Flip Horizontal</button>
+                </div>
+
+                <div class="pfp-slider-row">
+                  <div class="pfp-slider-head">
+                    <label for="pfpBrightness" data-i18n="pfp_brightness">Brightness</label>
+                    <span class="pfp-val-num" id="pfpBrightnessVal">0</span>
+                  </div>
+                  <input type="range" id="pfpBrightness" class="range-input" min="-40" max="40" step="1" value="0">
+                </div>
+
+                <div class="pfp-slider-row">
+                  <div class="pfp-slider-head">
+                    <label for="pfpContrast" data-i18n="pfp_contrast">Contrast</label>
+                    <span class="pfp-val-num" id="pfpContrastVal">0</span>
+                  </div>
+                  <input type="range" id="pfpContrast" class="range-input" min="-40" max="40" step="1" value="0">
+                </div>
+
+                <div class="pfp-slider-row">
+                  <div class="pfp-slider-head">
+                    <label for="pfpWarmth" data-i18n="pfp_warmth">Warmth</label>
+                    <span class="pfp-val-num" id="pfpWarmthVal">0</span>
+                  </div>
+                  <input type="range" id="pfpWarmth" class="range-input" min="-35" max="35" step="1" value="0">
+                </div>
+
+                <label class="pfp-check-row" for="pfpBwToggle">
+                  <input type="checkbox" id="pfpBwToggle">
+                  <span data-i18n="pfp_bw_toggle">B&amp;W Classic Portrait</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- TAB 2: BACKGROUNDS (46 PRESETS + CUSTOM CONTROLS) -->
+            <div class="pfp-step-pane" data-pane="bg">
+              <div class="pfp-group">
+                <div class="pfp-group-head">
+                  <h3 data-i18n="pfp_bg_library_title">Profile Background Library (46 Presets)</h3>
+                </div>
+                <div class="pfp-cat-tabs" id="pfpBgCatRow" role="tablist" aria-label="Background categories">
+                  <button type="button" class="pfp-chip-btn active" data-cat="all" data-i18n="pfp_bg_cat_all">All (46)</button>
+                  <button type="button" class="pfp-chip-btn" data-cat="solid" data-i18n="pfp_bg_cat_solid">Solids (12)</button>
+                  <button type="button" class="pfp-chip-btn" data-cat="gradient" data-i18n="pfp_bg_cat_grad">Gradients (14)</button>
+                  <button type="button" class="pfp-chip-btn" data-cat="pattern" data-i18n="pfp_bg_cat_pat">Halos &amp; Patterns (12)</button>
+                  <button type="button" class="pfp-chip-btn" data-cat="smart" data-i18n="pfp_bg_cat_smart">Smart &amp; Scenes (8)</button>
+                </div>
+                <div class="pfp-bg-grid" id="pfpBgGrid" role="radiogroup" aria-label="Background presets"></div>
+              </div>
+
+              <div class="pfp-group">
+                <div class="pfp-group-head">
+                  <h3 data-i18n="pfp_bg_custom_title">Custom Gradient &amp; Angle</h3>
+                </div>
+                <div class="pfp-slider-row">
+                  <div class="pfp-slider-head">
+                    <label for="pfpGradAngle" data-i18n="pfp_grad_angle">Gradient Angle</label>
+                    <span class="pfp-val-num" id="pfpGradAngleVal">135°</span>
+                  </div>
+                  <input type="range" id="pfpGradAngle" class="range-input" min="0" max="360" step="1" value="135">
+                </div>
+                <div class="pfp-btn-2">
+                  <label class="pfp-color-field">
+                    <span data-i18n="pfp_color_1">Color 1</span>
+                    <input type="color" id="pfpBgColor1" value="#1D4ED8">
+                  </label>
+                  <label class="pfp-color-field">
+                    <span data-i18n="pfp_color_2">Color 2</span>
+                    <input type="color" id="pfpBgColor2" value="#06B6D4">
+                  </label>
+                </div>
+                <button type="button" class="btn btn-secondary btn-sm btn-block" id="btnApplyCustomBg" data-i18n="pfp_btn_apply_custom_bg">Use Custom Dual-Color Gradient</button>
+              </div>
+            </div>
+
+            <!-- TAB 3: FRAMES, RINGS, 3D SHADOWS, STATUS BADGES & CURVED TEXT -->
+            <div class="pfp-step-pane" data-pane="rings">
+              <div class="pfp-group">
+                <div class="pfp-group-head">
+                  <h3 data-i18n="pfp_shapes_title">Frame Mask Shapes (6)</h3>
+                </div>
+                <div class="pfp-shape-grid" id="pfpShapeGrid" role="radiogroup" aria-label="Frame mask shapes">
+                  <button type="button" class="pfp-shape-btn active" data-shape="circle" role="radio" aria-checked="true" data-i18n="pfp_shape_circle">Circle</button>
+                  <button type="button" class="pfp-shape-btn" data-shape="squircle" role="radio" aria-checked="false" data-i18n="pfp_shape_squircle">iOS Squircle</button>
+                  <button type="button" class="pfp-shape-btn" data-shape="hexagon" role="radio" aria-checked="false" data-i18n="pfp_shape_hexagon">Hexagon</button>
+                  <button type="button" class="pfp-shape-btn" data-shape="shield" role="radio" aria-checked="false" data-i18n="pfp_shape_shield">Modern Shield</button>
+                  <button type="button" class="pfp-shape-btn" data-shape="badge" role="radio" aria-checked="false" data-i18n="pfp_shape_badge">Soft Badge</button>
+                  <button type="button" class="pfp-shape-btn" data-shape="square" role="radio" aria-checked="false" data-i18n="pfp_shape_square">Classic Square</button>
+                </div>
+              </div>
+
+              <div class="pfp-group">
+                <div class="pfp-group-head">
+                  <h3 data-i18n="pfp_rings_title">Ring, Border &amp; 3D Pop-Out Styles (18)</h3>
+                </div>
+                <div class="pfp-ring-grid" id="pfpRingGrid" role="radiogroup" aria-label="Ring and border styles"></div>
+
+                <div class="pfp-slider-row">
+                  <div class="pfp-slider-head">
+                    <label for="pfpRingThickness" data-i18n="pfp_ring_thickness">Ring Thickness</label>
+                    <span class="pfp-val-num" id="pfpRingThicknessVal">12 px</span>
+                  </div>
+                  <input type="range" id="pfpRingThickness" class="range-input" min="0" max="30" step="1" value="12">
+                </div>
+
+                <div class="pfp-slider-row">
+                  <div class="pfp-slider-head">
+                    <label for="pfpDropShadow" data-i18n="pfp_drop_shadow">Drop Shadow Intensity</label>
+                    <span class="pfp-val-num" id="pfpDropShadowVal">25%</span>
+                  </div>
+                  <input type="range" id="pfpDropShadow" class="range-input" min="0" max="100" step="1" value="25">
+                </div>
+
+                <div class="pfp-slider-row">
+                  <div class="pfp-slider-head">
+                    <label for="pfpInnerShadow" data-i18n="pfp_inner_shadow">Inner Shadow Depth</label>
+                    <span class="pfp-val-num" id="pfpInnerShadowVal">15%</span>
+                  </div>
+                  <input type="range" id="pfpInnerShadow" class="range-input" min="0" max="100" step="1" value="15">
+                </div>
+
+                <div class="pfp-slider-row">
+                  <div class="pfp-slider-head">
+                    <label for="pfpOuterGlow" data-i18n="pfp_outer_glow">Outer Glow Intensity</label>
+                    <span class="pfp-val-num" id="pfpOuterGlowVal">20%</span>
+                  </div>
+                  <input type="range" id="pfpOuterGlow" class="range-input" min="0" max="100" step="1" value="20">
+                </div>
+
+                <div class="pfp-btn-2">
+                  <label class="pfp-color-field">
+                    <span data-i18n="pfp_ring_col1">Ring Color 1</span>
+                    <input type="color" id="pfpRingCol1" value="#1D4ED8">
+                  </label>
+                  <label class="pfp-color-field">
+                    <span data-i18n="pfp_ring_col2">Ring Color 2</span>
+                    <input type="color" id="pfpRingCol2" value="#06B6D4">
+                  </label>
+                </div>
+              </div>
+
+              <div class="pfp-group">
+                <div class="pfp-group-head">
+                  <h3 data-i18n="pfp_badges_title">Status Badges &amp; Curved Ring Text</h3>
+                </div>
+                <div class="pfp-chip-row" id="pfpBadgeRow">
+                  <button type="button" class="pfp-chip-btn active" data-badge="none" data-i18n="pfp_badge_none">None</button>
+                  <button type="button" class="pfp-chip-btn" data-badge="opentowork">#OPENTOWORK</button>
+                  <button type="button" class="pfp-chip-btn" data-badge="hiring">#HIRING</button>
+                  <button type="button" class="pfp-chip-btn" data-badge="verified" data-i18n="pfp_badge_verified">Verified Check</button>
+                  <button type="button" class="pfp-chip-btn" data-badge="star" data-i18n="pfp_badge_star">Creator Star</button>
+                  <button type="button" class="pfp-chip-btn" data-badge="custom" data-i18n="pfp_badge_custom">Custom Arc</button>
+                </div>
+
+                <div class="pfp-custom-badge-box hide" id="pfpCustomBadgeBox">
+                  <div class="pfp-btn-2">
+                    <label class="pfp-field">
+                      <span data-i18n="pfp_badge_text_lbl">Badge Text</span>
+                      <input type="text" id="pfpCustomBadgeText" class="text-input" maxlength="24" value="#AVAILABLE">
+                    </label>
+                    <label class="pfp-color-field">
+                      <span data-i18n="pfp_badge_col_lbl">Badge Color</span>
+                      <input type="color" id="pfpCustomBadgeCol" value="#16A34A">
+                    </label>
+                  </div>
+                </div>
+
+                <div class="pfp-curved-box">
+                  <label class="pfp-field">
+                    <span data-i18n="pfp_curved_text_lbl">Optional Curved Text Along Ring</span>
+                    <input type="text" id="pfpCurvedText" class="text-input" maxlength="36" data-i18n-placeholder="pfp_curved_ph" placeholder="e.g. CREATIVE DIRECTOR · DESIGNER">
+                  </label>
+                  <div class="pfp-btn-2">
+                    <button type="button" class="btn btn-secondary btn-sm" id="btnPickFont">
+                      <span data-i18n="pfp_font_label">Font:</span> <strong id="pfpFontName">Cairo</strong>
+                    </button>
+                    <label class="pfp-color-field">
+                      <span data-i18n="pfp_text_color">Text Color</span>
+                      <input type="color" id="pfpCurvedTextColor" value="#FFFFFF">
+                    </label>
+                  </div>
+                  <div class="pfp-chip-row" id="pfpCurvedPosRow">
+                    <button type="button" class="pfp-chip-btn active" data-pos="top" data-i18n="pfp_pos_top">Top Arc</button>
+                    <button type="button" class="pfp-chip-btn" data-pos="bottom" data-i18n="pfp_pos_bottom">Bottom Arc</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 24-Font Library Picker Modal -->
+  <div class="pfp-modal-backdrop hide" id="pfpFontModal" role="dialog" aria-modal="true" aria-labelledby="pfpFontModalTitle">
+    <div class="pfp-modal-dialog pfp-font-dialog">
+      <div class="pfp-modal-head">
+        <div>
+          <h2 id="pfpFontModalTitle" data-i18n="pfp_font_modal_title">Select Font (24 Studio Arabic &amp; English Fonts)</h2>
+          <p data-i18n="pfp_font_modal_d">Choose a bold display or Arabic calligraphy typeface for curved ring text.</p>
+        </div>
+        <button type="button" class="pfp-modal-close" id="btnCloseFontModal" aria-label="Close">×</button>
+      </div>
+      <div class="pfp-modal-body pfp-font-body" id="pfpFontList"></div>
+    </div>
+  </div>
+
+  <!-- Live Social Platform Preview Modal -->
+  <div class="pfp-modal-backdrop hide" id="pfpSocialModal" role="dialog" aria-modal="true" aria-labelledby="pfpSocialModalTitle">
+    <div class="pfp-modal-dialog pfp-social-dialog">
+      <div class="pfp-modal-head">
+        <div>
+          <h2 id="pfpSocialModalTitle" data-i18n="pfp_social_modal_title">Live Social Platform Preview</h2>
+          <p data-i18n="pfp_social_modal_d">Inspect how your avatar looks inside real LinkedIn, Instagram, WhatsApp, X, YouTube, and Discord interfaces.</p>
+        </div>
+        <div class="pfp-social-head-actions">
+          <button type="button" class="btn btn-secondary btn-sm" id="btnSocialThemeToggle" data-i18n="pfp_social_toggle_theme">Switch Light / Dark</button>
+          <button type="button" class="pfp-modal-close" id="btnCloseSocialModal" aria-label="Close">×</button>
+        </div>
+      </div>
+      <div class="pfp-modal-body pfp-social-body" id="pfpSocialStage">
+        <div class="pfp-social-grid">
+          <!-- 1. Facebook -->
+          <div class="pfp-soc-card">
+            <div class="pfp-soc-tag" data-i18n="pfp_soc_fb_tag">Facebook</div>
+            <div class="pfp-fb-cover"></div>
+            <div class="pfp-fb-head">
+              <img class="pfp-soc-avatar pfp-fb-av" alt="Facebook Profile Preview">
+              <div>
+                <strong class="pfp-soc-name">Alex Morgan · أليكس</strong>
+                <span class="pfp-soc-sub" data-i18n="pfp_soc_fb_sub">Profile cover &amp; feed</span>
+              </div>
+            </div>
+            <div class="pfp-fb-comment">
+              <img class="pfp-soc-avatar pfp-fb-comment-av" alt="Facebook Comment Avatar Preview">
+              <span class="pfp-soc-sub" data-i18n="pfp_soc_fb_comment">Great studio shot! Looking sharp.</span>
+            </div>
+          </div>
+
+          <!-- 2. TikTok -->
+          <div class="pfp-soc-card">
+            <div class="pfp-soc-tag" data-i18n="pfp_soc_tt_tag">TikTok</div>
+            <div class="pfp-tt-stage">
+              <div>
+                <strong class="pfp-soc-name">@alex.creates</strong>
+                <span class="pfp-soc-sub" data-i18n="pfp_soc_tt_sub">Creator sidebar &amp; follow badge</span>
+              </div>
+              <div class="pfp-tt-av-wrap">
+                <img class="pfp-soc-avatar pfp-tt-av" alt="TikTok Creator Preview">
+                <span class="pfp-tt-plus" aria-hidden="true">+</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. WhatsApp -->
+          <div class="pfp-soc-card">
+            <div class="pfp-soc-tag" data-i18n="pfp_soc_wa_tag">WhatsApp</div>
+            <div class="pfp-wa-row">
+              <div class="pfp-wa-ring">
+                <img class="pfp-soc-avatar pfp-wa-av" alt="WhatsApp Status Preview">
+              </div>
+              <div class="pfp-wa-meta">
+                <div class="pfp-wa-top">
+                  <strong class="pfp-soc-name">Alex Studio</strong>
+                  <span class="pfp-wa-time">09:41</span>
+                </div>
+                <span class="pfp-soc-sub" data-i18n="pfp_soc_wa_sub">Chat list &amp; Status ring active</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Telegram -->
+          <div class="pfp-soc-card">
+            <div class="pfp-soc-tag" data-i18n="pfp_soc_tg_tag">Telegram</div>
+            <div class="pfp-tg-bar">
+              <img class="pfp-soc-avatar pfp-tg-av" alt="Telegram Profile Preview">
+              <div>
+                <strong class="pfp-soc-name">Alex Morgan</strong>
+                <span class="pfp-soc-sub" data-i18n="pfp_soc_tg_sub">last seen recently · Chat header</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Snapchat -->
+          <div class="pfp-soc-card">
+            <div class="pfp-soc-tag" data-i18n="pfp_soc_sc_tag">Snapchat</div>
+            <div class="pfp-sc-card-inner">
+              <div class="pfp-sc-ring">
+                <img class="pfp-soc-avatar pfp-sc-av" alt="Snapchat Profile Preview">
+              </div>
+              <div>
+                <strong class="pfp-soc-name">alex.snap</strong>
+                <span class="pfp-soc-sub" data-i18n="pfp_soc_sc_sub">Snap profile &amp; circular frame</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Instagram -->
+          <div class="pfp-soc-card">
+            <div class="pfp-soc-tag" data-i18n="pfp_soc_ig_tag">Instagram</div>
+            <div class="pfp-ig-row">
+              <div class="pfp-ig-story-wrap">
+                <img class="pfp-soc-avatar pfp-ig-av" alt="Instagram Story Preview">
+              </div>
+              <div class="pfp-ig-meta">
+                <strong class="pfp-soc-name">@alex.studio</strong>
+                <span class="pfp-soc-sub" data-i18n="pfp_soc_ig_sub">Story gradient ring &amp; feed header</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. LinkedIn -->
+          <div class="pfp-soc-card">
+            <div class="pfp-soc-tag" data-i18n="pfp_soc_li_tag">LinkedIn</div>
+            <div class="pfp-li-banner"></div>
+            <div class="pfp-li-body">
+              <img class="pfp-soc-avatar pfp-li-av" alt="LinkedIn Avatar Preview">
+              <strong class="pfp-soc-name">Alex Morgan · أليكس</strong>
+              <span class="pfp-soc-sub" data-i18n="pfp_soc_li_sub">Senior Product Designer · #OPENTOWORK ready</span>
+            </div>
+          </div>
+
+          <!-- 8. X (Twitter) -->
+          <div class="pfp-soc-card">
+            <div class="pfp-soc-tag" data-i18n="pfp_soc_x_tag">X (Twitter)</div>
+            <div class="pfp-x-row">
+              <img class="pfp-soc-avatar pfp-x-av" alt="X Feed Preview">
+              <div class="pfp-x-post">
+                <div class="pfp-x-head">
+                  <strong class="pfp-soc-name">Alex Studio</strong>
+                  <span class="pfp-soc-sub">@alexstudio · 2m</span>
+                </div>
+                <p class="pfp-soc-sub" data-i18n="pfp_soc_x_line">Sharp avatar silhouette and ring contrast at small timeline size.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9. YouTube -->
+          <div class="pfp-soc-card">
+            <div class="pfp-soc-tag" data-i18n="pfp_soc_yt_tag">YouTube</div>
+            <div class="pfp-yt-banner"></div>
+            <div class="pfp-yt-row">
+              <img class="pfp-soc-avatar pfp-yt-av" alt="YouTube Channel Preview">
+              <div>
+                <strong class="pfp-soc-name">Alex Creates</strong>
+                <span class="pfp-soc-sub" data-i18n="pfp_soc_yt_sub">148K subscribers · Channel &amp; comments</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10. Discord -->
+          <div class="pfp-soc-card">
+            <div class="pfp-soc-tag" data-i18n="pfp_soc_dc_tag">Discord</div>
+            <div class="pfp-dc-row">
+              <div class="pfp-dc-av-wrap">
+                <img class="pfp-soc-avatar pfp-dc-av" alt="Discord Member Preview">
+                <span class="pfp-dc-status" aria-hidden="true"></span>
+              </div>
+              <div>
+                <strong class="pfp-soc-name">alex#2026</strong>
+                <span class="pfp-soc-sub" data-i18n="pfp_soc_dc_sub">Online · User card &amp; status dot</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dedicated Export & Download Modal -->
+  <div class="pfp-modal-backdrop hide" id="pfpExportModal" role="dialog" aria-modal="true" aria-labelledby="pfpExportModalTitle">
+    <div class="pfp-modal-dialog">
+      <div class="pfp-modal-head">
+        <div>
+          <h2 id="pfpExportModalTitle" data-i18n="pfp_btn_export">Export &amp; Download</h2>
+          <p data-i18n="pfp_export_modal_d">Export crisp 1080 × 1080 px avatars or bundle pre-sized PNGs for every social platform locally.</p>
+        </div>
+        <button type="button" class="pfp-modal-close" id="btnCloseExportModal" aria-label="Close">×</button>
+      </div>
+      <div class="pfp-modal-body">
+        <div class="pfp-export-summary" id="pfpExportSummary">1080 × 1080 px · Circle</div>
+        <div class="pfp-export-actions">
+          <button type="button" class="btn btn-primary btn-block" id="btnExportPng">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span data-i18n="pfp_btn_dl_png">Download 1080×1080 PNG (Transparent Outer)</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn-block" id="btnExportJpg" data-i18n="pfp_btn_dl_jpg">Download 1080×1080 JPG</button>
+          <button type="button" class="btn btn-secondary btn-block" id="btnExportZip" data-i18n="pfp_btn_dl_zip">Download Social Pack (.ZIP — 10 Platforms)</button>
+          <p class="pfp-note" data-i18n="pfp_zip_note">ZIP bundle includes Facebook, TikTok, WhatsApp, Telegram, Snapchat, Instagram, LinkedIn, X (Twitter), YouTube, and Discord.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script type="module" src="/js/profile-picture.js"></script>
+</body>
+</html>

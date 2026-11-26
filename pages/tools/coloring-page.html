@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo to Coloring Page — Line-Art &amp; Printable Coloring Sheet Studio — imgsfix</title>
+  <meta name="description" content="Turn photos into clean black-and-white printable coloring pages 100% locally in your browser with 4 line-art styles, AI background isolation, clean-up eraser, decorative frames, and 300 DPI A4/Letter PDF export.">
+  <link rel="stylesheet" href="/assets/cairo.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="cp-page">
+  <section class="page-head cp-page-head">
+    <div class="container">
+      <span class="badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/>
+        </svg>
+        <span data-i18n="t_coloring_t">Photo to Coloring Page</span>
+      </span>
+      <h1 data-i18n="t_coloring_t">Photo to Coloring Page</h1>
+      <p data-i18n="t_coloring_d">Turn photos into crisp black-and-white printable coloring sheets locally in your browser with 4 line-art styles, AI background isolation, clean-up eraser, custom title header, and 300 DPI PDF export.</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html" data-i18n="bc_home">Home</a><span class="sep">/</span>
+        <a href="../../index.html#categories" data-i18n="nav_tools">Tools</a><span class="sep">/</span>
+        <a href="../categories/ai-design.html" data-i18n="cat_ai_t">Smart Studio</a><span class="sep">/</span>
+        <span data-i18n="t_coloring_t">Photo to Coloring Page</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section-sm cp-section">
+    <div class="container cp-container">
+      <!-- Step-by-Step Usage Hint Banner -->
+      <div class="cp-usage-banner" role="note">
+        <svg class="cp-usage-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+        </svg>
+        <p data-i18n="cp_usage_hint">How to use: 1. Upload any photo (or paste Ctrl+V) → 2. Pick a line-art style &amp; optionally click 'Isolate Subject' to strip messy backgrounds → 3. Refine thickness, denoise &amp; erase unwanted lines → 4. Print or download A4/Letter PDF.</p>
+      </div>
+
+      <div class="cp-studio" id="cpStudio">
+        <!-- Left / Top Paper Preview Stage -->
+        <div class="cp-stage-col">
+          <div class="cp-stage-card">
+            <div class="cp-stage-topbar">
+              <div class="cp-stage-badges">
+                <span class="cp-style-pill" id="cpActiveStylePill" data-i18n="cp_style_classic_t">Classic Kids Coloring</span>
+                <span class="cp-meta-text" id="cpSpecMeta">A4 Portrait · 2480 × 3508 px · 300 DPI</span>
+              </div>
+              <div class="cp-stage-meta">
+                <button type="button" class="btn btn-secondary btn-sm hide" id="btnReplacePhoto" data-i18n="pp_btn_replace">Change Photo</button>
+                <button type="button" class="btn btn-primary btn-sm" id="btnOpenExportModal" disabled data-i18n="studio_export_print">Export &amp; Print</button>
+              </div>
+            </div>
+
+            <div class="cp-viewport" id="cpViewport">
+              <!-- Empty Drop Zone -->
+              <div class="cp-empty" id="cpEmptyState" tabindex="0" role="button" aria-label="Upload photo to convert to coloring page">
+                <div class="cp-empty-icon" aria-hidden="true">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/>
+                    <path d="m9 12 2 2 4-4"/>
+                  </svg>
+                </div>
+                <strong data-i18n="cp_drop_title">Drop your photo, browse, or paste (Ctrl+V)</strong>
+                <span data-i18n="cp_drop_sub">JPG, PNG, WebP, BMP, GIF (max 30MB · 12,000px) · 100% in-browser</span>
+                <button type="button" class="btn btn-primary btn-sm" id="btnUploadEmpty" data-i18n="t_upload">Upload Image</button>
+              </div>
+
+              <!-- Printable Paper Sheet Preview -->
+              <div class="cp-paper-wrap hide" id="cpPaperWrap">
+                <canvas id="cpMainCanvas"></canvas>
+                <div class="cp-brush-cursor hide" id="cpBrushCursor" aria-hidden="true"></div>
+              </div>
+
+              <!-- AI Isolation Overlay -->
+              <div class="cp-ai-overlay hide" id="cpAiOverlay" role="status" aria-live="polite">
+                <div class="ai-sweep" aria-hidden="true"></div>
+                <div class="cp-ai-pill">
+                  <span class="cp-ai-spinner" aria-hidden="true"></span>
+                  <span id="cpAiStatusText" data-i18n="cp_ai_working">Isolating main subject &amp; whitening background locally…</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mobile Quick-Shortcut Bar (<= 900px) -->
+            <div class="cp-mobile-quickbar" id="cpMobileQuickbar" aria-label="Mobile quick actions">
+              <button type="button" class="cp-mq-btn cp-mq-primary" id="btnMqDownload" disabled>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span data-i18n="cp_mq_download">Download / Export</span>
+              </button>
+              <button type="button" class="cp-mq-btn" id="btnMqPeek" disabled>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>
+                </svg>
+                <span data-i18n="cp_mq_peek">Peek Original</span>
+              </button>
+              <button type="button" class="cp-mq-btn" id="btnMqEraser" disabled aria-pressed="false">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/>
+                </svg>
+                <span data-i18n="cp_mq_eraser">Eraser</span>
+              </button>
+              <button type="button" class="cp-mq-btn" id="btnMqUndo" disabled>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/>
+                </svg>
+                <span data-i18n="tc_undo">Undo</span>
+              </button>
+            </div>
+
+            <!-- Stage Footer & Desktop Shortcuts Legend -->
+            <div class="cp-stage-footer">
+              <div class="cp-stage-actions">
+                <button type="button" class="btn btn-secondary btn-sm" id="btnStagePeek" disabled>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>
+                  </svg>
+                  <span data-i18n="tc_peek_original">Hold to Compare</span>
+                </button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnStageEraser" disabled aria-pressed="false" data-i18n="cp_btn_eraser">Clean-Up Eraser</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnStageUndo" disabled data-i18n="tc_undo">Undo</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnResetAll" disabled data-i18n="tc_reset">Reset</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnClearAll" disabled data-i18n="tc_clear">Clear</button>
+              </div>
+              <div class="cp-shortcuts-bar" data-i18n="cp_shortcuts_legend">
+                1-4 Line Style · E Toggle Eraser · Hold Space Peek · Ctrl+Z Undo · Ctrl+P Print · Ctrl+S Export
+              </div>
+            </div>
+          </div>
+          <input type="file" id="cpFileInput" accept="image/jpeg,image/png,image/webp,image/bmp,image/gif" class="hide">
+        </div>
+
+        <!-- Right 3-Tab Controls Dock -->
+        <aside class="cp-dock" aria-label="Coloring Page Studio Controls">
+          <div class="cp-dock-tabs" role="tablist" aria-label="Studio tabs">
+            <button type="button" class="cp-dock-tab active" data-tab="style" role="tab" aria-selected="true">
+              <span class="cp-tab-num">1</span>
+              <span data-i18n="cp_tab_style">Line Style</span>
+            </button>
+            <button type="button" class="cp-dock-tab" data-tab="refine" role="tab" aria-selected="false">
+              <span class="cp-tab-num">2</span>
+              <span data-i18n="cp_tab_refine">Refine &amp; Clean</span>
+            </button>
+            <button type="button" class="cp-dock-tab" data-tab="page" role="tab" aria-selected="false">
+              <span class="cp-tab-num">3</span>
+              <span data-i18n="cp_tab_page">Page &amp; Title</span>
+            </button>
+          </div>
+
+          <div class="cp-dock-body">
+            <!-- TAB 1: LINE-ART ALGORITHMS & SUBJECT ISOLATION -->
+            <div class="cp-step-pane active" data-pane="style">
+              <div class="cp-group">
+                <div class="cp-group-head">
+                  <h3 data-i18n="cp_styles_title">Line-Art Styles (4 Algorithms)</h3>
+                </div>
+                <div class="cp-style-grid" id="cpStyleGrid" role="radiogroup" aria-label="Line art styles">
+                  <button type="button" class="cp-style-card active" data-style="classic" role="radio" aria-checked="true">
+                    <span class="cp-style-ico" aria-hidden="true">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>
+                      </svg>
+                    </span>
+                    <span class="cp-style-txt">
+                      <strong data-i18n="cp_style_classic_t">Classic Kids Coloring</strong>
+                      <small data-i18n="cp_style_classic_d">Clean outer contours &amp; wide open crayon spaces</small>
+                    </span>
+                  </button>
+
+                  <button type="button" class="cp-style-card" data-style="comic" role="radio" aria-checked="false">
+                    <span class="cp-style-ico" aria-hidden="true">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L15 8l6 1-4.5 4.2L17.5 20 12 16.8 6.5 20l1-6.8L3 9l6-1z"/>
+                      </svg>
+                    </span>
+                    <span class="cp-style-txt">
+                      <strong data-i18n="cp_style_comic_t">Bold Comic Ink</strong>
+                      <small data-i18n="cp_style_comic_d">Thick high-contrast ink outlines for toys &amp; characters</small>
+                    </span>
+                  </button>
+
+                  <button type="button" class="cp-style-card" data-style="pencil" role="radio" aria-checked="false">
+                    <span class="cp-style-ico" aria-hidden="true">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/>
+                      </svg>
+                    </span>
+                    <span class="cp-style-txt">
+                      <strong data-i18n="cp_style_pencil_t">Artistic Pencil Sketch</strong>
+                      <small data-i18n="cp_style_pencil_d">Soft graphite shading &amp; fine texture lines</small>
+                    </span>
+                  </button>
+
+                  <button type="button" class="cp-style-card" data-style="mandala" role="radio" aria-checked="false">
+                    <span class="cp-style-ico" aria-hidden="true">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 3v18"/><path d="M3 12h18"/><path d="m5.6 5.6 12.8 12.8"/><path d="m18.4 5.6-12.8 12.8"/>
+                      </svg>
+                    </span>
+                    <span class="cp-style-txt">
+                      <strong data-i18n="cp_style_mandala_t">Detailed Mandala / Fine Lines</strong>
+                      <small data-i18n="cp_style_mandala_d">Intricate fine-detail extraction for adult coloring</small>
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="cp-group">
+                <div class="cp-group-head">
+                  <h3 data-i18n="cp_isolate_title">Smart Subject Isolation</h3>
+                </div>
+                <p class="cp-note" data-i18n="cp_isolate_note">Strip cluttered rooms or street backgrounds locally with AI so only your subject appears on a clean white page.</p>
+                <button type="button" class="btn btn-primary btn-block" id="btnIsolateSubject" disabled>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m12 3 1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3Z"/>
+                  </svg>
+                  <span data-i18n="cp_btn_isolate">Isolate Subject / Remove Messy Background</span>
+                </button>
+                <button type="button" class="btn btn-secondary btn-sm btn-block hide" id="btnRestoreFullBg" data-i18n="cp_btn_restore_full">Use Full Original Photo</button>
+              </div>
+            </div>
+
+            <!-- TAB 2: LINE REFINEMENT & CLEAN-UP ERASER -->
+            <div class="cp-step-pane" data-pane="refine">
+              <div class="cp-group">
+                <div class="cp-group-head">
+                  <h3 data-i18n="cp_refine_title">Line &amp; Whiteness Tuning</h3>
+                </div>
+                <div class="cp-slider-row">
+                  <div class="cp-slider-head">
+                    <label for="cpThickness" data-i18n="cp_thickness">Line Thickness / Boldness</label>
+                    <span class="cp-val-badge" id="cpThicknessVal">4</span>
+                  </div>
+                  <input type="range" id="cpThickness" class="range-input" min="1" max="10" step="1" value="4" disabled>
+                </div>
+
+                <div class="cp-slider-row">
+                  <div class="cp-slider-head">
+                    <label for="cpDenoise" data-i18n="cp_denoise">Background Whiteness / Denoise</label>
+                    <span class="cp-val-badge" id="cpDenoiseVal">45%</span>
+                  </div>
+                  <input type="range" id="cpDenoise" class="range-input" min="0" max="100" step="1" value="45" disabled>
+                </div>
+              </div>
+
+              <div class="cp-group">
+                <div class="cp-group-head">
+                  <h3 data-i18n="cp_eraser_title">Manual Clean-Up Eraser</h3>
+                </div>
+                <p class="cp-note" data-i18n="cp_eraser_note">Paint directly over unwanted stray marks or background lines to erase them to pure white before printing.</p>
+                <button type="button" class="btn btn-secondary btn-block" id="btnToggleEraser" disabled aria-pressed="false" data-i18n="cp_btn_eraser">Clean-Up Eraser</button>
+                <div class="cp-slider-row">
+                  <div class="cp-slider-head">
+                    <label for="cpEraserSize" data-i18n="cp_eraser_size">Eraser Brush Size</label>
+                    <span class="cp-val-badge" id="cpEraserSizeVal">32 px</span>
+                  </div>
+                  <input type="range" id="cpEraserSize" class="range-input" min="8" max="100" step="2" value="32" disabled>
+                </div>
+                <div class="cp-btn-2">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnUndoEraser" disabled data-i18n="tc_undo">Undo</button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnClearEraser" disabled data-i18n="cp_btn_clear_eraser">Clear Eraser Edits</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 3: PRINTABLE SHEET CUSTOMIZER -->
+            <div class="cp-step-pane" data-pane="page">
+              <div class="cp-group">
+                <div class="cp-group-head">
+                  <h3 data-i18n="cp_paper_title">Printable Paper Format (300 DPI)</h3>
+                </div>
+                <div class="cp-paper-grid" id="cpPaperGrid" role="radiogroup" aria-label="Paper format">
+                  <button type="button" class="cp-paper-btn active" data-paper="a4p" role="radio" aria-checked="true">
+                    <strong data-i18n="cp_paper_a4p">A4 Portrait</strong>
+                    <span>210 × 297 mm</span>
+                  </button>
+                  <button type="button" class="cp-paper-btn" data-paper="a4l" role="radio" aria-checked="false">
+                    <strong data-i18n="cp_paper_a4l">A4 Landscape</strong>
+                    <span>297 × 210 mm</span>
+                  </button>
+                  <button type="button" class="cp-paper-btn" data-paper="letter" role="radio" aria-checked="false">
+                    <strong data-i18n="cp_paper_letter">US Letter</strong>
+                    <span>8.5 × 11 in</span>
+                  </button>
+                  <button type="button" class="cp-paper-btn" data-paper="square" role="radio" aria-checked="false">
+                    <strong data-i18n="cp_paper_square">Square (1:1)</strong>
+                    <span>210 × 210 mm</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="cp-group">
+                <div class="cp-group-head">
+                  <h3 data-i18n="cp_frame_title">Decorative Frame &amp; Header</h3>
+                </div>
+                <label class="cp-check-row" for="cpFrameToggle">
+                  <input type="checkbox" id="cpFrameToggle" checked>
+                  <span data-i18n="cp_frame_toggle">Decorative Coloring Page Border Frame</span>
+                </label>
+
+                <div class="cp-chip-row" id="cpFrameStyleRow">
+                  <button type="button" class="cp-chip-btn active" data-fstyle="classic" data-i18n="cp_fstyle_classic">Classic Double</button>
+                  <button type="button" class="cp-chip-btn" data-fstyle="scallop" data-i18n="cp_fstyle_scallop">Scalloped Kids</button>
+                  <button type="button" class="cp-chip-btn" data-fstyle="stars" data-i18n="cp_fstyle_stars">Corner Stars</button>
+                  <button type="button" class="cp-chip-btn" data-fstyle="rounded" data-i18n="cp_fstyle_rounded">Rounded Clean</button>
+                </div>
+
+                <label class="cp-field">
+                  <span data-i18n="cp_title_label">Top Header Title / Child's Name</span>
+                  <input type="text" id="cpCustomTitle" class="text-input" maxlength="60" placeholder="Adam's Coloring Page / لوحة البطل آدم">
+                </label>
+
+                <div class="cp-chip-row" id="cpTitleStyleRow">
+                  <button type="button" class="cp-chip-btn active" data-tstyle="outline" data-i18n="cp_tstyle_outline">Colorable Outline Text</button>
+                  <button type="button" class="cp-chip-btn" data-tstyle="solid" data-i18n="cp_tstyle_solid">Bold Solid Ink</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dedicated Export & Print Modal -->
+  <div class="cp-modal-backdrop hide" id="cpExportModal" role="dialog" aria-modal="true" aria-labelledby="cpExportModalTitle">
+    <div class="cp-modal-dialog">
+      <div class="cp-modal-head">
+        <div>
+          <h2 id="cpExportModalTitle" data-i18n="studio_export_print">Export &amp; Print</h2>
+          <p data-i18n="cp_export_modal_d">Print directly on paper or download crisp 300 DPI PDF, PNG, and JPG coloring sheets.</p>
+        </div>
+        <button type="button" class="cp-modal-close" id="btnCloseExportModal" aria-label="Close">×</button>
+      </div>
+      <div class="cp-modal-body">
+        <div class="cp-export-summary" id="cpExportSummary">A4 Portrait · 2480 × 3508 px · 300 DPI</div>
+        <div class="cp-export-actions">
+          <button type="button" class="btn btn-primary btn-block" id="btnDirectPrint" disabled>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/>
+            </svg>
+            <span data-i18n="cp_btn_direct_print">Print Coloring Page Now</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn-block" id="btnExportPdf" disabled data-i18n="cp_btn_dl_pdf">Download Print-Ready PDF (300 DPI)</button>
+          <div class="cp-btn-2">
+            <button type="button" class="btn btn-secondary" id="btnExportPng" disabled data-i18n="cp_btn_dl_png">Download PNG (High-Res)</button>
+            <button type="button" class="btn btn-secondary" id="btnExportJpg" disabled data-i18n="cp_btn_dl_jpg">Download JPG</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script type="module" src="/js/coloring-page.js"></script>
+</body>
+</html>

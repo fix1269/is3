@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remove Background — imgsfix</title>
+  <meta name="description" content="Remove image backgrounds automatically with 100% local in-browser AI. Zero uploads.">
+  <link rel="stylesheet" href="/assets/cairo.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .preview-wrap{position:relative;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--border-soft);background:var(--bg-subtle);user-select:none;}
+    .preview-wrap canvas{display:block;cursor:default;}
+    .preview-wrap.brush-active #resultCanvas{cursor:none;touch-action:none;}
+    #resultCanvas{background-image:
+      linear-gradient(45deg,#ccc 25%,transparent 25%),
+      linear-gradient(-45deg,#ccc 25%,transparent 25%),
+      linear-gradient(45deg,transparent 75%,#ccc 75%),
+      linear-gradient(-45deg,transparent 75%,#ccc 75%);
+      background-size:16px 16px;background-position:0 0,0 8px,8px -8px,-8px 0;}
+    .instruction{font-size:12px;color:var(--text-faint);margin-top:8px;line-height:1.5;}
+
+    /* Manual Refinement Bar */
+    .refine-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;width:100%;padding:10px 12px;background:var(--bg-card);border:1px solid var(--border-soft);border-radius:var(--r-md);box-shadow:var(--shadow-sm,0 2px 8px rgba(0,0,0,.04));}
+    .refine-bar.hide{display:none;}
+    .refine-bar .tool-btn{padding:7px 11px;font-size:13px;white-space:nowrap;}
+    .refine-bar .tool-btn svg{width:15px;height:15px;flex-shrink:0;}
+    .refine-bar .tool-btn.is-restore.active{background:var(--c-success-500,#10b981);border-color:var(--c-success-500,#10b981);color:#fff;}
+    .refine-bar .tool-btn.is-erase.active{background:var(--c-error-500,#ef4444);border-color:var(--c-error-500,#ef4444);color:#fff;}
+    .refine-bar .tool-btn.is-peeking{background:var(--c-primary-500);border-color:var(--c-primary-500);color:#fff;}
+    .refine-size-wrap{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--text-muted);margin:0;}
+    .refine-range{width:96px;margin:0;cursor:pointer;}
+    .refine-size-val{min-width:36px;text-align:center;font-variant-numeric:tabular-nums;color:var(--text-strong);font-size:12px;}
+    .refine-peek-btn{margin-inline-start:auto;}
+
+    /* Exact Brush Cursor Circle Preview */
+    .brush-cursor{position:absolute;top:0;left:0;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);z-index:8;border:2px solid #fff;box-shadow:0 0 0 1.5px rgba(15,23,42,.75),inset 0 0 0 1px rgba(15,23,42,.45);transition:width .08s ease,height .08s ease;}
+    .brush-cursor.hide{display:none;}
+    .brush-cursor.mode-restore{background:rgba(16,185,129,.18);}
+    .brush-cursor.mode-erase{background:rgba(239,68,68,.18);}
+
+    /* Canva-Style Sparkling Overlay */
+    .ai-scan-overlay{position:absolute;inset:0;z-index:12;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(10,15,30,.56);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);overflow:hidden;pointer-events:all;}
+    .ai-scan-overlay.hide{display:none;}
+    .ai-sweep{position:absolute;inset:-25% -60%;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.16) 47%,rgba(147,197,253,.28) 50%,rgba(255,255,255,.16) 53%,transparent 65%);transform:translateX(-70%);animation:aiSweep 2.4s ease-in-out infinite;pointer-events:none;}
+    .ai-sparkles{position:absolute;inset:0;pointer-events:none;}
+    .ai-sparkle{position:absolute;color:#fff;opacity:0;filter:drop-shadow(0 0 8px rgba(147,197,253,.95));animation:sparkleTwinkle 2.2s ease-in-out infinite;}
+    .ai-sparkle svg{display:block;width:100%;height:100%;}
+    .ai-scan-pill{position:relative;z-index:2;display:inline-flex;align-items:center;gap:10px;max-width:92%;padding:10px 18px;border-radius:999px;background:rgba(15,23,42,.78);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:13px;font-weight:600;line-height:1.45;text-align:center;box-shadow:0 8px 28px rgba(0,0,0,.35);}
+    .ai-scan-star{font-size:16px;color:#93c5fd;animation:starPulse 1.5s ease-in-out infinite;flex-shrink:0;}
+
+    @keyframes aiSweep{
+      0%{transform:translateX(-65%);}
+      55%,100%{transform:translateX(65%);}
+    }
+    @keyframes sparkleTwinkle{
+      0%,100%{opacity:0;transform:translateY(4px) scale(.4) rotate(0deg);}
+      45%{opacity:.95;transform:translateY(-5px) scale(1.1) rotate(22deg);}
+      70%{opacity:.55;transform:translateY(-8px) scale(.85) rotate(35deg);}
+    }
+    @keyframes starPulse{
+      0%,100%{opacity:.65;transform:scale(.9) rotate(0deg);}
+      50%{opacity:1;transform:scale(1.2) rotate(18deg);}
+    }
+
+    @media (max-width:640px){
+      .refine-bar{gap:6px;padding:8px 10px;}
+      .refine-size-wrap{width:100%;order:10;justify-content:space-between;padding-top:4px;border-top:1px solid var(--border-soft);}
+      .refine-range{flex:1;max-width:none;}
+      .refine-peek-btn{margin-inline-start:0;}
+      .ai-scan-pill{font-size:12px;padding:9px 14px;}
+    }
+  </style>
+</head>
+<body>
+  <section class="page-head">
+    <div class="container">
+      <span class="badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3Z"/></svg><span data-i18n="t_removebg_t">Remove BG</span></span>
+      <h1 data-i18n="t_removebg_t">Remove BG</h1>
+      <p data-i18n="t_removebg_d">Remove image backgrounds automatically with 100% local in-browser AI.</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html" data-i18n="bc_home">Home</a><span class="sep">/</span>
+        <a href="../../index.html#categories" data-i18n="nav_tools">Tools</a><span class="sep">/</span>
+        <a href="../categories/images.html" data-i18n="cat_images_t">Images &amp; Design</a><span class="sep">/</span>
+        <span data-i18n="t_removebg_t">Remove BG</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container tool-shell">
+      <aside class="tool-panel">
+        <div class="panel-section">
+          <h4 data-i18n="tc_removebg_settings">Remove BG Settings</h4>
+          <div class="setting-row">
+            <label data-i18n="tc_output_bg">Output Background</label>
+            <select id="outputMode" class="select-input">
+              <option value="transparent" data-i18n="tc_transparent">Transparent</option>
+              <option value="white" data-i18n="tc_white">White</option>
+              <option value="custom" data-i18n="tc_custom_color">Custom Color</option>
+            </select>
+          </div>
+          <div class="setting-row" id="customColorRow" style="display:none">
+            <label data-i18n="tc_custom_color">Custom Color</label>
+            <input type="color" id="customColor" class="color-input" value="#00aaff">
+          </div>
+          <p class="instruction" data-i18n="tc_removebg_hint">100% private in-browser AI. Everything runs locally on your device — no uploads.</p>
+          <button class="btn btn-primary btn-block" id="btnApply" style="margin-top:12px" data-i18n="tc_removebg_auto_btn">Auto Remove Background</button>
+        </div>
+      </aside>
+
+      <div class="tool-stage" id="toolStage">
+        <div class="tool-stage-header">
+          <h3 data-i18n="t_removebg_t">Remove BG</h3>
+          <div class="result-actions" id="resultActions" style="display:none">
+            <button class="btn btn-primary btn-sm" id="btnDownload" data-i18n="tc_download">Download</button>
+            <button class="btn btn-secondary btn-sm" id="btnClear" data-i18n="tc_clear">Clear</button>
+            <button class="btn btn-secondary btn-sm" id="btnReset" data-i18n="tc_reset">Reset</button>
+          </div>
+        </div>
+        <div class="tool-stage-body">
+          <div class="refine-bar hide" id="refineBar" role="toolbar">
+            <button type="button" class="tool-btn is-restore" id="btnBrushRestore" aria-pressed="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.06 11.9l8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg>
+              <span data-i18n="tc_brush_restore">Restore</span>
+            </button>
+            <button type="button" class="tool-btn is-erase" id="btnBrushErase" aria-pressed="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/></svg>
+              <span data-i18n="tc_brush_erase">Erase</span>
+            </button>
+            <span class="tool-divider" aria-hidden="true"></span>
+            <label class="refine-size-wrap" for="brushSize">
+              <span data-i18n="tc_brush_size">Brush Size</span>
+              <input type="range" id="brushSize" class="range-input refine-range" min="8" max="120" value="32">
+              <span id="brushSizeVal" class="refine-size-val">32px</span>
+            </label>
+            <span class="tool-divider" aria-hidden="true"></span>
+            <button type="button" class="tool-btn" id="btnUndo" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>
+              <span data-i18n="tc_undo">Undo</span>
+            </button>
+            <button type="button" class="tool-btn refine-peek-btn" id="btnPeek">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+              <span data-i18n="tc_peek_original">Hold to Compare</span>
+            </button>
+          </div>
+
+          <div class="empty-state" id="emptyState">
+            <div class="es-icon"></div>
+            <p data-i18n="tc_drop">Drop your image here or click to browse</p>
+            <p style="font-size:12px;color:var(--text-faint)" data-i18n="tc_supported">JPG · PNG · WebP · GIF · BMP</p>
+            <button class="btn btn-primary btn-sm" id="btnUpload" data-i18n="t_upload">Upload Image</button>
+          </div>
+
+          <div class="preview-wrap hide" id="previewWrap">
+            <canvas id="srcCanvas"></canvas>
+            <canvas id="resultCanvas" style="display:none"></canvas>
+            <div id="brushCursor" class="brush-cursor hide" aria-hidden="true"></div>
+            <div id="aiOverlay" class="ai-scan-overlay hide" role="status" aria-live="polite">
+              <div class="ai-sweep" aria-hidden="true"></div>
+              <div class="ai-sparkles" id="aiSparkles" aria-hidden="true"></div>
+              <div class="ai-scan-pill">
+                <span class="ai-scan-star" aria-hidden="true">✦</span>
+                <span data-i18n="tc_removebg_scanning">Removing background... (may take a few seconds on first use)</span>
+              </div>
+            </div>
+          </div>
+
+          <input type="file" id="fileInput" accept="image/*" class="hide">
+          <div class="drop-zone hide" id="dropZone" style="margin-top:16px">
+            <span class="dz-icon"></span>
+            <span data-i18n="tc_drop">Drop your image here or click to browse</span>
+          </div>
+          <div id="infoBar" style="font-size:13px;color:var(--text-faint)"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="/js/main.js"></script>
+  <script type="module" src="/js/remove-bg.js"></script>
+</body>
+</html>

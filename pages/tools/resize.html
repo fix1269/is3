@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resize Image — imgsfix</title>
+  <meta name="description" content="Resize image width and height by exact pixels, percentage, or social media presets with crisp quality. 100% local browser processing.">
+  <link rel="stylesheet" href="/assets/cairo.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <section class="page-head">
+    <div class="container">
+      <span class="badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/>
+        </svg>
+        <span data-i18n="t_resize_t">Resize Image</span>
+      </span>
+      <h1 data-i18n="t_resize_t">Resize Image</h1>
+      <p data-i18n="t_resize_d">Resize image width and height by exact pixels, percentage, or social media presets with crisp quality.</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html" data-i18n="bc_home">Home</a><span class="sep">/</span>
+        <a href="../../index.html#categories" data-i18n="nav_tools">Tools</a><span class="sep">/</span>
+        <a href="../categories/images.html" data-i18n="cat_images_t">Images &amp; Design</a><span class="sep">/</span>
+        <span data-i18n="t_resize_t">Resize Image</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container tool-shell">
+      <aside class="tool-panel">
+        <div class="panel-section">
+          <h4 data-i18n="tc_resize_settings">Resize Settings</h4>
+
+          <div class="resize-mode-tabs" id="resizeModeTabs" role="tablist" aria-label="Resize mode">
+            <button type="button" class="resize-mode-tab active" data-mode="pixels" role="tab" aria-selected="true" data-i18n="tc_resize_by_pixels">By Pixels (px)</button>
+            <button type="button" class="resize-mode-tab" data-mode="percent" role="tab" aria-selected="false" data-i18n="tc_resize_by_percent">By Percentage (%)</button>
+          </div>
+
+          <!-- Pixels Mode -->
+          <div id="pixelsPanel">
+            <div class="resize-dims-row">
+              <div class="setting-row">
+                <label for="widthEl" data-i18n="tc_width_px">Width (px)</label>
+                <input type="number" id="widthEl" class="num-input" min="1" max="16384" value="0" disabled>
+              </div>
+              <div class="setting-row">
+                <label for="heightEl" data-i18n="tc_height_px">Height (px)</label>
+                <input type="number" id="heightEl" class="num-input" min="1" max="16384" value="0" disabled>
+              </div>
+            </div>
+
+            <div class="setting-row">
+              <label class="resize-check-row" for="lockAr">
+                <input type="checkbox" id="lockAr" checked>
+                <span data-i18n="tc_lock_ar">Lock aspect ratio</span>
+              </label>
+            </div>
+
+            <div class="setting-row" style="margin-top:4px">
+              <label data-i18n="tc_resize_presets">Social &amp; Web Presets</label>
+              <div class="resize-presets-grid" id="resizePresets" role="group" aria-label="Social and web presets">
+                <button type="button" class="resize-preset-pill" data-w="1080" data-h="1080" disabled>
+                  <span data-i18n="tc_preset_ig_post">Instagram Post</span>
+                  <span class="resize-preset-dims">1080 × 1080</span>
+                </button>
+                <button type="button" class="resize-preset-pill" data-w="1080" data-h="1920" disabled>
+                  <span data-i18n="tc_preset_story">Story / TikTok</span>
+                  <span class="resize-preset-dims">1080 × 1920</span>
+                </button>
+                <button type="button" class="resize-preset-pill" data-w="1280" data-h="720" disabled>
+                  <span data-i18n="tc_preset_yt_thumb">YouTube Thumbnail</span>
+                  <span class="resize-preset-dims">1280 × 720</span>
+                </button>
+                <button type="button" class="resize-preset-pill" data-w="1920" data-h="1080" disabled>
+                  <span data-i18n="tc_preset_fhd">Full HD</span>
+                  <span class="resize-preset-dims">1920 × 1080</span>
+                </button>
+                <button type="button" class="resize-preset-pill" data-w="820" data-h="312" disabled>
+                  <span data-i18n="tc_preset_fb_cover">Facebook Cover</span>
+                  <span class="resize-preset-dims">820 × 312</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Percentage Mode -->
+          <div id="percentPanel" class="hide">
+            <div class="setting-row">
+              <label for="percentRange"><span data-i18n="tc_percent_scale">Scale Percentage</span>: <span id="percentValLabel">100</span>%</label>
+              <div class="resize-percent-input-row">
+                <input type="range" id="percentRange" class="range-input" min="10" max="400" value="100" disabled>
+                <input type="number" id="percentInput" class="num-input resize-percent-num" min="10" max="400" value="100" aria-label="Scale percentage" disabled>
+              </div>
+            </div>
+            <div class="setting-row">
+              <div class="resize-percent-presets" id="percentPresets" role="group" aria-label="Percentage presets">
+                <button type="button" class="resize-percent-btn" data-pct="25" disabled>25%</button>
+                <button type="button" class="resize-percent-btn" data-pct="50" disabled>50%</button>
+                <button type="button" class="resize-percent-btn" data-pct="75" disabled>75%</button>
+                <button type="button" class="resize-percent-btn" data-pct="150" disabled>150%</button>
+              </div>
+            </div>
+            <div class="setting-row">
+              <div class="resize-percent-dims">
+                <span data-i18n="tc_percent_result">Output Dimensions</span>
+                <strong id="percentResultDims">—</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Safety Option -->
+          <div class="setting-row" style="margin-top:6px;padding-top:10px;border-top:1px solid var(--border-soft)">
+            <label class="resize-check-row" for="noEnlarge">
+              <input type="checkbox" id="noEnlarge">
+              <span data-i18n="tc_no_enlarge">Do not enlarge if original is smaller</span>
+            </label>
+          </div>
+
+          <button type="button" class="btn btn-primary btn-block" id="btnApply" style="margin-top:10px" disabled data-i18n="tc_apply">Apply</button>
+        </div>
+      </aside>
+
+      <div class="tool-stage" id="toolStage">
+        <div class="tool-stage-header">
+          <h3 data-i18n="t_resize_t">Resize Image</h3>
+          <div class="result-actions" id="resultActions" style="display:none">
+            <button type="button" class="btn btn-primary btn-sm" id="btnDownload" data-i18n="tc_download">Download</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnClear" data-i18n="tc_clear">Clear</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnReset" data-i18n="tc_reset">Reset</button>
+          </div>
+        </div>
+        <div class="tool-stage-body">
+          <div class="empty-state" id="emptyState">
+            <div class="es-icon">
+              <svg class="ic-upload" viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 20h14"/>
+              </svg>
+            </div>
+            <p data-i18n="tc_drop">Drop your image here or click to browse</p>
+            <p style="font-size:12px;color:var(--text-faint)" data-i18n="tc_supported">JPG · PNG · WebP · GIF · BMP</p>
+            <button type="button" class="btn btn-primary btn-sm" id="btnUpload" data-i18n="t_upload">Upload Image</button>
+          </div>
+
+          <div class="preview-wrap hide" id="previewWrap">
+            <canvas id="afterCanvas"></canvas>
+          </div>
+
+          <div class="resize-summary-badge hide" id="resizeSummary" role="status" aria-live="polite"></div>
+
+          <input type="file" id="fileInput" accept="image/*" class="hide">
+          <div class="drop-zone hide" id="dropZone" style="margin-top:16px">
+            <span class="dz-icon">
+              <svg class="ic-upload" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 20h14"/>
+              </svg>
+            </span>
+            <span data-i18n="tc_drop">Drop your image here or click to browse</span>
+          </div>
+          <div class="progress hide" id="progress" style="max-width:400px">
+            <div class="progress-bar"></div>
+            <div class="progress-text" id="progressText"></div>
+          </div>
+          <div id="infoBar" style="font-size:13px;color:var(--text-faint)"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="/js/main.js"></script>
+  <script type="module" src="/js/resize.js"></script>
+</body>
+</html>

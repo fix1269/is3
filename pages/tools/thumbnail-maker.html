@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube &amp; Social Thumbnail Editor — imgsfix</title>
+  <meta name="description" content="Design high-CTR YouTube, Shorts, Reels, and social media thumbnails 100% locally in your browser with pro starter templates, AI background removal, multi-image layers, EN/AR typography, shapes, arrows, and live YouTube feed preview.">
+  <link rel="stylesheet" href="/assets/cairo.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Almarai:wght@700;800&family=Amiri:wght@700&family=Anton&family=Aref+Ruqaa:wght@400;700&family=Bangers&family=Bebas+Neue&family=Changa:wght@700;800&family=El+Messiri:wght@600;700&family=IBM+Plex+Sans+Arabic:wght@700&family=Lalezar&family=Lemonada:wght@600;700&family=Luckiest+Guy&family=Montserrat:wght@800;900&family=Oswald:wght@700&family=Pacifico&family=Permanent+Marker&family=Playfair+Display:wght@700;900&family=Poppins:wght@800&family=Readex+Pro:wght@700&family=Reem+Kufi:wght@600;700&family=Roboto:wght@900&family=Tajawal:wght@700;800&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <section class="page-head tm-page-head">
+    <div class="container">
+      <span class="badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="4" width="20" height="16" rx="2.5"/>
+          <polygon points="10 9 16 12 10 15 10 9"/>
+        </svg>
+        <span data-i18n="t_thumbnail_t">YouTube &amp; Social Thumbnail Editor</span>
+      </span>
+      <h1 data-i18n="t_thumbnail_t">YouTube &amp; Social Thumbnail Editor</h1>
+      <p data-i18n="t_thumbnail_d">Design high-CTR YouTube, Shorts, and social thumbnails locally with starter templates, AI subject cutout, outline glow, bold EN/AR text, CTR icons, and live YouTube feed preview.</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html" data-i18n="bc_home">Home</a><span class="sep">/</span>
+        <a href="../../index.html#categories" data-i18n="nav_tools">Tools</a><span class="sep">/</span>
+        <a href="../categories/ai-design.html" data-i18n="cat_ai_t">Smart Studio</a><span class="sep">/</span>
+        <span data-i18n="t_thumbnail_t">YouTube &amp; Social Thumbnail Editor</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section-sm tm-section">
+    <div class="container tm-container">
+      <!-- Clear Step-by-Step Usage Hint Banner -->
+      <div class="tm-usage-banner" role="note">
+        <svg class="tm-usage-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+        </svg>
+        <p data-i18n="tm_usage_hint">How to use: 1. Pick a platform size or starter template → 2. Add photos, logos, or cutout images → 3. Style EN/AR headlines, arrows, shapes &amp; stickers → 4. Preview in YouTube Feed &amp; download crisp PNG/JPG.</p>
+      </div>
+
+      <!-- Three-Zone Studio Workspace -->
+      <div class="tm-studio" id="tmStudio">
+        <!-- LEFT DOCK: Templates, Background, Images, Text & Elements -->
+        <aside class="tm-dock" aria-label="Thumbnail creation tools">
+          <div class="tm-dock-tabs" role="tablist" aria-label="Studio creation tabs">
+            <button type="button" class="tm-dock-tab active" data-tab="templates" role="tab" aria-selected="true" data-i18n="tm_tab_templates">Templates</button>
+            <button type="button" class="tm-dock-tab" data-tab="background" role="tab" aria-selected="false" data-i18n="tm_tab_bg">Background</button>
+            <button type="button" class="tm-dock-tab" data-tab="subject" role="tab" aria-selected="false" data-i18n="tm_tab_subject">Images</button>
+            <button type="button" class="tm-dock-tab" data-tab="elements" role="tab" aria-selected="false" data-i18n="tm_tab_elements">Text &amp; Elements</button>
+          </div>
+
+          <div class="tm-dock-body">
+            <!-- TAB 1: Pro Starter Templates -->
+            <div class="tm-pane active" data-pane="templates">
+              <div class="tm-group">
+                <div class="tm-group-head">
+                  <h3 data-i18n="tm_tpl_title">Pro Starter Templates</h3>
+                  <span class="tm-hint-inline" data-i18n="tm_tpl_sub">1-click customizable</span>
+                </div>
+                <div class="tm-tpl-grid" id="tmTemplateGrid">
+                  <button type="button" class="tm-tpl-card active" data-template="tech">
+                    <span class="tm-tpl-swatch tm-sw-tech" aria-hidden="true"></span>
+                    <span class="tm-tpl-name" data-i18n="tm_tpl_tech">Tech &amp; Tutorials</span>
+                  </button>
+                  <button type="button" class="tm-tpl-card" data-template="gaming">
+                    <span class="tm-tpl-swatch tm-sw-gaming" aria-hidden="true"></span>
+                    <span class="tm-tpl-name" data-i18n="tm_tpl_gaming">Gaming</span>
+                  </button>
+                  <button type="button" class="tm-tpl-card" data-template="podcast">
+                    <span class="tm-tpl-swatch tm-sw-podcast" aria-hidden="true"></span>
+                    <span class="tm-tpl-name" data-i18n="tm_tpl_podcast">Podcast / Interview</span>
+                  </button>
+                  <button type="button" class="tm-tpl-card" data-template="vs">
+                    <span class="tm-tpl-swatch tm-sw-vs" aria-hidden="true"></span>
+                    <span class="tm-tpl-name" data-i18n="tm_tpl_vs">Before vs After / VS</span>
+                  </button>
+                  <button type="button" class="tm-tpl-card" data-template="news">
+                    <span class="tm-tpl-swatch tm-sw-news" aria-hidden="true"></span>
+                    <span class="tm-tpl-name" data-i18n="tm_tpl_news">Breaking News</span>
+                  </button>
+                  <button type="button" class="tm-tpl-card" data-template="vlog">
+                    <span class="tm-tpl-swatch tm-sw-vlog" aria-hidden="true"></span>
+                    <span class="tm-tpl-name" data-i18n="tm_tpl_vlog">Vlog &amp; Lifestyle</span>
+                  </button>
+                </div>
+              </div>
+              <div class="tm-group">
+                <div class="tm-group-head">
+                  <h3 data-i18n="tm_tpl_note_t">Starter Layout Behavior</h3>
+                </div>
+                <p class="tm-note-text" data-i18n="tm_tpl_note_d">Clicking any template builds an editable composition while keeping your uploaded image layers on canvas.</p>
+              </div>
+            </div>
+
+            <!-- TAB 2: Canvas Background -->
+            <div class="tm-pane" data-pane="background">
+              <div class="tm-group">
+                <div class="tm-group-head">
+                  <h3 data-i18n="tm_bg_colors">Backdrop Gradient &amp; Color</h3>
+                </div>
+                <div class="tm-color-pair">
+                  <label class="tm-color-field">
+                    <span data-i18n="tm_bg_c1">Color 1</span>
+                    <input type="color" id="tmBgColor1" value="#0F172A">
+                  </label>
+                  <label class="tm-color-field">
+                    <span data-i18n="tm_bg_c2">Color 2</span>
+                    <input type="color" id="tmBgColor2" value="#1D4ED8">
+                  </label>
+                </div>
+                <div class="tm-slider-row">
+                  <div class="tm-slider-head">
+                    <label for="tmBgAngle" data-i18n="tm_bg_angle">Gradient Angle</label>
+                    <span class="tm-val-badge" id="tmBgAngleVal">135°</span>
+                  </div>
+                  <input type="range" id="tmBgAngle" class="range-input" min="0" max="360" step="5" value="135">
+                </div>
+                <div class="tm-bg-presets" id="tmBgPresetRow">
+                  <button type="button" class="tm-bg-chip" data-bg="#0F172A,#1D4ED8" style="background:linear-gradient(135deg,#0F172A,#1D4ED8)" aria-label="Navy Cobalt"></button>
+                  <button type="button" class="tm-bg-chip" data-bg="#2E1065,#BE123C" style="background:linear-gradient(135deg,#2E1065,#BE123C)" aria-label="Neon Berry"></button>
+                  <button type="button" class="tm-bg-chip" data-bg="#111827,#B45309" style="background:linear-gradient(135deg,#111827,#B45309)" aria-label="Studio Gold"></button>
+                  <button type="button" class="tm-bg-chip" data-bg="#064E3B,#0D9488" style="background:linear-gradient(135deg,#064E3B,#0D9488)" aria-label="Emerald Teal"></button>
+                  <button type="button" class="tm-bg-chip" data-bg="#7F1D1D,#DC2626" style="background:linear-gradient(135deg,#7F1D1D,#DC2626)" aria-label="Alert Red"></button>
+                  <button type="button" class="tm-bg-chip" data-bg="#F97316,#EC4899" style="background:linear-gradient(135deg,#F97316,#EC4899)" aria-label="Sunset Vlog"></button>
+                </div>
+              </div>
+
+              <div class="tm-group">
+                <div class="tm-group-head">
+                  <h3 data-i18n="tm_bg_image_t">Custom Background Image</h3>
+                </div>
+                <button type="button" class="btn btn-primary btn-block" id="btnUploadBgImg" data-i18n="tm_bg_upload">Upload Custom Background</button>
+                <button type="button" class="btn btn-secondary btn-sm btn-block hide" id="btnClearBgImg" data-i18n="tm_bg_clear">Remove Background Image</button>
+                <div class="tm-slider-row">
+                  <div class="tm-slider-head">
+                    <label for="tmBgBlur" data-i18n="tm_bg_blur">Backdrop Blur</label>
+                    <span class="tm-val-badge" id="tmBgBlurVal">0 px</span>
+                  </div>
+                  <input type="range" id="tmBgBlur" class="range-input" min="0" max="24" step="1" value="0">
+                </div>
+                <div class="tm-slider-row">
+                  <div class="tm-slider-head">
+                    <label for="tmBgVignette" data-i18n="tm_bg_vignette">Dark Vignette</label>
+                    <span class="tm-val-badge" id="tmBgVignetteVal">35%</span>
+                  </div>
+                  <input type="range" id="tmBgVignette" class="range-input" min="0" max="90" step="5" value="35">
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 3: Multi-Image, Logos, Stickers & Cutout -->
+            <div class="tm-pane" data-pane="subject">
+              <div class="tm-group">
+                <div class="tm-group-head">
+                  <h3 data-i18n="tm_subj_upload_t">Photos, Logos &amp; Stickers</h3>
+                </div>
+                <button type="button" class="btn btn-primary btn-block" id="btnUploadSubject" data-i18n="tm_btn_upload_subj">+ Add Image / Logo / Sticker Layer</button>
+                <p class="tm-note-text" id="tmImgTargetHint" data-i18n="tm_img_multi_note">Upload unlimited local photos, PNG logos, or stickers. Select any image layer to apply AI background removal, corner radius, border, or shadow.</p>
+                <button type="button" class="btn btn-secondary btn-block" id="btnAutoCutoutSubject" disabled>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m12 3 1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3Z"/>
+                  </svg>
+                  <span data-i18n="tm_btn_auto_cutout">One-Click Background Removal</span>
+                </button>
+                <button type="button" class="btn btn-secondary btn-sm btn-block hide" id="btnRestoreOrigSubject" data-i18n="tm_btn_restore_subj">Restore Original Image</button>
+              </div>
+
+              <div class="tm-group">
+                <div class="tm-group-head">
+                  <h3 data-i18n="tm_subj_pop_t">Frame, Outline &amp; Rim Glow</h3>
+                </div>
+
+                <div class="tm-slider-row">
+                  <div class="tm-slider-head">
+                    <label for="tmImgRadius" data-i18n="tm_img_radius">Corner Radius</label>
+                    <span class="tm-val-badge" id="tmImgRadiusVal">0%</span>
+                  </div>
+                  <input type="range" id="tmImgRadius" class="range-input" min="0" max="50" step="2" value="0" disabled>
+                </div>
+
+                <div class="tm-slider-row">
+                  <div class="tm-slider-head">
+                    <label for="tmSubjOutline" data-i18n="tm_subj_outline">Border / Die-Cut Outline</label>
+                    <span class="tm-val-badge" id="tmSubjOutlineVal">0 px</span>
+                  </div>
+                  <input type="range" id="tmSubjOutline" class="range-input" min="0" max="24" step="1" value="0" disabled>
+                </div>
+                <div class="tm-color-inline">
+                  <span data-i18n="tm_outline_color">Outline Color</span>
+                  <div class="tm-mini-swatches">
+                    <button type="button" class="tm-mini-sw" data-subj-outline="#FFFFFF" style="background:#FFFFFF" aria-label="White"></button>
+                    <button type="button" class="tm-mini-sw" data-subj-outline="#FACC15" style="background:#FACC15" aria-label="Yellow"></button>
+                    <button type="button" class="tm-mini-sw" data-subj-outline="#38BDF8" style="background:#38BDF8" aria-label="Cyan"></button>
+                    <input type="color" id="tmSubjOutlineColor" value="#FFFFFF" aria-label="Outline custom color" disabled>
+                  </div>
+                </div>
+
+                <div class="tm-slider-row">
+                  <div class="tm-slider-head">
+                    <label for="tmSubjGlow" data-i18n="tm_subj_glow">Backlight Rim Glow</label>
+                    <span class="tm-val-badge" id="tmSubjGlowVal">0 px</span>
+                  </div>
+                  <input type="range" id="tmSubjGlow" class="range-input" min="0" max="60" step="2" value="0" disabled>
+                </div>
+                <div class="tm-color-inline">
+                  <span data-i18n="tm_glow_color">Glow Color</span>
+                  <div class="tm-mini-swatches">
+                    <button type="button" class="tm-mini-sw" data-subj-glow="#38BDF8" style="background:#38BDF8" aria-label="Sky Glow"></button>
+                    <button type="button" class="tm-mini-sw" data-subj-glow="#FACC15" style="background:#FACC15" aria-label="Gold Glow"></button>
+                    <button type="button" class="tm-mini-sw" data-subj-glow="#EF4444" style="background:#EF4444" aria-label="Red Glow"></button>
+                    <button type="button" class="tm-mini-sw" data-subj-glow="#A855F7" style="background:#A855F7" aria-label="Purple Glow"></button>
+                    <input type="color" id="tmSubjGlowColor" value="#38BDF8" aria-label="Glow custom color" disabled>
+                  </div>
+                </div>
+
+                <div class="tm-slider-row">
+                  <div class="tm-slider-head">
+                    <label for="tmImgShadow" data-i18n="tm_img_shadow">Drop Shadow</label>
+                    <span class="tm-val-badge" id="tmImgShadowVal">12 px</span>
+                  </div>
+                  <input type="range" id="tmImgShadow" class="range-input" min="0" max="48" step="2" value="12" disabled>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 4: Text, Arrows, Shapes, Hook Badges & Stickers -->
+            <div class="tm-pane" data-pane="elements">
+              <div class="tm-group">
+                <div class="tm-group-head">
+                  <h3 data-i18n="tm_text_add_t">High-CTR Typography</h3>
+                </div>
+                <button type="button" class="btn btn-primary btn-block" id="btnAddHeadline" data-i18n="tm_btn_add_text">+ Add Headline Text</button>
+              </div>
+
+              <div class="tm-group">
+                <div class="tm-group-head">
+                  <h3 data-i18n="tm_ctr_arrows_t">Arrows &amp; Pointers</h3>
+                </div>
+                <div class="tm-ctr-grid">
+                  <button type="button" class="tm-ctr-btn" data-add-ctr="arrow_curved_red">
+                    <span class="tm-ctr-prev" style="color:#EF4444" aria-hidden="true">↪</span>
+                    <span data-i18n="tm_ctr_arrow_red">Curved Red</span>
+                  </button>
+                  <button type="button" class="tm-ctr-btn" data-add-ctr="arrow_curved_yellow">
+                    <span class="tm-ctr-prev" style="color:#FACC15" aria-hidden="true">↪</span>
+                    <span data-i18n="tm_ctr_arrow_yellow">Curved Yellow</span>
+                  </button>
+                  <button type="button" class="tm-ctr-btn" data-add-ctr="arrow_straight">
+                    <span class="tm-ctr-prev" style="color:#EF4444" aria-hidden="true">➔</span>
+                    <span data-i18n="tm_ctr_arrow_straight">Straight Arrow</span>
+                  </button>
+                  <button type="button" class="tm-ctr-btn" data-add-ctr="arrow_double">
+                    <span class="tm-ctr-prev" style="color:#38BDF8" aria-hidden="true">⇄</span>
+                    <span data-i18n="tm_ctr_arrow_double">Double Arrow</span>
+                  </button>
+                  <button type="button" class="tm-ctr-btn" data-add-ctr="arrow_trend_up">
+                    <span class="tm-ctr-prev" style="color:#22C55E" aria-hidden="true">↗</span>
+                    <span data-i18n="tm_ctr_trend_up">Trend Up</span>
+                  </button>
+                  <button type="button" class="tm-ctr-btn" data-add-ctr="arrow_trend_down">
+                    <span class="tm-ctr-prev" style="color:#EF4444" aria-hidden="true">↘</span>
+                    <span data-i18n="tm_ctr_trend_down">Trend Down</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="tm-group">
+                <div class="tm-group-head">
+                  <h3 data-i18n="tm_ctr_shapes_t">Shapes &amp; Frames</h3>
+                </div>
+                <div class="tm-ctr-grid">
+                  <button type="button" class="tm-ctr-btn" data-add-shape="ring_focus">
+                    <span class="tm-ctr-prev" style="color:#EF4444" aria-hidden="true">◯</span>
+                    <span data-i18n="tm_ctr_circle_red">Focus Ring</span>
+                  </button>
+                  <button type="button" class="tm-ctr-btn" data-add-shape="box_rounded">
+                    <span class="tm-ctr-prev" style="color:#2563EB" aria-hidden="true">▢</span>
+                    <span data-i18n="tm_shape_box">Rounded Card</span>
+                  </button>
+                  <button type="button" class="tm-ctr-btn" data-add-shape="ribbon_slanted">
+                    <span class="tm-ctr-prev" style="color:#FACC15" aria-hidden="true">▱</span>
+                    <span data-i18n="tm_shape_ribbon">Slanted Ribbon</span>
+                  </button>
+                  <button type="button" class="tm-ctr-btn" data-add-shape="starburst">
+                    <span class="tm-ctr-prev" style="color:#F97316" aria-hidden="true">✸</span>
+                    <span data-i18n="tm_shape_burst">Starburst</span>
+                  </button>
+                  <button type="button" class="tm-ctr-btn" data-add-shape="speech_bubble">
+                    <span class="tm-ctr-prev" style="color:#38BDF8" aria-hidden="true">💬</span>
+                    <span data-i18n="tm_shape_bubble">Speech Bubble</span>
+                  </button>
+                  <button type="button" class="tm-ctr-btn" data-add-shape="neon_frame">
+                    <span class="tm-ctr-prev" style="color:#A855F7" aria-hidden="true">◈</span>
+                    <span data-i18n="tm_shape_neon">Neon Frame</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="tm-group">
+                <div class="tm-group-head">
+                  <h3 data-i18n="tm_ctr_badges_t">Hook Words &amp; Badges</h3>
+                </div>
+                <div class="tm-badge-grid" id="tmBadgeButtons">
+                  <button type="button" class="tm-badge-chip" data-add-badge="حصري|#EA580C|#FFFFFF">حصري</button>
+                  <button type="button" class="tm-badge-chip" data-add-badge="مفاجأة!|#9333EA|#FFFFFF">مفاجأة!</button>
+                  <button type="button" class="tm-badge-chip" data-add-badge="عاجل|#DC2626|#FFFFFF">عاجل</button>
+                  <button type="button" class="tm-badge-chip" data-add-badge="جديد|#0EA5E9|#FFFFFF">جديد</button>
+                  <button type="button" class="tm-badge-chip" data-add-badge="قبل / بعد|#2563EB|#FFFFFF">قبل / بعد</button>
+                  <button type="button" class="tm-badge-chip" data-add-badge="مقارنة|#0F172A|#FACC15">مقارنة</button>
+                  <button type="button" class="tm-badge-chip" data-add-badge="مجاني 100%|#16A34A|#FFFFFF">مجاني 100%</button>
+                  <button type="button" class="tm-badge-chip" data-add-badge="سر!|#B91C1C|#FACC15">سر!</button>
+                  <button type="button" class="tm-badge-chip" data-add-badge="تحذير|#FACC15|#111827">تحذير</button>
+                  <button type="button" class="tm-badge-chip" data-add-badge="NEW|#EF4444|#FFFFFF">NEW</button>
+                  <button type="button" class="tm-badge-chip" data-add-badge="LIVE|#DC2626|#FFFFFF">LIVE</button>
+                  <button type="button" class="tm-badge-chip" data-add-badge="VS|#FACC15|#111827">VS</button>
+                  <button type="button" class="tm-badge-chip" data-add-badge="4K|#2563EB|#FFFFFF">4K</button>
+                  <button type="button" class="tm-badge-chip" data-add-badge="100%|#16A34A|#FFFFFF">100%</button>
+                  <button type="button" class="tm-badge-chip" data-add-badge="TOP 10|#0F172A|#38BDF8">TOP 10</button>
+                  <button type="button" class="tm-badge-chip" data-add-badge="FREE|#059669|#FFFFFF">FREE</button>
+                  <button type="button" class="tm-badge-chip" data-add-badge="OMG!|#DB2777|#FFFFFF">OMG!</button>
+                </div>
+              </div>
+
+              <div class="tm-group">
+                <div class="tm-group-head">
+                  <h3 data-i18n="tm_ctr_emojis_t">Expressive Stickers &amp; Emojis</h3>
+                </div>
+                <div class="tm-emoji-grid" id="tmEmojiGrid">
+                  <button type="button" class="tm-emoji-btn" data-add-emoji="🔥" aria-label="Fire">🔥</button>
+                  <button type="button" class="tm-emoji-btn" data-add-emoji="😱" aria-label="Shock">😱</button>
+                  <button type="button" class="tm-emoji-btn" data-add-emoji="🤔" aria-label="Thinking">🤔</button>
+                  <button type="button" class="tm-emoji-btn" data-add-emoji="😂" aria-label="Laugh">😂</button>
+                  <button type="button" class="tm-emoji-btn" data-add-emoji="✅" aria-label="Checkmark">✅</button>
+                  <button type="button" class="tm-emoji-btn" data-add-emoji="❌" aria-label="Cross">❌</button>
+                  <button type="button" class="tm-emoji-btn" data-add-emoji="👑" aria-label="Crown">👑</button>
+                  <button type="button" class="tm-emoji-btn" data-add-emoji="🚀" aria-label="Rocket">🚀</button>
+                  <button type="button" class="tm-emoji-btn" data-add-emoji="💰" aria-label="Money">💰</button>
+                  <button type="button" class="tm-emoji-btn" data-add-emoji="❤️" aria-label="Heart">❤️</button>
+                  <button type="button" class="tm-emoji-btn" data-add-emoji="⚠️" aria-label="Warning">⚠️</button>
+                  <button type="button" class="tm-emoji-btn" data-add-emoji="🎯" aria-label="Target">🎯</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- CENTER STAGE: Platform Size Bar, Interactive Canvas, Quickbar & Footer -->
+        <div class="tm-stage-col">
+          <div class="tm-stage-card">
+            <!-- Top Platform Size Bar -->
+            <div class="tm-stage-topbar">
+              <div class="tm-aspect-strip" id="tmAspectStrip" role="tablist" aria-label="Platform aspect ratio presets">
+                <button type="button" class="tm-aspect-btn active" data-size="yt_hd" role="tab" aria-selected="true" data-i18n="tm_size_yt_hd">YouTube 16:9</button>
+                <button type="button" class="tm-aspect-btn" data-size="yt_fhd" role="tab" aria-selected="false" data-i18n="tm_size_yt_fhd">Full HD 1080p</button>
+                <button type="button" class="tm-aspect-btn" data-size="shorts" role="tab" aria-selected="false" data-i18n="tm_size_shorts">Shorts / Reels 9:16</button>
+                <button type="button" class="tm-aspect-btn" data-size="sq_1_1" role="tab" aria-selected="false" data-i18n="tm_size_sq">Post 1:1</button>
+                <button type="button" class="tm-aspect-btn" data-size="ig_4_5" role="tab" aria-selected="false" data-i18n="tm_size_4_5">Portrait 4:5</button>
+              </div>
+              <div class="tm-stage-actions-top">
+                <span class="tm-dim-badge" id="tmDimMeta">1280 × 720 px</span>
+                <button type="button" class="btn btn-secondary btn-sm active" id="btnToggleSafeZone" aria-pressed="true" data-i18n="tm_safe_zone">Safe Zone</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnOpenFeedPreview">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>
+                  </svg>
+                  <span data-i18n="tm_btn_feed_preview">Preview in YouTube Feed</span>
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" id="btnOpenExportModal" data-i18n="studio_export_print">Export &amp; Print</button>
+              </div>
+            </div>
+
+            <!-- Interactive Stage Viewport -->
+            <div class="tm-viewport" id="tmViewport">
+              <div class="tm-canvas-wrap" id="tmCanvasWrap">
+                <canvas id="tmMainCanvas"></canvas>
+                <canvas id="tmSafeOverlayCanvas" class="tm-safe-canvas" aria-hidden="true"></canvas>
+              </div>
+
+              <!-- AI Scanning Overlay -->
+              <div class="tm-ai-overlay hide" id="tmAiOverlay" role="status" aria-live="polite">
+                <div class="ai-sweep" aria-hidden="true"></div>
+                <div class="tm-ai-pill">
+                  <span class="tm-ai-spinner" aria-hidden="true"></span>
+                  <span id="tmAiStatus" data-i18n="tm_ai_working">Removing image background locally…</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mobile Thumb Quick-Shortcut Bar (<= 900px) -->
+            <div class="tm-mobile-quickbar" id="tmMobileQuickbar" aria-label="Mobile quick actions">
+              <button type="button" class="tm-mq-btn" id="btnMqAddText">
+                <span aria-hidden="true">T+</span>
+                <span data-i18n="tm_mq_text">Add Text</span>
+              </button>
+              <button type="button" class="tm-mq-btn" id="btnMqSubject">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                <span data-i18n="tm_mq_photo">Add Image</span>
+              </button>
+              <button type="button" class="tm-mq-btn" id="btnMqFeed">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>
+                </svg>
+                <span data-i18n="tm_mq_feed">Feed Preview</span>
+              </button>
+              <button type="button" class="tm-mq-btn" id="btnMqUndo" disabled>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/>
+                </svg>
+                <span data-i18n="tc_undo">Undo</span>
+              </button>
+              <button type="button" class="tm-mq-btn tm-mq-primary" id="btnMqDownload">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span data-i18n="tm_mq_download">Download / Export</span>
+              </button>
+            </div>
+
+            <!-- Stage Footer & Shortcuts -->
+            <div class="tm-stage-footer">
+              <div class="tm-footer-btns">
+                <button type="button" class="btn btn-secondary btn-sm" id="btnUndo" disabled data-i18n="tc_undo">Undo</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnRedo" disabled data-i18n="tc_redo">Redo</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnDupSelected" disabled data-i18n="tm_btn_dup">Duplicate</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnDelSelected" disabled data-i18n="tm_btn_delete">Delete Layer</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnResetStudio" data-i18n="tc_reset">Reset</button>
+              </div>
+              <div class="tm-shortcuts-bar" data-i18n="tm_shortcuts_legend">
+                Arrows Nudge (Shift 10px) · Del Remove Layer · Ctrl+D Duplicate · Ctrl+Z/Y Undo/Redo · P Feed Preview · Hold Space Peek · Ctrl+S Export
+              </div>
+            </div>
+          </div>
+
+          <input type="file" id="tmSubjInput" accept="image/jpeg,image/png,image/webp,image/bmp,image/gif" multiple class="hide">
+          <input type="file" id="tmBgInput" accept="image/jpeg,image/png,image/webp,image/bmp,image/gif" class="hide">
+        </div>
+
+        <!-- RIGHT INSPECTOR: Selected Layer Properties & Layer Stack -->
+        <aside class="tm-inspector" aria-label="Selected layer inspector and layer stack">
+          <div class="tm-inspector-card">
+            <div class="tm-insp-head">
+              <h3 data-i18n="tm_insp_title">Layer Properties</h3>
+              <span class="tm-type-tag hide" id="tmSelectedTypeTag">Text</span>
+            </div>
+
+            <div class="tm-insp-empty" id="tmNoSelectionMsg">
+              <p data-i18n="tm_no_selection">Select any layer on the canvas to edit its text, colors, outline, glow, or rotation.</p>
+            </div>
+
+            <!-- Text Layer Controls -->
+            <div class="tm-prop-group hide" id="tmTextProps">
+              <label class="tm-field">
+                <span data-i18n="tm_prop_text">Text Content (EN / AR)</span>
+                <textarea id="tmPropTextVal" class="text-input tm-textarea" rows="2" placeholder="Type hook text…"></textarea>
+              </label>
+
+              <div class="tm-field">
+                <span data-i18n="tm_prop_font">Font Family (AR / EN)</span>
+                <div class="tm-font-picker" id="tmFontPicker">
+                  <button type="button" class="tm-font-trigger" id="tmFontTrigger" aria-expanded="false" aria-controls="tmFontMenu">
+                    <span id="tmFontTriggerLabel">Cairo</span>
+                    <span class="tm-font-caret" aria-hidden="true">▾</span>
+                  </button>
+                  <div class="tm-font-menu hide" id="tmFontMenu" role="listbox" aria-label="Select font family"></div>
+                </div>
+              </div>
+
+              <div class="tm-two-col">
+                <label class="tm-field">
+                  <span data-i18n="tm_prop_size">Font Size</span>
+                  <input type="number" id="tmPropFontSize" class="num-input" min="24" max="240" step="2" value="96">
+                </label>
+                <div class="tm-field">
+                  <span data-i18n="tm_btn_center">Align</span>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnTextCenter" data-i18n="tm_btn_center">Center</button>
+                </div>
+              </div>
+
+              <div class="tm-color-pair">
+                <label class="tm-color-field">
+                  <span data-i18n="tm_prop_fill1">Fill Color</span>
+                  <input type="color" id="tmPropFill1" value="#FFFFFF">
+                </label>
+                <label class="tm-color-field">
+                  <span data-i18n="tm_prop_fill2">Gradient 2</span>
+                  <input type="color" id="tmPropFill2" value="#FACC15">
+                </label>
+              </div>
+
+              <label class="tm-check-row">
+                <input type="checkbox" id="tmPropUseGrad">
+                <span data-i18n="tm_prop_grad_on">Enable Text Gradient Fill</span>
+              </label>
+
+              <div class="tm-slider-row">
+                <div class="tm-slider-head">
+                  <label for="tmPropStrokeW" data-i18n="tm_prop_stroke">Contrast Stroke</label>
+                  <span class="tm-val-badge" id="tmPropStrokeWVal">10 px</span>
+                </div>
+                <div class="tm-range-color">
+                  <input type="range" id="tmPropStrokeW" class="range-input" min="0" max="28" step="1" value="10">
+                  <input type="color" id="tmPropStrokeColor" value="#090D16" aria-label="Text stroke color">
+                </div>
+              </div>
+
+              <div class="tm-slider-row">
+                <div class="tm-slider-head">
+                  <label for="tmPropShadow" data-i18n="tm_prop_shadow">3D Drop Shadow</label>
+                  <span class="tm-val-badge" id="tmPropShadowVal">14 px</span>
+                </div>
+                <input type="range" id="tmPropShadow" class="range-input" min="0" max="40" step="2" value="14">
+              </div>
+
+              <label class="tm-check-row">
+                <input type="checkbox" id="tmPropBannerOn">
+                <span data-i18n="tm_prop_banner">Slanted Hook Banner Background</span>
+              </label>
+              <div class="tm-two-col hide" id="tmBannerOpts">
+                <label class="tm-color-field">
+                  <span data-i18n="tm_prop_banner_c">Banner Color</span>
+                  <input type="color" id="tmPropBannerColor" value="#EF4444">
+                </label>
+                <label class="tm-field">
+                  <span data-i18n="tm_prop_skew">Slant (°)</span>
+                  <input type="number" id="tmPropBannerSkew" class="num-input" min="-20" max="20" step="1" value="-8">
+                </label>
+              </div>
+            </div>
+
+            <!-- Selected Image Layer Quick Actions -->
+            <div class="tm-prop-group hide" id="tmImageProps">
+              <button type="button" class="btn btn-primary btn-sm btn-block" id="btnInspCutout" data-i18n="tm_btn_auto_cutout">One-Click Background Removal</button>
+              <button type="button" class="btn btn-secondary btn-sm btn-block hide" id="btnInspRestore" data-i18n="tm_btn_restore_subj">Restore Original Image</button>
+
+              <div class="tm-slider-row">
+                <div class="tm-slider-head">
+                  <label for="tmInspImgRadius" data-i18n="tm_img_radius">Corner Radius</label>
+                  <span class="tm-val-badge" id="tmInspImgRadiusVal">0%</span>
+                </div>
+                <input type="range" id="tmInspImgRadius" class="range-input" min="0" max="50" step="2" value="0">
+              </div>
+
+              <div class="tm-slider-row">
+                <div class="tm-slider-head">
+                  <label for="tmInspImgOutline" data-i18n="tm_subj_outline">Border / Die-Cut Outline</label>
+                  <span class="tm-val-badge" id="tmInspImgOutlineVal">0 px</span>
+                </div>
+                <div class="tm-range-color">
+                  <input type="range" id="tmInspImgOutline" class="range-input" min="0" max="24" step="1" value="0">
+                  <input type="color" id="tmInspImgOutlineColor" value="#FFFFFF" aria-label="Image outline color">
+                </div>
+              </div>
+
+              <div class="tm-slider-row">
+                <div class="tm-slider-head">
+                  <label for="tmInspImgGlow" data-i18n="tm_subj_glow">Backlight Rim Glow</label>
+                  <span class="tm-val-badge" id="tmInspImgGlowVal">0 px</span>
+                </div>
+                <div class="tm-range-color">
+                  <input type="range" id="tmInspImgGlow" class="range-input" min="0" max="60" step="2" value="0">
+                  <input type="color" id="tmInspImgGlowColor" value="#38BDF8" aria-label="Image glow color">
+                </div>
+              </div>
+
+              <div class="tm-slider-row">
+                <div class="tm-slider-head">
+                  <label for="tmInspImgShadow" data-i18n="tm_img_shadow">Drop Shadow</label>
+                  <span class="tm-val-badge" id="tmInspImgShadowVal">12 px</span>
+                </div>
+                <input type="range" id="tmInspImgShadow" class="range-input" min="0" max="48" step="2" value="12">
+              </div>
+            </div>
+
+            <!-- Badge Text & Color Controls -->
+            <div class="tm-prop-group hide" id="tmBadgeProps">
+              <label class="tm-field">
+                <span data-i18n="tm_prop_badge_txt">Badge Label</span>
+                <input type="text" id="tmPropBadgeText" class="text-input" maxlength="24">
+              </label>
+              <div class="tm-color-pair">
+                <label class="tm-color-field">
+                  <span data-i18n="tm_prop_banner_c">Banner Color</span>
+                  <input type="color" id="tmPropBadgeBg" value="#EF4444">
+                </label>
+                <label class="tm-color-field">
+                  <span data-i18n="tm_prop_fill1">Text Color</span>
+                  <input type="color" id="tmPropBadgeFg" value="#FFFFFF">
+                </label>
+              </div>
+            </div>
+
+            <!-- Arrow / Shape Color & Flip Control -->
+            <div class="tm-prop-group hide" id="tmVectorProps">
+              <div class="tm-color-pair">
+                <label class="tm-color-field">
+                  <span data-i18n="tm_prop_accent">Accent Color</span>
+                  <input type="color" id="tmPropVectorColor" value="#EF4444">
+                </label>
+                <label class="tm-color-field">
+                  <span data-i18n="tm_outline_color">Outline Color</span>
+                  <input type="color" id="tmPropVectorStroke" value="#090D16">
+                </label>
+              </div>
+              <button type="button" class="btn btn-secondary btn-sm btn-block" id="btnFlipLayer" data-i18n="tc_flip_h">Flip H</button>
+            </div>
+
+            <!-- Common Transform Controls (All Layers) -->
+            <div class="tm-prop-group hide" id="tmTransformProps">
+              <div class="tm-slider-row">
+                <div class="tm-slider-head">
+                  <label for="tmPropScale" data-i18n="tm_prop_scale">Scale</label>
+                  <span class="tm-val-badge" id="tmPropScaleVal">100%</span>
+                </div>
+                <input type="range" id="tmPropScale" class="range-input" min="20" max="280" step="2" value="100">
+              </div>
+              <div class="tm-slider-row">
+                <div class="tm-slider-head">
+                  <label for="tmPropRot" data-i18n="tm_prop_rot">Rotation</label>
+                  <span class="tm-val-badge" id="tmPropRotVal">0°</span>
+                </div>
+                <input type="range" id="tmPropRot" class="range-input" min="-180" max="180" step="1" value="0">
+              </div>
+              <div class="tm-slider-row">
+                <div class="tm-slider-head">
+                  <label for="tmPropOpacity" data-i18n="tm_prop_opacity">Opacity</label>
+                  <span class="tm-val-badge" id="tmPropOpacityVal">100%</span>
+                </div>
+                <input type="range" id="tmPropOpacity" class="range-input" min="10" max="100" step="2" value="100">
+              </div>
+              <div class="tm-btn-row" id="tmSubjectQuickBtns">
+                <button type="button" class="btn btn-secondary btn-sm" id="btnSubjFlipH" data-i18n="tc_flip_h">Flip H</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnSubjCenter" data-i18n="tm_btn_center">Center</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Layers Stack Manager Card -->
+          <div class="tm-inspector-card">
+            <div class="tm-insp-head">
+              <h3 data-i18n="tm_layers_title">Layers Manager</h3>
+              <span class="tm-val-badge" id="tmLayersCount">0</span>
+            </div>
+            <div class="tm-layer-list" id="tmLayerList"></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live YouTube Feed Preview Modal -->
+  <div class="tm-modal-backdrop hide" id="tmFeedModal" role="dialog" aria-modal="true" aria-labelledby="tmFeedModalTitle">
+    <div class="tm-modal-dialog">
+      <div class="tm-modal-head">
+        <div>
+          <h2 id="tmFeedModalTitle" data-i18n="tm_feed_modal_t">Live YouTube Feed Preview</h2>
+          <p data-i18n="tm_feed_modal_d">Test readability and visual CTR alongside competing videos in real YouTube feed sizes.</p>
+        </div>
+        <button type="button" class="tm-modal-close" id="btnCloseFeedModal" aria-label="Close">×</button>
+      </div>
+
+      <div class="tm-feed-toolbar">
+        <div class="tm-feed-switches">
+          <div class="tm-seg-group" role="tablist" aria-label="Feed device view">
+            <button type="button" class="tm-seg-item active" data-feed-device="desktop" data-i18n="tm_feed_desktop">Desktop Feed</button>
+            <button type="button" class="tm-seg-item" data-feed-device="mobile" data-i18n="tm_feed_mobile">Mobile Feed</button>
+          </div>
+          <div class="tm-seg-group" role="tablist" aria-label="Feed theme mode">
+            <button type="button" class="tm-seg-item active" data-feed-theme="dark" data-i18n="tm_feed_dark">Dark Mode</button>
+            <button type="button" class="tm-seg-item" data-feed-theme="light" data-i18n="tm_feed_light">Light Mode</button>
+          </div>
+        </div>
+        <div class="tm-feed-meta-inputs">
+          <input type="text" id="tmFeedTitleInput" class="text-input" maxlength="95" data-i18n-ph="tm_feed_title_ph" placeholder="Test your video title here…" value="How to 3X Your Click-Through Rate in 5 Minutes!">
+          <input type="text" id="tmFeedChannelInput" class="text-input tm-channel-in" maxlength="40" data-i18n-ph="tm_feed_chan_ph" placeholder="Channel name" value="Creator Studio">
+        </div>
+      </div>
+
+      <div class="tm-feed-stage is-dark is-desktop" id="tmFeedStage">
+        <div class="tm-yt-grid" id="tmYtGrid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dedicated Export & Print Modal -->
+  <div class="tm-modal-backdrop hide" id="tmExportModal" role="dialog" aria-modal="true" aria-labelledby="tmExportModalTitle">
+    <div class="tm-modal-dialog tm-modal-dialog-sm">
+      <div class="tm-modal-head">
+        <div>
+          <h2 id="tmExportModalTitle" data-i18n="studio_export_print">Export &amp; Print</h2>
+          <p data-i18n="tm_export_modal_d">Choose PNG or JPG resolution, adjust compression quality, or copy directly to clipboard.</p>
+        </div>
+        <button type="button" class="tm-modal-close" id="btnCloseExportModal" aria-label="Close">×</button>
+      </div>
+      <div class="tm-export-modal-body">
+        <div class="tm-group">
+          <div class="tm-group-head">
+            <h3 data-i18n="tm_export_title">High-Res Download</h3>
+          </div>
+          <label class="tm-field">
+            <span data-i18n="tm_export_filename">Filename</span>
+            <input type="text" id="tmExportName" class="text-input" value="youtube-thumbnail" maxlength="80">
+          </label>
+          <div class="tm-format-row" role="radiogroup" aria-label="Export image format">
+            <label class="tm-radio-chip">
+              <input type="radio" name="tmExportFormat" value="png" checked>
+              <span>PNG (Lossless)</span>
+            </label>
+            <label class="tm-radio-chip">
+              <input type="radio" name="tmExportFormat" value="jpg">
+              <span>JPG (Small)</span>
+            </label>
+          </div>
+          <div class="tm-slider-row" id="tmJpgQualWrap">
+            <div class="tm-slider-head">
+              <label for="tmJpgQuality" data-i18n="tc_quality">Quality</label>
+              <span class="tm-val-badge" id="tmJpgQualityVal">94%</span>
+            </div>
+            <input type="range" id="tmJpgQuality" class="range-input" min="70" max="100" step="1" value="94">
+          </div>
+          <button type="button" class="btn btn-primary btn-block" id="btnDownloadThumb" data-i18n="tm_btn_download">Download Thumbnail</button>
+          <button type="button" class="btn btn-secondary btn-block" id="btnCopyThumb" data-i18n="tm_btn_copy">Copy to Clipboard</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script type="module" src="/js/thumbnail-maker.js"></script>
+</body>
+</html>

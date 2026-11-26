@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convert Image Format — imgsfix</title>
+  <meta name="description" content="Convert images between JPG, PNG, WebP, AVIF, ICO, and PDF locally in your browser with smart size optimization.">
+  <link rel="stylesheet" href="/assets/cairo.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <section class="page-head">
+    <div class="container">
+      <span class="badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 16V4m0 0L3 8m4-4l4 4"/><path d="M17 8v12m0 0l4-4m-4 4l-4-4"/>
+        </svg>
+        <span data-i18n="t_convert_t">Convert Image Format</span>
+      </span>
+      <h1 data-i18n="t_convert_t">Convert Image Format</h1>
+      <p data-i18n="t_convert_d">Convert images between JPG, PNG, WebP, AVIF, ICO, and PDF locally in your browser with smart size optimization.</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html" data-i18n="bc_home">Home</a><span class="sep">/</span>
+        <a href="../../index.html#categories" data-i18n="nav_tools">Tools</a><span class="sep">/</span>
+        <a href="../categories/images.html" data-i18n="cat_images_t">Images &amp; Design</a><span class="sep">/</span>
+        <span data-i18n="t_convert_t">Convert Image Format</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container tool-shell">
+      <aside class="tool-panel">
+        <div class="panel-section">
+          <h4 data-i18n="tc_convert_settings">Convert Settings</h4>
+
+          <div class="setting-row">
+            <label data-i18n="tc_format">Format</label>
+            <div class="convert-format-grid" id="formatGrid" role="radiogroup" aria-label="Output format">
+              <button type="button" class="convert-format-pill active" data-fmt="jpg" role="radio" aria-checked="true">
+                <span class="convert-fmt-name">JPG</span>
+                <span class="convert-fmt-badge" data-i18n="tc_fmt_jpg_badge">Small</span>
+              </button>
+              <button type="button" class="convert-format-pill" data-fmt="png" role="radio" aria-checked="false">
+                <span class="convert-fmt-name">PNG</span>
+                <span class="convert-fmt-badge" data-i18n="tc_fmt_png_badge">Transparent</span>
+              </button>
+              <button type="button" class="convert-format-pill" data-fmt="webp" role="radio" aria-checked="false">
+                <span class="convert-fmt-name">WebP</span>
+                <span class="convert-fmt-badge" data-i18n="tc_fmt_webp_badge">Modern</span>
+              </button>
+              <button type="button" class="convert-format-pill" data-fmt="avif" role="radio" aria-checked="false">
+                <span class="convert-fmt-name">AVIF</span>
+                <span class="convert-fmt-badge" data-i18n="tc_fmt_avif_badge">Next-Gen</span>
+              </button>
+              <button type="button" class="convert-format-pill" data-fmt="ico" role="radio" aria-checked="false">
+                <span class="convert-fmt-name">ICO</span>
+                <span class="convert-fmt-badge" data-i18n="tc_fmt_ico_badge">Favicon</span>
+              </button>
+              <button type="button" class="convert-format-pill" data-fmt="pdf" role="radio" aria-checked="false">
+                <span class="convert-fmt-name">PDF</span>
+                <span class="convert-fmt-badge" data-i18n="tc_fmt_pdf_badge">Document</span>
+              </button>
+              <button type="button" class="convert-format-pill is-full" data-fmt="bmp" role="radio" aria-checked="false">
+                <span class="convert-fmt-name">BMP</span>
+                <span class="convert-fmt-badge" data-i18n="tc_fmt_bmp_badge">Bitmap</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="convert-inline-notice hide" id="avifNotice" role="note"></div>
+
+          <!-- Quality Slider (JPG, WebP, AVIF) -->
+          <div class="setting-row" id="qualityRow">
+            <label for="quality"><span data-i18n="tc_quality">Quality:</span> <span id="qualVal">90</span>%</label>
+            <input type="range" id="quality" class="range-input" min="10" max="100" value="90" disabled>
+          </div>
+
+          <!-- Smart PNG Compression (PNG) -->
+          <div class="setting-row hide" id="smartPngRow">
+            <label class="resize-check-row" for="smartPng">
+              <input type="checkbox" id="smartPng" checked>
+              <span data-i18n="tc_convert_smart_png">Smart PNG Compression (Prevent Size Bloat)</span>
+            </label>
+          </div>
+
+          <!-- Transparent Background Fill (JPG, BMP) -->
+          <div class="setting-row" id="bgFillRow">
+            <label data-i18n="tc_convert_bg_fill">Transparent Background Fill</label>
+            <div class="convert-bg-swatches" id="bgSwatches" role="group" aria-label="Background fill color">
+              <button type="button" class="convert-bg-btn active" data-bg="#ffffff" aria-pressed="true">
+                <span class="convert-bg-dot" style="background:#ffffff"></span>
+                <span data-i18n="tc_convert_bg_white">White</span>
+              </button>
+              <button type="button" class="convert-bg-btn" data-bg="#000000" aria-pressed="false">
+                <span class="convert-bg-dot" style="background:#000000"></span>
+                <span data-i18n="tc_convert_bg_black">Black</span>
+              </button>
+              <label class="convert-bg-custom-label" id="bgCustomLabel" for="bgFillCustom">
+                <input type="color" id="bgFillCustom" class="convert-bg-custom-input" value="#ffffff" aria-label="Custom background color">
+                <span data-i18n="tc_convert_bg_custom">Custom</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- ICO Icon Size Selector (ICO) -->
+          <div class="setting-row hide" id="icoSizeRow">
+            <label for="icoSizeEl" data-i18n="tc_convert_ico_size">Favicon Icon Size</label>
+            <select id="icoSizeEl" class="select-input">
+              <option value="multi" data-i18n="tc_convert_ico_multi">Multi-size (16 / 32 / 48 px)</option>
+              <option value="32">32 × 32 px</option>
+              <option value="64">64 × 64 px</option>
+              <option value="128">128 × 128 px</option>
+            </select>
+          </div>
+
+          <button type="button" class="btn btn-primary btn-block" id="btnApply" style="margin-top:10px" disabled data-i18n="tc_apply">Apply</button>
+        </div>
+      </aside>
+
+      <div class="tool-stage" id="toolStage">
+        <div class="tool-stage-header">
+          <h3 data-i18n="t_convert_t">Convert Image Format</h3>
+          <div class="result-actions" id="resultActions" style="display:none">
+            <button type="button" class="btn btn-primary btn-sm" id="btnDownload" data-i18n="tc_download">Download</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnClear" data-i18n="tc_clear">Clear</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnReset" data-i18n="tc_reset">Reset</button>
+          </div>
+        </div>
+        <div class="tool-stage-body">
+          <div class="empty-state" id="emptyState">
+            <div class="es-icon">
+              <svg class="ic-upload" viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 20h14"/>
+              </svg>
+            </div>
+            <p data-i18n="tc_drop">Drop your image here or click to browse</p>
+            <p style="font-size:12px;color:var(--text-faint)" data-i18n="tc_supported">JPG · PNG · WebP · GIF · BMP</p>
+            <button type="button" class="btn btn-primary btn-sm" id="btnUpload" data-i18n="t_upload">Upload Image</button>
+          </div>
+
+          <div class="preview-wrap hide" id="previewWrap">
+            <canvas id="afterCanvas"></canvas>
+          </div>
+
+          <div class="resize-summary-badge hide" id="convertSummary" role="status" aria-live="polite"></div>
+
+          <input type="file" id="fileInput" accept="image/*" class="hide">
+          <div class="drop-zone hide" id="dropZone" style="margin-top:16px">
+            <span class="dz-icon">
+              <svg class="ic-upload" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 20h14"/>
+              </svg>
+            </span>
+            <span data-i18n="tc_drop">Drop your image here or click to browse</span>
+          </div>
+          <div class="progress hide" id="progress" style="max-width:400px">
+            <div class="progress-bar"></div>
+            <div class="progress-text" id="progressText"></div>
+          </div>
+          <div id="infoBar" style="font-size:13px;color:var(--text-faint)"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="/js/main.js"></script>
+  <script type="module" src="/js/convert.js"></script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word &amp; Character Counter + SEO Keyword Analyzer — imgsfix</title>
+  <meta name="description" content="Count words, characters, sentences, paragraphs, reading &amp; speaking time, social media limits, and top SEO keyword density instantaneously inside your browser.">
+  <link rel="stylesheet" href="/assets/cairo.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <section class="page-head">
+    <div class="container">
+      <span class="badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 9h16"/><path d="M4 15h16"/><path d="M10 3 8 21"/><path d="M16 3l-2 18"/>
+        </svg>
+        <span data-i18n="txt_counter_t">Word &amp; Character Counter</span>
+      </span>
+      <h1 data-i18n="txt_counter_t">Word &amp; Character Counter</h1>
+      <p data-i18n="txt_counter_d">Count words, characters, sentences, paragraphs, reading &amp; speaking time, social media limits, and top SEO keyword density instantly in-browser.</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html" data-i18n="bc_home">Home</a><span class="sep">/</span>
+        <a href="../../index.html#categories" data-i18n="nav_tools">Tools</a><span class="sep">/</span>
+        <a href="../categories/text.html" data-i18n="cat_text_t">Text &amp; Content</a><span class="sep">/</span>
+        <span data-i18n="txt_counter_t">Word &amp; Character Counter</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container">
+      <!-- Live 7-Metric Real-Time Dashboard -->
+      <div class="wc-metrics-grid" role="region" aria-label="Text Statistics">
+        <div class="wc-metric-card is-accent">
+          <span class="wc-metric-val" id="wcWords">0</span>
+          <span class="wc-metric-lbl" data-i18n="ts_words">Words</span>
+        </div>
+        <div class="wc-metric-card">
+          <span class="wc-metric-val" id="wcCharsWith">0</span>
+          <span class="wc-metric-lbl" data-i18n="wc_chars_with">Characters (with spaces)</span>
+        </div>
+        <div class="wc-metric-card">
+          <span class="wc-metric-val" id="wcCharsNo">0</span>
+          <span class="wc-metric-lbl" data-i18n="wc_chars_no">Characters (no spaces)</span>
+        </div>
+        <div class="wc-metric-card">
+          <span class="wc-metric-val" id="wcSentences">0</span>
+          <span class="wc-metric-lbl" data-i18n="ts_sentences">Sentences</span>
+        </div>
+        <div class="wc-metric-card">
+          <span class="wc-metric-val" id="wcParagraphs">0</span>
+          <span class="wc-metric-lbl" data-i18n="wc_paragraphs">Paragraphs</span>
+        </div>
+        <div class="wc-metric-card">
+          <span class="wc-metric-val" id="wcReadTime">0s</span>
+          <span class="wc-metric-lbl" data-i18n="wc_read_time">Reading Time</span>
+        </div>
+        <div class="wc-metric-card">
+          <span class="wc-metric-val" id="wcSpeakTime">0s</span>
+          <span class="wc-metric-lbl" data-i18n="wc_speak_time">Speaking Time</span>
+        </div>
+      </div>
+
+      <!-- Main Split Workspace: Text Editor + Social Limits & Keyword Density -->
+      <div class="wc-workspace">
+        <!-- Left Panel: Sticky Toolbar + Textarea -->
+        <div class="ts-panel wc-editor-panel">
+          <div class="ts-panel-head">
+            <h3>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+              </svg>
+              <span data-i18n="wc_input_title">Your Text</span>
+            </h3>
+            <button type="button" class="btn btn-primary btn-sm" id="btnCopyReport">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              <span data-i18n="wc_copy_report">Copy Stats Report</span>
+            </button>
+          </div>
+
+          <div class="ts-sticky-toolbar" id="wordCounterToolbar">
+            <button type="button" class="btn btn-secondary btn-sm" id="btnPaste" data-i18n="ts_btn_paste">Paste</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnSample" data-i18n="ts_btn_sample">Sample Text</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnUpload" data-i18n="wc_btn_upload">Upload .txt / .md</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnSelectAll" data-i18n="ts_btn_select_all">Select All</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnCopy" data-i18n="wc_btn_copy_text">Copy Text</button>
+            <button type="button" class="btn btn-secondary btn-sm ts-btn-clear" id="btnClear">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+              </svg>
+              <span data-i18n="tc_clear">Clear</span>
+            </button>
+            <input type="file" id="fileInput" accept=".txt,.md" class="hide">
+          </div>
+
+          <textarea id="inputText" class="ts-textarea" dir="auto" data-i18n-ph="wc_input_ph" placeholder="Type or paste your article, post, meta description, or essay here (Arabic or English)…"></textarea>
+
+          <div class="ts-panel-foot">
+            <span data-i18n="wc_speed_note">200 WPM reading · 130 WPM speaking · 100% local</span>
+            <span data-i18n="wc_file_hint">.txt · .md (max 5MB)</span>
+          </div>
+        </div>
+
+        <!-- Right Analytics Column -->
+        <div class="wc-analytics-col">
+          <!-- Social Media & SEO Limits -->
+          <div class="wc-card">
+            <div class="wc-card-head">
+              <h3>
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>
+                </svg>
+                <span data-i18n="wc_limits_title">Social Media &amp; SEO Limits</span>
+              </h3>
+            </div>
+            <div class="wc-card-body">
+              <div class="wc-limits-list" id="limitsList">
+                <!-- Google Meta Description (160) -->
+                <div class="wc-limit-item" data-limit="160" data-key="meta">
+                  <div class="wc-limit-top">
+                    <span class="wc-limit-name" data-i18n="wc_limit_meta">Google Meta Description</span>
+                    <span class="wc-limit-meta">
+                      <span id="limitCountMeta">0 / 160</span>
+                      <span class="wc-limit-status" id="limitStatusMeta" data-i18n="wc_status_empty">Empty</span>
+                    </span>
+                  </div>
+                  <div class="wc-limit-bar">
+                    <div class="wc-limit-fill" id="limitFillMeta"></div>
+                  </div>
+                </div>
+
+                <!-- X / Twitter Post (280) -->
+                <div class="wc-limit-item" data-limit="280" data-key="twitter">
+                  <div class="wc-limit-top">
+                    <span class="wc-limit-name" data-i18n="wc_limit_x">X / Twitter Post</span>
+                    <span class="wc-limit-meta">
+                      <span id="limitCountX">0 / 280</span>
+                      <span class="wc-limit-status" id="limitStatusX" data-i18n="wc_status_empty">Empty</span>
+                    </span>
+                  </div>
+                  <div class="wc-limit-bar">
+                    <div class="wc-limit-fill" id="limitFillX"></div>
+                  </div>
+                </div>
+
+                <!-- Instagram Caption (2200) -->
+                <div class="wc-limit-item" data-limit="2200" data-key="instagram">
+                  <div class="wc-limit-top">
+                    <span class="wc-limit-name" data-i18n="wc_limit_ig">Instagram Caption</span>
+                    <span class="wc-limit-meta">
+                      <span id="limitCountIg">0 / 2,200</span>
+                      <span class="wc-limit-status" id="limitStatusIg" data-i18n="wc_status_empty">Empty</span>
+                    </span>
+                  </div>
+                  <div class="wc-limit-bar">
+                    <div class="wc-limit-fill" id="limitFillIg"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Keyword Density & Frequency Analyzer -->
+          <div class="wc-card">
+            <div class="wc-card-head">
+              <h3>
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+                </svg>
+                <span data-i18n="wc_kw_title">Top Keyword Density</span>
+              </h3>
+              <div class="wc-kw-head-actions">
+                <div class="ts-ratio-group" id="ngramToggle" role="group" aria-label="Keyword Phrase Length">
+                  <button type="button" class="ts-ratio-btn active" data-ngram="1" aria-pressed="true" data-i18n="wc_ngram_1">1-Word Terms</button>
+                  <button type="button" class="ts-ratio-btn" data-ngram="2" aria-pressed="false" data-i18n="wc_ngram_2">2-Word Phrases</button>
+                </div>
+              </div>
+            </div>
+            <div class="wc-card-body">
+              <div class="wc-kw-table-wrap" id="keywordTable">
+                <p class="wc-kw-empty" data-i18n="wc_kw_empty">Start typing or paste text to analyze top SEO keywords and density.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="/js/main.js"></script>
+  <script type="module" src="/js/word-counter.js"></script>
+</body>
+</html>

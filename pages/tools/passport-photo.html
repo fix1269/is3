@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Passport &amp; Visa Photo Editor — imgsfix</title>
+  <meta name="description" content="Create compliant biometric passport and visa photos 100% locally in your browser with AI background whitening, alignment guides, studio retouching, and 300 DPI printable JPG/PNG/PDF sheets.">
+  <link rel="stylesheet" href="/assets/cairo.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <section class="page-head pp-page-head">
+    <div class="container">
+      <span class="badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="16" rx="2"/>
+          <circle cx="9.5" cy="10.5" r="2.2"/>
+          <path d="M6.5 16.5c.8-1.8 2-2.5 3-2.5s2.2.7 3 2.5"/>
+          <path d="M15 9h3"/>
+          <path d="M15 13h3"/>
+        </svg>
+        <span data-i18n="t_passport_t">Passport &amp; Visa Photo Editor</span>
+      </span>
+      <h1 data-i18n="t_passport_t">Passport &amp; Visa Photo Editor</h1>
+      <p data-i18n="t_passport_d">Create compliant biometric passport and visa photos with local AI background removal, alignment guides, studio lighting, and 300 DPI print sheets.</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html" data-i18n="bc_home">Home</a><span class="sep">/</span>
+        <a href="../../index.html#categories" data-i18n="nav_tools">Tools</a><span class="sep">/</span>
+        <a href="../categories/ai-design.html" data-i18n="cat_ai_t">Smart Studio</a><span class="sep">/</span>
+        <span data-i18n="t_passport_t">Passport &amp; Visa Photo Editor</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section-sm pp-section">
+    <div class="container">
+      <!-- Clear Step-by-Step Usage Hint Banner -->
+      <div class="pp-usage-banner" role="note">
+        <svg class="pp-usage-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+        </svg>
+        <p data-i18n="pp_usage_hint">How to use: 1. Select your standard document size → 2. Open tab (2) Background and click 'Auto Remove &amp; Whiten Background' → 3. Align your head inside the guide &amp; adjust lighting → 4. Download single photo or print sheet.</p>
+      </div>
+
+      <div class="pp-studio" id="ppStudio">
+        <!-- Left / Top Preview Stage -->
+        <div class="pp-stage-col">
+          <div class="pp-stage-card" id="ppStageCard">
+            <!-- Top Stage Bar -->
+            <div class="pp-stage-topbar">
+              <div class="pp-view-segment" role="tablist" aria-label="Preview view mode">
+                <button type="button" class="pp-seg-btn active" id="btnViewSingle" role="tab" aria-selected="true" data-view="single" data-i18n="pp_view_single">Single Photo</button>
+                <button type="button" class="pp-seg-btn" id="btnViewSheet" role="tab" aria-selected="false" data-view="sheet" data-i18n="pp_view_sheet">Print Sheet</button>
+              </div>
+              <div class="pp-stage-meta">
+                <span class="pp-meta-text" id="ppSpecMeta">40 × 60 mm · 472 × 709 px · 300 DPI</span>
+                <button type="button" class="btn btn-secondary btn-sm hide" id="btnReplacePhoto" data-i18n="pp_btn_replace">Change Photo</button>
+                <button type="button" class="btn btn-primary btn-sm" id="btnOpenExportModal" disabled data-i18n="studio_export_print">Export &amp; Print</button>
+              </div>
+            </div>
+
+            <!-- Interactive Stage Viewport -->
+            <div class="pp-viewport" id="ppViewport">
+              <!-- Empty Drop Zone -->
+              <div class="pp-empty" id="ppEmptyState" tabindex="0" role="button" aria-label="Upload portrait photo">
+                <div class="pp-empty-icon" aria-hidden="true">
+                  <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="16" rx="2.5"/>
+                    <circle cx="10" cy="10" r="2.5"/>
+                    <path d="M6.2 17.5c.8-2.3 2.3-3.5 3.8-3.5s3 1.2 3.8 3.5"/>
+                    <path d="M16 9h2.5"/>
+                    <path d="M16 13h2.5"/>
+                  </svg>
+                </div>
+                <strong data-i18n="pp_drop_title">Drop your portrait photo, browse, or paste (Ctrl+V)</strong>
+                <span data-i18n="pp_drop_sub">JPG, PNG, WebP, BMP, GIF (max 30MB · 12,000px) · 100% in-browser</span>
+                <div class="pp-empty-actions">
+                  <button type="button" class="btn btn-primary btn-sm" id="btnUploadEmpty" data-i18n="t_upload">Upload Image</button>
+                </div>
+              </div>
+
+              <!-- Live Single Photo Stage -->
+              <div class="pp-canvas-frame hide" id="ppSingleFrame">
+                <canvas id="ppSingleCanvas"></canvas>
+                <canvas id="ppOrigPeekCanvas" class="hide" aria-hidden="true"></canvas>
+                <canvas id="ppGuideCanvas" class="pp-guide-canvas" aria-hidden="true"></canvas>
+                <div class="pp-brush-cursor hide" id="ppBrushCursor" aria-hidden="true"></div>
+              </div>
+
+              <!-- Live Printable Multi-Copy Sheet Stage -->
+              <div class="pp-sheet-frame hide" id="ppSheetFrame">
+                <canvas id="ppSheetCanvas"></canvas>
+              </div>
+
+              <!-- AI Scanning Overlay -->
+              <div class="pp-ai-overlay hide" id="ppAiOverlay" role="status" aria-live="polite">
+                <div class="ai-sweep" aria-hidden="true"></div>
+                <div class="pp-ai-pill">
+                  <span class="pp-ai-spinner" aria-hidden="true"></span>
+                  <span id="ppAiStatusText" data-i18n="pp_ai_working">Detecting subject &amp; whitening background locally…</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mobile & Tablet Floating Quick-Shortcut Bar (<= 900px) -->
+            <div class="pp-mobile-quickbar" id="ppMobileQuickbar" aria-label="Quick adjustments">
+              <button type="button" class="pp-mq-btn" id="btnMobilePeek" disabled data-i18n-title="tc_peek_original" title="Hold to Peek Original">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>
+                </svg>
+                <span data-i18n="pp_quick_peek">Peek</span>
+              </button>
+              <button type="button" class="pp-mq-btn" id="btnMobileCenter" disabled>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/>
+                </svg>
+                <span data-i18n="pp_btn_center">Center</span>
+              </button>
+              <button type="button" class="pp-mq-btn" id="btnMobileTiltLeft" disabled aria-label="Tilt -1 degree">
+                <span>↺ -1°</span>
+              </button>
+              <button type="button" class="pp-mq-btn" id="btnMobileTiltRight" disabled aria-label="Tilt +1 degree">
+                <span>↻ +1°</span>
+              </button>
+              <button type="button" class="pp-mq-btn" id="btnMobileUndo" disabled>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/>
+                </svg>
+                <span data-i18n="tc_undo">Undo</span>
+              </button>
+              <button type="button" class="pp-mq-btn" id="btnMobileToggleView">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+                </svg>
+                <span id="mobileToggleViewLabel" data-i18n="pp_view_sheet">Print Sheet</span>
+              </button>
+              <button type="button" class="pp-mq-btn pp-mq-primary" id="btnMobileExport" disabled>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span data-i18n="pp_mq_download">Download / Export</span>
+              </button>
+            </div>
+
+            <!-- Stage Footer & Desktop Keyboard Shortcuts Legend -->
+            <div class="pp-stage-footer">
+              <div class="pp-stage-actions">
+                <button type="button" class="btn btn-secondary btn-sm" id="btnStagePeek" disabled>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>
+                  </svg>
+                  <span data-i18n="tc_peek_original">Hold to Compare</span>
+                </button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnToggleGuide" aria-pressed="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18"/><path d="M12 3v18"/>
+                  </svg>
+                  <span data-i18n="pp_guide_toggle">Biometric Guide</span>
+                </button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnResetAll" disabled data-i18n="tc_reset">Reset</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnClearAll" disabled data-i18n="tc_clear">Clear</button>
+              </div>
+              <div class="pp-shortcuts-bar" id="ppShortcutsBar" data-i18n="pp_shortcuts_legend">
+                Arrows Nudge (Shift 10px) · +/- Zoom · [/] Tilt · G Guide · Hold Space Peek · Ctrl+Z/Y Undo/Redo · Ctrl+S Export
+              </div>
+            </div>
+          </div>
+          <input type="file" id="ppFileInput" accept="image/jpeg,image/png,image/webp,image/bmp,image/gif" class="hide">
+        </div>
+
+        <!-- Right / Bottom 3-Step Studio Dock -->
+        <aside class="pp-dock" aria-label="Passport Studio Controls">
+          <!-- 3-Step Design Tab Navigation -->
+          <div class="pp-dock-tabs" role="tablist" aria-label="Studio steps">
+            <button type="button" class="pp-dock-tab active" data-step="size" role="tab" aria-selected="true">
+              <span class="pp-tab-num">1</span>
+              <span data-i18n="pp_step_size">Size</span>
+            </button>
+            <button type="button" class="pp-dock-tab" data-step="bg" role="tab" aria-selected="false">
+              <span class="pp-tab-num">2</span>
+              <span data-i18n="pp_step_bg">Background</span>
+            </button>
+            <button type="button" class="pp-dock-tab" data-step="align" role="tab" aria-selected="false">
+              <span class="pp-tab-num">3</span>
+              <span data-i18n="pp_step_align">Align &amp; Retouch</span>
+            </button>
+          </div>
+
+          <div class="pp-dock-body">
+            <!-- STEP 1: Country & Document Presets -->
+            <div class="pp-step-pane active" id="ppPaneSize" data-step-pane="size">
+              <div class="pp-group">
+                <div class="pp-group-head">
+                  <h3 data-i18n="pp_presets_title">Standard Document Presets (300 DPI)</h3>
+                </div>
+                <div class="pp-presets-grid" id="ppPresetGrid" role="radiogroup" aria-label="Standard document photo presets">
+                  <button type="button" class="pp-preset-btn active" data-preset="40x60" role="radio" aria-checked="true">
+                    <span class="pp-preset-name" dir="ltr">40 × 60 mm</span>
+                    <span class="pp-preset-dim" data-i18n="pp_preset_40x60">4 × 6 cm — Standard Passport &amp; Visa</span>
+                  </button>
+                  <button type="button" class="pp-preset-btn" data-preset="35x45" role="radio" aria-checked="false">
+                    <span class="pp-preset-name" dir="ltr">35 × 45 mm</span>
+                    <span class="pp-preset-dim" data-i18n="pp_preset_35x45">3.5 × 4.5 cm — Standard Biometric Visa Photo</span>
+                  </button>
+                  <button type="button" class="pp-preset-btn" data-preset="51x51" role="radio" aria-checked="false">
+                    <span class="pp-preset-name" dir="ltr">51 × 51 mm</span>
+                    <span class="pp-preset-dim" data-i18n="pp_preset_51x51">2 × 2 in — Standard Square Visa &amp; Passport</span>
+                  </button>
+                  <button type="button" class="pp-preset-btn" data-preset="50x70" role="radio" aria-checked="false">
+                    <span class="pp-preset-name" dir="ltr">50 × 70 mm</span>
+                    <span class="pp-preset-dim" data-i18n="pp_preset_50x70">5 × 7 cm — Large Passport &amp; Official Document</span>
+                  </button>
+                  <button type="button" class="pp-preset-btn" data-preset="50x60" role="radio" aria-checked="false">
+                    <span class="pp-preset-name" dir="ltr">50 × 60 mm</span>
+                    <span class="pp-preset-dim" data-i18n="pp_preset_50x60">5 × 6 cm — Biometric Official Document</span>
+                  </button>
+                  <button type="button" class="pp-preset-btn" data-preset="30x40" role="radio" aria-checked="false">
+                    <span class="pp-preset-name" dir="ltr">30 × 40 mm</span>
+                    <span class="pp-preset-dim" data-i18n="pp_preset_30x40">3 × 4 cm — Small Official &amp; Visa Photo</span>
+                  </button>
+                  <button type="button" class="pp-preset-btn" data-preset="25x35" role="radio" aria-checked="false">
+                    <span class="pp-preset-name" dir="ltr">25 × 35 mm</span>
+                    <span class="pp-preset-dim" data-i18n="pp_preset_25x35">2.5 × 3.5 cm — Mini Official Photo</span>
+                  </button>
+                  <button type="button" class="pp-preset-btn pp-preset-custom" data-preset="custom" role="radio" aria-checked="false">
+                    <span class="pp-preset-name" data-i18n="pp_preset_custom">Custom Size</span>
+                    <span class="pp-preset-dim" data-i18n="pp_preset_custom_sub">mm · cm · in · px</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Custom Size Fields -->
+              <div class="pp-group hide" id="ppCustomSizeBox">
+                <div class="pp-group-head">
+                  <h3 data-i18n="pp_custom_dims">Custom Dimensions (300 DPI)</h3>
+                </div>
+                <div class="pp-custom-size-row">
+                  <label class="pp-field">
+                    <span data-i18n="ed_width">Width</span>
+                    <input type="number" id="ppCustomW" class="num-input" min="1" step="0.1" value="40">
+                  </label>
+                  <label class="pp-field">
+                    <span data-i18n="ed_height">Height</span>
+                    <input type="number" id="ppCustomH" class="num-input" min="1" step="0.1" value="60">
+                  </label>
+                  <label class="pp-field">
+                    <span data-i18n="pp_unit">Unit</span>
+                    <select id="ppCustomUnit" class="select-input">
+                      <option value="mm">mm</option>
+                      <option value="cm">cm</option>
+                      <option value="in">in</option>
+                      <option value="px">px</option>
+                    </select>
+                  </label>
+                </div>
+                <button type="button" class="btn btn-secondary btn-sm btn-block" id="btnApplyCustomSize" data-i18n="tc_apply">Apply</button>
+              </div>
+            </div>
+
+            <!-- STEP 2: Smart Background & Touch-Up Brush -->
+            <div class="pp-step-pane" id="ppPaneBg" data-step-pane="bg">
+              <div class="pp-group">
+                <div class="pp-group-head">
+                  <h3 data-i18n="pp_bg_title">Smart Background</h3>
+                </div>
+                <div class="pp-bg-actions">
+                  <button type="button" class="btn btn-primary btn-block" id="btnAutoBg" disabled>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="m12 3 1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3Z"/>
+                    </svg>
+                    <span data-i18n="pp_btn_auto_bg">Auto Remove &amp; Whiten Background</span>
+                  </button>
+                  <button type="button" class="btn btn-secondary btn-sm btn-block" id="btnKeepOrigBg" disabled aria-pressed="true" data-i18n="pp_btn_keep_orig">Keep Original Background</button>
+                </div>
+              </div>
+
+              <div class="pp-group">
+                <div class="pp-group-head">
+                  <h3 data-i18n="pp_swatches_title">Official Background Swatches</h3>
+                  <span class="pp-val-badge" id="ppBgHexBadge">#FFFFFF</span>
+                </div>
+                <div class="pp-swatches" id="ppSwatches" role="radiogroup" aria-label="Official background colors">
+                  <button type="button" class="pp-swatch active" data-color="#FFFFFF" style="--sw:#FFFFFF" data-i18n-title="pp_sw_white" title="Pure White (#FFFFFF)" aria-label="Pure White" role="radio" aria-checked="true"></button>
+                  <button type="button" class="pp-swatch" data-color="#F8FAFC" style="--sw:#F8FAFC" data-i18n-title="pp_sw_offwhite" title="Off-White (#F8FAFC)" aria-label="Off-White" role="radio" aria-checked="false"></button>
+                  <button type="button" class="pp-swatch" data-color="#D6ECFA" style="--sw:#D6ECFA" data-i18n-title="pp_sw_sky" title="Sky Blue (#D6ECFA)" aria-label="Sky Blue" role="radio" aria-checked="false"></button>
+                  <button type="button" class="pp-swatch" data-color="#1E6FD9" style="--sw:#1E6FD9" data-i18n-title="pp_sw_royal" title="Royal Blue (#1E6FD9)" aria-label="Royal Blue" role="radio" aria-checked="false"></button>
+                  <button type="button" class="pp-swatch" data-color="#E5E7EB" style="--sw:#E5E7EB" data-i18n-title="pp_sw_gray" title="Light Gray (#E5E7EB)" aria-label="Light Gray" role="radio" aria-checked="false"></button>
+                  <button type="button" class="pp-swatch" data-color="#D92626" style="--sw:#D92626" data-i18n-title="pp_sw_red" title="Official Red (#D92626)" aria-label="Official Red" role="radio" aria-checked="false"></button>
+                  <label class="pp-swatch pp-swatch-custom" id="ppCustomBgLabel" data-i18n-title="tc_custom_color" title="Custom Color">
+                    <input type="color" id="ppCustomBgColor" value="#FFFFFF" aria-label="Custom background color">
+                  </label>
+                </div>
+              </div>
+
+              <div class="pp-group">
+                <div class="pp-group-head">
+                  <h3 data-i18n="pp_brush_title">Edge Refine Brush</h3>
+                  <span class="pp-hint-inline" id="ppBrushHint" data-i18n="pp_brush_need_cutout">Run AI removal first</span>
+                </div>
+                <div class="pp-brush-tools">
+                  <button type="button" class="tool-btn active" id="btnToolPan" aria-pressed="true" disabled>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M5 9l-3 3 3 3"/><path d="M9 5l3-3 3 3"/><path d="M15 19l-3 3-3-3"/><path d="M19 9l3 3-3 3"/><path d="M2 12h20"/><path d="M12 2v20"/>
+                    </svg>
+                    <span data-i18n="pp_tool_pan">Move</span>
+                  </button>
+                  <button type="button" class="tool-btn is-restore" id="btnBrushRestore" aria-pressed="false" disabled>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M9.06 11.9l8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/>
+                    </svg>
+                    <span data-i18n="tc_brush_restore">Restore</span>
+                  </button>
+                  <button type="button" class="tool-btn is-erase" id="btnBrushErase" aria-pressed="false" disabled>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/>
+                    </svg>
+                    <span data-i18n="tc_brush_erase">Erase</span>
+                  </button>
+                </div>
+                <div class="pp-slider-row">
+                  <div class="pp-slider-head">
+                    <label for="ppBrushSize" data-i18n="tc_brush_size">Brush Size</label>
+                    <span class="pp-val-badge" id="ppBrushSizeVal">28 px</span>
+                  </div>
+                  <input type="range" id="ppBrushSize" class="range-input" min="8" max="110" value="28" disabled>
+                </div>
+                <div class="pp-undo-row">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnUndoMask" disabled>
+                    <span data-i18n="tc_undo">Undo</span>
+                  </button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnRedoMask" disabled>
+                    <span data-i18n="tc_redo">Redo</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 3: Interactive Alignment & Studio Retouch -->
+            <div class="pp-step-pane" id="ppPaneAlign" data-step-pane="align">
+              <div class="pp-group">
+                <div class="pp-group-head">
+                  <h3 data-i18n="pp_align_title">Biometric Alignment</h3>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnAutoCenter" disabled data-i18n="pp_btn_auto_center">Auto Center</button>
+                </div>
+
+                <div class="pp-slider-row">
+                  <div class="pp-slider-head">
+                    <label for="ppZoom" data-i18n="ed_zoom">Zoom</label>
+                    <span class="pp-val-badge" id="ppZoomVal">100%</span>
+                  </div>
+                  <input type="range" id="ppZoom" class="range-input" min="50" max="300" step="1" value="100" disabled>
+                </div>
+
+                <div class="pp-slider-row">
+                  <div class="pp-slider-head">
+                    <label for="ppTilt" data-i18n="tc_straighten">Straighten</label>
+                    <span class="pp-val-badge" id="ppTiltVal">0.0°</span>
+                  </div>
+                  <input type="range" id="ppTilt" class="range-input" min="-15" max="15" step="0.5" value="0" disabled>
+                </div>
+
+                <div class="pp-transform-btns">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnRotateLeft" disabled data-i18n="tc_rotate_left">Rotate -90°</button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnRotateRight" disabled data-i18n="tc_rotate_right">Rotate +90°</button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnFlipH" disabled data-i18n="tc_flip_h">Flip H</button>
+                </div>
+              </div>
+
+              <div class="pp-group">
+                <div class="pp-group-head">
+                  <h3 data-i18n="pp_retouch_title">Portrait Studio Lighting &amp; Retouch</h3>
+                  <button type="button" class="btn btn-primary btn-sm" id="btnAutoLight" disabled data-i18n="pp_btn_auto_light">Studio Auto-Light</button>
+                </div>
+
+                <div class="pp-slider-row">
+                  <div class="pp-slider-head">
+                    <label for="ppBrightness" data-i18n="tc_brightness">Brightness</label>
+                    <span class="pp-val-badge" id="ppBrightnessVal">0</span>
+                  </div>
+                  <input type="range" id="ppBrightness" class="range-input" min="-40" max="40" step="1" value="0" disabled>
+                </div>
+
+                <div class="pp-slider-row">
+                  <div class="pp-slider-head">
+                    <label for="ppContrast" data-i18n="tc_contrast">Contrast</label>
+                    <span class="pp-val-badge" id="ppContrastVal">0</span>
+                  </div>
+                  <input type="range" id="ppContrast" class="range-input" min="-40" max="40" step="1" value="0" disabled>
+                </div>
+
+                <div class="pp-slider-row">
+                  <div class="pp-slider-head">
+                    <label for="ppWarmth" data-i18n="pp_warmth">Warmth / White Balance</label>
+                    <span class="pp-val-badge" id="ppWarmthVal">0</span>
+                  </div>
+                  <input type="range" id="ppWarmth" class="range-input" min="-40" max="40" step="1" value="0" disabled>
+                </div>
+
+                <div class="pp-slider-row">
+                  <div class="pp-slider-head">
+                    <label for="ppSharpness" data-i18n="tc_sharpness">Sharpness</label>
+                    <span class="pp-val-badge" id="ppSharpnessVal">0</span>
+                  </div>
+                  <input type="range" id="ppSharpness" class="range-input" min="0" max="100" step="1" value="0" disabled>
+                </div>
+
+                <div class="pp-slider-row">
+                  <div class="pp-slider-head">
+                    <label for="ppSkinSmooth" data-i18n="pp_skin_smooth">Natural Skin Smoothness</label>
+                    <span class="pp-val-badge" id="ppSkinSmoothVal">0</span>
+                  </div>
+                  <input type="range" id="ppSkinSmooth" class="range-input" min="0" max="100" step="1" value="0" disabled>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dedicated Export & Print Modal -->
+  <div class="pp-modal-backdrop hide" id="ppExportModal" role="dialog" aria-modal="true" aria-labelledby="ppExportModalTitle">
+    <div class="pp-modal-dialog">
+      <div class="pp-modal-head">
+        <div>
+          <h2 id="ppExportModalTitle" data-i18n="studio_export_print">Export &amp; Print</h2>
+          <p data-i18n="pp_export_modal_d">Configure 300 DPI multi-copy print sheet layout or download your single official photo.</p>
+        </div>
+        <button type="button" class="pp-modal-close" id="btnCloseExportModal" aria-label="Close">×</button>
+      </div>
+      <div class="pp-modal-body">
+        <div class="pp-group">
+          <div class="pp-group-head">
+            <h3 data-i18n="pp_sheet_title">Print Sheet Layout (300 DPI)</h3>
+            <span class="pp-copy-badge" id="ppCopyBadge">4 copies</span>
+          </div>
+
+          <div class="pp-paper-grid" id="ppPaperGrid" role="radiogroup" aria-label="Print sheet paper size">
+            <button type="button" class="pp-paper-btn active" data-paper="4x6" role="radio" aria-checked="true">
+              <strong>4 × 6 in</strong>
+              <span>10 × 15 cm</span>
+            </button>
+            <button type="button" class="pp-paper-btn" data-paper="5x7" role="radio" aria-checked="false">
+              <strong>5 × 7 in</strong>
+              <span>13 × 18 cm</span>
+            </button>
+            <button type="button" class="pp-paper-btn" data-paper="a4" role="radio" aria-checked="false">
+              <strong>A4</strong>
+              <span>210 × 297 mm</span>
+            </button>
+          </div>
+
+          <div class="pp-slider-row">
+            <div class="pp-slider-head">
+              <label for="ppSheetGap" data-i18n="pp_sheet_gap">Spacing Gap</label>
+              <span class="pp-val-badge" id="ppSheetGapVal">2.0 mm</span>
+            </div>
+            <input type="range" id="ppSheetGap" class="range-input" min="0" max="4" step="0.5" value="2">
+          </div>
+
+          <label class="pp-check-row" for="ppCutGuides">
+            <input type="checkbox" id="ppCutGuides" checked>
+            <span data-i18n="pp_cut_guides">Cutting Guide Marks &amp; Borders</span>
+          </label>
+        </div>
+
+        <div class="pp-group">
+          <div class="pp-group-head">
+            <h3 data-i18n="pp_export_title">Download Ready-to-Print File</h3>
+          </div>
+          <div class="pp-export-target">
+            <label class="pp-radio-chip">
+              <input type="radio" name="ppExportTarget" value="single">
+              <span data-i18n="pp_export_single">Single Photo</span>
+            </label>
+            <label class="pp-radio-chip">
+              <input type="radio" name="ppExportTarget" value="sheet" checked>
+              <span data-i18n="pp_export_sheet">Print Sheet</span>
+            </label>
+          </div>
+          <div class="pp-export-grid">
+            <button type="button" class="btn btn-primary" id="btnExportJpg" disabled>
+              <span>JPG (300 DPI)</span>
+            </button>
+            <button type="button" class="btn btn-secondary" id="btnExportPng" disabled>
+              <span>PNG (300 DPI)</span>
+            </button>
+            <button type="button" class="btn btn-secondary pp-export-pdf" id="btnExportPdf" disabled>
+              <span data-i18n="pp_export_pdf">Print PDF (Exact mm)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script type="module" src="/js/passport-photo.js"></script>
+</body>
+</html>

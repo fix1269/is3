@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wallpaper &amp; Pattern Generator — 4K Generative &amp; Seamless Studio — imgsfix</title>
+  <meta name="description" content="Generate 4K wallpapers and seamless geometric patterns 100% locally in your browser with Mesh &amp; Aurora gradients, Layered Waves, Islamic &amp; Geometric patterns, Low-Poly crystals, Bauhaus abstract art, phone lock-screen preview, and PNG/JPG/SVG export.">
+  <link rel="stylesheet" href="/assets/cairo.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="wg-page">
+  <section class="page-head wg-page-head">
+    <div class="container">
+      <span class="badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="4" width="20" height="12" rx="2"/><path d="M8 20h8"/><path d="M12 16v4"/>
+        </svg>
+        <span data-i18n="t_wallpaper_t">Wallpaper &amp; Pattern Generator</span>
+      </span>
+      <h1 data-i18n="t_wallpaper_t">Wallpaper &amp; Pattern Generator</h1>
+      <p data-i18n="t_wallpaper_d">Create custom 4K wallpapers and seamless patterns locally in your browser with Mesh &amp; Aurora gradients, Layered Waves, Geometric &amp; Islamic motifs, Low-Poly crystals, Bauhaus art, phone lock-screen preview, and PNG/JPG/SVG export.</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html" data-i18n="bc_home">Home</a><span class="sep">/</span>
+        <a href="../../index.html#categories" data-i18n="nav_tools">Tools</a><span class="sep">/</span>
+        <a href="../categories/ai-design.html" data-i18n="cat_ai_t">Smart Studio</a><span class="sep">/</span>
+        <span data-i18n="t_wallpaper_t">Wallpaper &amp; Pattern Generator</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section-sm wg-section">
+    <div class="container wg-container">
+      <!-- Step-by-Step Usage Hint Banner -->
+      <div class="wg-usage-banner" role="note">
+        <svg class="wg-usage-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+        </svg>
+        <p data-i18n="wg_usage_hint">How to use: 1. Choose a generation style &amp; screen preset (Mobile, 4K Desktop, iPad, Square) → 2. Click 'Magic Shuffle ✨' or customize your palette, colors &amp; film grain → 3. Toggle 'Lock-Screen Preview' to check clock readability → 4. Export in 4K PNG, JPG, or Vector SVG.</p>
+      </div>
+
+      <div class="wg-studio" id="wgStudio">
+        <!-- Left / Top Generative Preview Stage -->
+        <div class="wg-stage-col">
+          <div class="wg-stage-card">
+            <div class="wg-stage-topbar">
+              <div class="wg-topbar-main">
+                <div class="wg-stage-badges">
+                  <span class="wg-style-pill" id="wgActiveStylePill" data-i18n="wg_style_mesh_t">Mesh &amp; Aurora Gradients</span>
+                  <span class="wg-meta-text" id="wgSpecMeta">Mobile · 1170 × 2532 px</span>
+                </div>
+                <div class="wg-stage-meta">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnTopShuffle" data-i18n="wg_btn_shuffle">Magic Shuffle ✨</button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnLockPreview" aria-pressed="false" data-i18n="wg_btn_lock_preview">Lock-Screen Preview</button>
+                  <button type="button" class="btn btn-primary btn-sm" id="btnOpenExportModal" data-i18n="wg_btn_export">Export &amp; Download</button>
+                </div>
+              </div>
+
+              <div class="wg-size-bar" id="wgSizeGrid" role="radiogroup" aria-label="Screen size presets">
+                <button type="button" class="wg-size-pill active" data-size="mobile" role="radio" aria-checked="true">
+                  <span data-i18n="wg_top_mobile">Mobile 9:19.5</span>
+                  <small>1170×2532</small>
+                </button>
+                <button type="button" class="wg-size-pill" data-size="desktop4k" role="radio" aria-checked="false">
+                  <span data-i18n="wg_top_4k">Desktop 4K</span>
+                  <small>3840×2160</small>
+                </button>
+                <button type="button" class="wg-size-pill" data-size="fhd" role="radio" aria-checked="false">
+                  <span data-i18n="wg_top_fhd">Full HD</span>
+                  <small>1920×1080</small>
+                </button>
+                <button type="button" class="wg-size-pill" data-size="tablet" role="radio" aria-checked="false">
+                  <span data-i18n="wg_top_tablet">Tablet iPad</span>
+                  <small>2048×2732</small>
+                </button>
+                <button type="button" class="wg-size-pill" data-size="square" role="radio" aria-checked="false">
+                  <span data-i18n="wg_top_square">Social 1:1</span>
+                  <small>1080×1080</small>
+                </button>
+                <button type="button" class="wg-size-pill" data-size="custom" role="radio" aria-checked="false">
+                  <span data-i18n="wg_top_custom">Custom</span>
+                </button>
+              </div>
+
+              <div class="wg-custom-popover hide" id="wgCustomDims" role="region" aria-label="Custom dimensions">
+                <label class="wg-popover-field">
+                  <span data-i18n="wg_custom_w">Width (px)</span>
+                  <input type="number" id="wgCustomW" class="text-input wg-popover-input" min="256" max="4096" value="2560">
+                </label>
+                <span class="wg-popover-x" aria-hidden="true">×</span>
+                <label class="wg-popover-field">
+                  <span data-i18n="wg_custom_h">Height (px)</span>
+                  <input type="number" id="wgCustomH" class="text-input wg-popover-input" min="256" max="4096" value="1440">
+                </label>
+                <button type="button" class="btn btn-primary btn-sm" id="btnApplyCustomDims" data-i18n="wg_apply_dims">Apply</button>
+                <button type="button" class="wg-popover-close" id="btnCloseCustomDims" aria-label="Close">×</button>
+              </div>
+            </div>
+
+            <div class="wg-viewport" id="wgViewport">
+              <div class="wg-canvas-frame" id="wgCanvasFrame">
+                <canvas id="wgPreviewCanvas"></canvas>
+
+                <!-- Realistic Phone Lock-Screen Readability Overlay -->
+                <div class="wg-lock-overlay hide" id="wgLockOverlay" aria-hidden="true">
+                  <div class="wg-lock-statusbar">
+                    <span class="wg-lock-notch"></span>
+                  </div>
+                  <div class="wg-lock-hero">
+                    <svg class="wg-lock-padlock" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                    <div class="wg-lock-date" id="wgLockDate">Wednesday, Nov 26</div>
+                    <div class="wg-lock-time" id="wgLockTime">09:41</div>
+                    <div class="wg-lock-widgets">
+                      <div class="wg-lock-widget">
+                        <span>☀ 24°</span>
+                      </div>
+                      <div class="wg-lock-widget">
+                        <span>🔋 94%</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="wg-lock-bottom">
+                    <span class="wg-lock-quickbtn">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+                      </svg>
+                    </span>
+                    <span class="wg-lock-homebar"></span>
+                    <span class="wg-lock-quickbtn">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/>
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mobile Quick-Shortcut Bar (<= 900px) -->
+            <div class="wg-mobile-quickbar" id="wgMobileQuickbar" aria-label="Mobile quick actions">
+              <button type="button" class="wg-mq-btn wg-mq-primary" id="btnMqDownload">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span data-i18n="wg_mq_download">Download / Export</span>
+              </button>
+              <button type="button" class="wg-mq-btn" id="btnMqShuffle">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m12 3 1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3Z"/>
+                </svg>
+                <span data-i18n="wg_mq_shuffle">Magic Shuffle ✨</span>
+              </button>
+              <button type="button" class="wg-mq-btn" id="btnMqLock" aria-pressed="false">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+                <span data-i18n="wg_mq_lock">Lock-Screen</span>
+              </button>
+              <button type="button" class="wg-mq-btn" id="btnMqUndo" disabled>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/>
+                </svg>
+                <span data-i18n="tc_undo">Undo</span>
+              </button>
+            </div>
+
+            <!-- Stage Footer & Desktop Shortcuts Legend -->
+            <div class="wg-stage-footer">
+              <div class="wg-stage-actions">
+                <button type="button" class="btn btn-secondary btn-sm" id="btnStageShuffle" data-i18n="wg_btn_shuffle">Magic Shuffle ✨</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnStageLock" aria-pressed="false" data-i18n="wg_btn_lock_preview">Lock-Screen Preview</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnStageUndo" disabled data-i18n="tc_undo">Undo</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnResetAll" data-i18n="tc_reset">Reset</button>
+              </div>
+              <div class="wg-shortcuts-bar" data-i18n="wg_shortcuts_legend">
+                Space Magic Shuffle · 1-9 Style Engine · L Lock-Screen Preview · Ctrl+Z Undo · Ctrl+S Export
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 3-Tab Controls Dock -->
+        <aside class="wg-dock" aria-label="Wallpaper &amp; Pattern Studio Controls">
+          <div class="wg-dock-tabs" role="tablist" aria-label="Studio tabs">
+            <button type="button" class="wg-dock-tab active" data-tab="style" role="tab" aria-selected="true">
+              <span class="wg-tab-num">1</span>
+              <span data-i18n="wg_tab_style">Style</span>
+            </button>
+            <button type="button" class="wg-dock-tab" data-tab="colors" role="tab" aria-selected="false">
+              <span class="wg-tab-num">2</span>
+              <span data-i18n="wg_tab_colors">Colors &amp; Palette</span>
+            </button>
+            <button type="button" class="wg-dock-tab" data-tab="details" role="tab" aria-selected="false">
+              <span class="wg-tab-num">3</span>
+              <span data-i18n="wg_tab_details">Details &amp; Grain</span>
+            </button>
+          </div>
+
+          <div class="wg-dock-body">
+            <!-- TAB 1: STYLE & SCREEN PRESETS -->
+            <div class="wg-step-pane active" data-pane="style">
+              <div class="wg-group">
+                <div class="wg-group-head">
+                  <h3 data-i18n="wg_styles_title">Generation Styles (9 Engines)</h3>
+                </div>
+                <div class="wg-style-grid" id="wgStyleGrid" role="radiogroup" aria-label="Generation styles">
+                  <button type="button" class="wg-style-card active" data-style="mesh" role="radio" aria-checked="true">
+                    <span class="wg-style-ico" aria-hidden="true">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="9" r="5"/><circle cx="15" cy="15" r="5"/>
+                      </svg>
+                    </span>
+                    <span class="wg-style-txt">
+                      <strong data-i18n="wg_style_mesh_t">Mesh &amp; Aurora Gradients</strong>
+                      <small data-i18n="wg_style_mesh_d">Smooth multi-point blurred light fields &amp; aurora glows</small>
+                    </span>
+                  </button>
+
+                  <button type="button" class="wg-style-card" data-style="waves" role="radio" aria-checked="false">
+                    <span class="wg-style-ico" aria-hidden="true">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 10c3-3 6-3 9 0s6 3 11 0"/><path d="M2 16c3-3 6-3 9 0s6 3 11 0"/>
+                      </svg>
+                    </span>
+                    <span class="wg-style-txt">
+                      <strong data-i18n="wg_style_waves_t">Layered Waves &amp; Blobs</strong>
+                      <small data-i18n="wg_style_waves_d">Flowing layered waves with smooth depth shadows</small>
+                    </span>
+                  </button>
+
+                  <button type="button" class="wg-style-card" data-style="pattern" role="radio" aria-checked="false">
+                    <span class="wg-style-ico" aria-hidden="true">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 20 7 20 17 12 22 4 17 4 7"/><circle cx="12" cy="12" r="3"/>
+                      </svg>
+                    </span>
+                    <span class="wg-style-txt">
+                      <strong data-i18n="wg_style_pattern_t">Geometric &amp; Islamic Patterns</strong>
+                      <small data-i18n="wg_style_pattern_d">Seamless hexagons, circles, triangles &amp; star motifs</small>
+                    </span>
+                  </button>
+
+                  <button type="button" class="wg-style-card" data-style="lowpoly" role="radio" aria-checked="false">
+                    <span class="wg-style-ico" aria-hidden="true">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 3 21 19 3 19"/><line x1="12" y1="3" x2="12" y2="19"/><line x1="7.5" y1="11" x2="16.5" y2="11"/>
+                      </svg>
+                    </span>
+                    <span class="wg-style-txt">
+                      <strong data-i18n="wg_style_lowpoly_t">Low-Poly Crystal Triangles</strong>
+                      <small data-i18n="wg_style_lowpoly_d">3D-shaded faceted crystal mesh geometry</small>
+                    </span>
+                  </button>
+
+                  <button type="button" class="wg-style-card" data-style="abstract" role="radio" aria-checked="false">
+                    <span class="wg-style-ico" aria-hidden="true">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="8" height="8"/><circle cx="17" cy="7" r="4"/><path d="M3 21a9 9 0 0 1 9-9v9Z"/>
+                      </svg>
+                    </span>
+                    <span class="wg-style-txt">
+                      <strong data-i18n="wg_style_abstract_t">Minimalist Abstract &amp; Bauhaus</strong>
+                      <small data-i18n="wg_style_abstract_d">Balanced modern arcs, grids, circles &amp; clean blocks</small>
+                    </span>
+                  </button>
+
+                  <button type="button" class="wg-style-card" data-style="nebula" role="radio" aria-checked="false">
+                    <span class="wg-style-ico" aria-hidden="true">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m12 3 1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3Z"/>
+                      </svg>
+                    </span>
+                    <span class="wg-style-txt">
+                      <strong data-i18n="wg_style_nebula_t">Cosmic Nebula &amp; Bokeh Lights</strong>
+                      <small data-i18n="wg_style_nebula_d">Deep glowing space fields, cinematic bokeh &amp; starlight sparkles</small>
+                    </span>
+                  </button>
+
+                  <button type="button" class="wg-style-card" data-style="mountain" role="radio" aria-checked="false">
+                    <span class="wg-style-ico" aria-hidden="true">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m8 3 4 8 5-5 5 15H2L8 3z"/>
+                      </svg>
+                    </span>
+                    <span class="wg-style-txt">
+                      <strong data-i18n="wg_style_mountain_t">Minimalist Mountain &amp; Sunset</strong>
+                      <small data-i18n="wg_style_mountain_d">Atmospheric mountain ridges, mist gradients &amp; glowing sun</small>
+                    </span>
+                  </button>
+
+                  <button type="button" class="wg-style-card" data-style="city" role="radio" aria-checked="false">
+                    <span class="wg-style-ico" aria-hidden="true">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 21h18"/><path d="M5 21V7l5-2v16"/><path d="M10 21V11l4-2v12"/><path d="M14 21V5l5 2v14"/>
+                      </svg>
+                    </span>
+                    <span class="wg-style-txt">
+                      <strong data-i18n="wg_style_city_t">Night Cityscape Skyline</strong>
+                      <small data-i18n="wg_style_city_d">Geometric night skyline with lit windows &amp; water reflections</small>
+                    </span>
+                  </button>
+
+                  <button type="button" class="wg-style-card" data-style="topo" role="radio" aria-checked="false">
+                    <span class="wg-style-ico" aria-hidden="true">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>
+                      </svg>
+                    </span>
+                    <span class="wg-style-txt">
+                      <strong data-i18n="wg_style_topo_t">Topographic Contour Lines</strong>
+                      <small data-i18n="wg_style_topo_d">Smooth organic elevation contours with crisp line thickness</small>
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="wg-group wg-photo-group" id="wgBasePhotoCard">
+                <div class="wg-group-head wg-group-split">
+                  <h3 data-i18n="wg_base_photo_title">Optional Base Photo Overlay</h3>
+                  <button type="button" class="btn btn-secondary btn-sm hide" id="btnClearBasePhoto" data-i18n="wg_btn_clear_photo">Remove Photo</button>
+                </div>
+                <input type="file" id="wgBasePhotoInput" accept="image/jpeg,image/png,image/webp,image/bmp,image/gif,image/svg+xml,.svg" hidden>
+                <button type="button" class="btn btn-secondary btn-sm btn-block" id="btnUploadBasePhoto" data-i18n="wg_btn_upload_photo">Upload Base Photo</button>
+                <p class="wg-note" data-i18n="wg_base_photo_note">Apply Glassmorphism blur, gradient light wash &amp; film grain on top of your own local photo.</p>
+
+                <div class="wg-photo-controls hide" id="wgBasePhotoControls">
+                  <div class="wg-slider-row">
+                    <div class="wg-slider-head">
+                      <label for="wgPhotoBlur" data-i18n="wg_photo_blur">Glassmorphism Blur</label>
+                      <span class="wg-val-badge" id="wgPhotoBlurVal">14px</span>
+                    </div>
+                    <input type="range" id="wgPhotoBlur" class="range-input" min="0" max="40" step="1" value="14">
+                  </div>
+
+                  <div class="wg-slider-row">
+                    <div class="wg-slider-head">
+                      <label for="wgPhotoOverlay" data-i18n="wg_photo_overlay">Gradient Light Overlay</label>
+                      <span class="wg-val-badge" id="wgPhotoOverlayVal">42%</span>
+                    </div>
+                    <input type="range" id="wgPhotoOverlay" class="range-input" min="0" max="95" step="1" value="42">
+                  </div>
+
+                  <div class="wg-count-row">
+                    <span data-i18n="wg_photo_blend">Overlay Blend:</span>
+                    <div class="wg-chip-row" id="wgPhotoBlendRow">
+                      <button type="button" class="wg-chip-btn active" data-blend="screen" data-i18n="wg_blend_screen">Glow</button>
+                      <button type="button" class="wg-chip-btn" data-blend="soft-light" data-i18n="wg_blend_soft">Soft Light</button>
+                      <button type="button" class="wg-chip-btn" data-blend="source-over" data-i18n="wg_blend_tint">Color Tint</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- TAB 2: COLORS & PALETTE -->
+            <div class="wg-step-pane" data-pane="colors">
+              <div class="wg-group">
+                <div class="wg-group-head wg-group-split">
+                  <h3 data-i18n="wg_palettes_title">Designer Palettes (18 Presets)</h3>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnPaletteShuffle" data-i18n="wg_btn_shuffle">Magic Shuffle ✨</button>
+                </div>
+                <div class="wg-palette-grid" id="wgPaletteGrid" role="radiogroup" aria-label="Curated color palettes"></div>
+              </div>
+
+              <div class="wg-group">
+                <div class="wg-group-head wg-group-split">
+                  <h3 data-i18n="wg_custom_colors_title">Custom Palette Colors</h3>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnReverseColors" data-i18n="wg_btn_reverse">Reverse Colors</button>
+                </div>
+                <div class="wg-count-row" id="wgColorCountRow">
+                  <span data-i18n="wg_color_count">Active Colors:</span>
+                  <div class="wg-chip-row">
+                    <button type="button" class="wg-chip-btn" data-count="3">3</button>
+                    <button type="button" class="wg-chip-btn active" data-count="4">4</button>
+                    <button type="button" class="wg-chip-btn" data-count="5">5</button>
+                  </div>
+                </div>
+                <div class="wg-pickers-grid" id="wgColorPickers"></div>
+              </div>
+            </div>
+
+            <!-- TAB 3: DETAILS, PATTERN & GRAIN -->
+            <div class="wg-step-pane" data-pane="details">
+              <div class="wg-group">
+                <div class="wg-group-head">
+                  <h3 data-i18n="wg_geometry_title">Structure, Flow &amp; Seed</h3>
+                </div>
+
+                <div class="wg-slider-row">
+                  <div class="wg-slider-head">
+                    <label for="wgDensity" data-i18n="wg_density">Complexity / Density</label>
+                    <span class="wg-val-badge" id="wgDensityVal">50%</span>
+                  </div>
+                  <input type="range" id="wgDensity" class="range-input" min="10" max="100" step="1" value="50">
+                </div>
+
+                <div class="wg-slider-row">
+                  <div class="wg-slider-head">
+                    <label for="wgAngle" data-i18n="wg_angle">Flow Angle / Rotation</label>
+                    <span class="wg-val-badge" id="wgAngleVal">35°</span>
+                  </div>
+                  <input type="range" id="wgAngle" class="range-input" min="0" max="360" step="1" value="35">
+                </div>
+
+                <div class="wg-slider-row">
+                  <div class="wg-slider-head">
+                    <label for="wgSmoothness" data-i18n="wg_smoothness">Contrast / Softness</label>
+                    <span class="wg-val-badge" id="wgSmoothnessVal">65%</span>
+                  </div>
+                  <input type="range" id="wgSmoothness" class="range-input" min="0" max="100" step="1" value="65">
+                </div>
+
+                <button type="button" class="btn btn-secondary btn-sm btn-block" id="btnReseedOnly" data-i18n="wg_btn_reseed">New Shape Seed (Keep Colors)</button>
+              </div>
+
+              <!-- Pattern Sub-Motifs & Seamless Tile (shown primarily for Pattern mode, or contextual options) -->
+              <div class="wg-group hide" id="wgPatternOptions">
+                <div class="wg-group-head">
+                  <h3 data-i18n="wg_pattern_opts_title">Geometric &amp; Islamic Motif</h3>
+                </div>
+                <div class="wg-chip-row" id="wgMotifRow">
+                  <button type="button" class="wg-chip-btn active" data-motif="star8" data-i18n="wg_motif_star8">Islamic Star</button>
+                  <button type="button" class="wg-chip-btn" data-motif="hex" data-i18n="wg_motif_hex">Hexagons</button>
+                  <button type="button" class="wg-chip-btn" data-motif="circles" data-i18n="wg_motif_circles">Interlocking Circles</button>
+                  <button type="button" class="wg-chip-btn" data-motif="triangles" data-i18n="wg_motif_triangles">Sacred Triangles</button>
+                </div>
+                <label class="wg-check-row" for="wgSeamlessToggle">
+                  <input type="checkbox" id="wgSeamlessToggle" checked>
+                  <span data-i18n="wg_seamless_toggle">Seamless Repeating Tile (Edge-to-Edge)</span>
+                </label>
+              </div>
+
+              <div class="wg-group">
+                <div class="wg-group-head">
+                  <h3 data-i18n="wg_grain_title">Film Grain &amp; Surface Texture</h3>
+                </div>
+                <div class="wg-slider-row">
+                  <div class="wg-slider-head">
+                    <label for="wgGrain" data-i18n="wg_grain">Film Grain / Texture Noise</label>
+                    <span class="wg-val-badge" id="wgGrainVal">14%</span>
+                  </div>
+                  <input type="range" id="wgGrain" class="range-input" min="0" max="100" step="1" value="14">
+                </div>
+                <p class="wg-note" data-i18n="wg_grain_note">Adds subtle organic film grain to prevent gradient banding on high-DPI OLED screens.</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dedicated Export & Download Modal -->
+  <div class="wg-modal-backdrop hide" id="wgExportModal" role="dialog" aria-modal="true" aria-labelledby="wgExportModalTitle">
+    <div class="wg-modal-dialog">
+      <div class="wg-modal-head">
+        <div>
+          <h2 id="wgExportModalTitle" data-i18n="wg_btn_export">Export &amp; Download</h2>
+          <p data-i18n="wg_export_modal_d">Render at true full resolution (up to 4K 3840 × 2160 px) locally in your browser.</p>
+        </div>
+        <button type="button" class="wg-modal-close" id="btnCloseExportModal" aria-label="Close">×</button>
+      </div>
+      <div class="wg-modal-body">
+        <div class="wg-export-summary" id="wgExportSummary">Mobile · 1170 × 2532 px</div>
+        <div class="wg-export-actions">
+          <button type="button" class="btn btn-primary btn-block" id="btnExportPng">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span data-i18n="wg_btn_dl_png">Download High-Res PNG (Up to 4K)</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn-block" id="btnExportJpg" data-i18n="wg_btn_dl_jpg">Download High-Quality JPG</button>
+          <button type="button" class="btn btn-secondary btn-block" id="btnExportSvg" data-i18n="wg_btn_dl_svg">Download Vector SVG</button>
+          <p class="wg-svg-note" id="wgSvgNote" data-i18n="wg_svg_note_supported">Clean infinite-resolution SVG supported for Waves, Patterns, Low-Poly, and Minimalist Abstract styles.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script type="module" src="/js/wallpaper-generator.js"></script>
+</body>
+</html>

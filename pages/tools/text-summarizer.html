@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Text Summarizer — imgsfix</title>
+  <meta name="description" content="Summarize articles, study notes, and reports 100% locally in your browser with tailored audience modes, key term extraction, voice narration, and Word/PDF export.">
+  <link rel="stylesheet" href="/assets/cairo.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <section class="page-head">
+    <div class="container">
+      <span class="badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/>
+        </svg>
+        <span data-i18n="t_summarizer_t">Smart Text Summarizer</span>
+      </span>
+      <h1 data-i18n="t_summarizer_t">Smart Text Summarizer</h1>
+      <p data-i18n="t_summarizer_d">Summarize articles, study notes, and reports with tailored audience modes, key terms extraction, voice reading, and Word/PDF export.</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html" data-i18n="bc_home">Home</a><span class="sep">/</span>
+        <a href="../../index.html#categories" data-i18n="nav_tools">Tools</a><span class="sep">/</span>
+        <a href="../categories/text.html" data-i18n="cat_text_t">Text &amp; Content</a><span class="sep">/</span>
+        <span data-i18n="t_summarizer_t">Smart Text Summarizer</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container">
+      <!-- Control Bar -->
+      <div class="ts-controls-card">
+        <div class="ts-controls-top">
+          <div class="ts-control-group">
+            <span class="ts-control-label" data-i18n="ts_audience_label">Audience Mode</span>
+            <div class="ts-mode-pills" id="audienceModes" role="group" aria-label="Audience Mode">
+              <button type="button" class="ts-mode-btn active" data-mode="study" aria-pressed="true">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/>
+                </svg>
+                <span data-i18n="ts_mode_study">Study Notes</span>
+              </button>
+              <button type="button" class="ts-mode-btn" data-mode="executive" aria-pressed="false">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>
+                </svg>
+                <span data-i18n="ts_mode_executive">Executive Summary</span>
+              </button>
+              <button type="button" class="ts-mode-btn" data-mode="article" aria-pressed="false">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/>
+                </svg>
+                <span data-i18n="ts_mode_article">Article Digest</span>
+              </button>
+              <button type="button" class="ts-mode-btn" data-mode="bullets" aria-pressed="false">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+                </svg>
+                <span data-i18n="ts_mode_bullets">Quick Key Points</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="ts-control-group">
+            <span class="ts-control-label" data-i18n="ts_ratio_label">Summary Length</span>
+            <div class="ts-ratio-group" id="ratioGroup" role="group" aria-label="Summary Length">
+              <button type="button" class="ts-ratio-btn" data-ratio="0.25" aria-pressed="false" data-i18n="ts_ratio_25">Concise (25%)</button>
+              <button type="button" class="ts-ratio-btn active" data-ratio="0.40" aria-pressed="true" data-i18n="ts_ratio_40">Balanced (40%)</button>
+              <button type="button" class="ts-ratio-btn" data-ratio="0.60" aria-pressed="false" data-i18n="ts_ratio_60">Detailed (60%)</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Two-Panel Split-Screen Workspace -->
+      <div class="ts-workspace">
+        <!-- Input Panel -->
+        <div class="ts-panel">
+          <div class="ts-panel-head">
+            <h3>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+              </svg>
+              <span data-i18n="ts_input_title">Source Text</span>
+            </h3>
+          </div>
+
+          <div class="ts-sticky-toolbar" id="summarizerToolbar">
+            <button type="button" class="btn btn-primary btn-sm" id="btnSummarize">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/>
+              </svg>
+              <span data-i18n="ts_btn_summarize">Summarize Now</span>
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnPaste" data-i18n="ts_btn_paste">Paste</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnSample" data-i18n="ts_btn_sample">Sample Text</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnUpload" data-i18n="ts_btn_upload">Upload Text File</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnSelectAll" data-i18n="ts_btn_select_all">Select All</button>
+            <button type="button" class="btn btn-secondary btn-sm ts-btn-clear" id="btnClear">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+              </svg>
+              <span data-i18n="tc_clear">Clear</span>
+            </button>
+            <input type="file" id="fileInput" accept=".txt,.md,.csv" class="hide">
+          </div>
+
+          <div class="ts-helper-note">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+            </svg>
+            <span data-i18n="ts_word_pdf_hint">Using a Word (.doc/.docx) or PDF file? Copy the text from your document and paste it directly below.</span>
+          </div>
+
+          <textarea id="inputText" class="ts-textarea" dir="auto" data-i18n-ph="ts_input_ph" placeholder="Paste or type your article, study notes, or report here (Arabic or English)…"></textarea>
+
+          <div class="ts-panel-foot">
+            <div class="ts-counters">
+              <span class="ts-counter-item"><span data-i18n="ts_words">Words</span>: <strong id="inWords">0</strong></span>
+              <span class="ts-counter-item"><span data-i18n="ts_chars">Characters</span>: <strong id="inChars">0</strong></span>
+              <span class="ts-counter-item"><span data-i18n="ts_sentences">Sentences</span>: <strong id="inSentences">0</strong></span>
+            </div>
+            <span data-i18n="ts_file_hint">.txt · .md · .csv (max 5MB)</span>
+          </div>
+        </div>
+
+        <!-- Output Panel -->
+        <div class="ts-panel">
+          <div class="ts-panel-head">
+            <h3>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/>
+              </svg>
+              <span data-i18n="ts_output_title">Summary &amp; Key Points</span>
+            </h3>
+            <div class="ts-export-bar">
+              <button type="button" class="btn btn-secondary btn-sm" id="btnCopy" disabled data-i18n="ts_btn_copy">Copy</button>
+              <button type="button" class="btn btn-secondary btn-sm ts-speak-btn" id="btnSpeak" disabled aria-pressed="false" data-i18n="ts_btn_listen">Listen</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btnExportWord" disabled data-i18n="ts_btn_word">Word (.doc)</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btnExportPdf" disabled data-i18n="ts_btn_pdf">Print / PDF</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btnExportTxt" disabled data-i18n="ts_btn_txt">TXT</button>
+            </div>
+          </div>
+
+          <div class="ts-output-body" id="outputBody">
+            <div class="ts-empty-output" id="emptyOutput">
+              <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/>
+              </svg>
+              <p data-i18n="ts_empty_hint">Enter or paste text on the left, choose an audience mode, and click Summarize Now.</p>
+            </div>
+
+            <div class="ts-summary-content hide" id="summaryContent" aria-live="polite"></div>
+
+            <div class="ts-terms-section hide" id="termsSection">
+              <span class="ts-control-label" data-i18n="ts_key_terms">Key Terms &amp; Concepts</span>
+              <div class="ts-terms-list" id="keyTerms"></div>
+            </div>
+          </div>
+
+          <div class="ts-panel-foot">
+            <div class="ts-counters" id="summaryStats">
+              <span class="ts-counter-item"><span data-i18n="ts_orig_words">Original</span>: <strong id="statOrigWords">0</strong></span>
+              <span class="ts-counter-item"><span data-i18n="ts_sum_words">Summary</span>: <strong id="statSumWords">0</strong></span>
+              <span class="ts-counter-item"><span data-i18n="ts_reduction">Reduction</span>: <strong id="statReduction">0%</strong></span>
+            </div>
+            <span class="ts-counter-item" id="statDuration"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Clean Print-Ready PDF Preview Modal -->
+  <div id="tsPrintOverlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="tsPrintModalTitle">
+    <div class="modal-box ts-print-modal-box">
+      <div class="ts-print-modal-head" style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+        <h3 id="tsPrintModalTitle" data-i18n="ts_print_title" style="margin:0">Print / Save as PDF</h3>
+        <button type="button" class="btn btn-ghost btn-sm" id="btnClosePrint" aria-label="Close">✕</button>
+      </div>
+      <div class="ts-print-preview-scroll">
+        <article id="tsPrintSheet" class="ts-print-sheet"></article>
+      </div>
+      <div class="modal-actions ts-print-modal-actions">
+        <button type="button" class="btn btn-secondary btn-sm" id="btnCancelPrint" data-i18n="modal_cancel">Cancel</button>
+        <button type="button" class="btn btn-primary btn-sm" id="btnConfirmPrint" data-i18n="ts_btn_print_now">Print / Save PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script type="module" src="/js/text-summarizer.js"></script>
+</body>
+</html>

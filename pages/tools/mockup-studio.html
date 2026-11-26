@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product &amp; Device Mockup Studio — imgsfix</title>
+  <meta name="description" content="Showcase apps, websites, logos, and products 100% locally inside 33 realistic mockups — iPhone 16 Pro Max, Galaxy S24 Ultra, MacBook, iPad, Watch Ultra, frames, books, mugs, apparel, polo shirt, packaging, hanging blade sign, and glass storefront with AI logo background removal, 36+ backgrounds, and 3x Retina export up to 3000px.">
+  <link rel="stylesheet" href="/assets/cairo.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="ms-page">
+  <section class="page-head ms-page-head">
+    <div class="container">
+      <span class="badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="4" width="20" height="12" rx="2"/><path d="M8 20h8"/><path d="M12 16v4"/>
+        </svg>
+        <span data-i18n="t_mockup_t">Product &amp; Device Mockup Studio</span>
+      </span>
+      <h1 data-i18n="t_mockup_t">Product &amp; Device Mockup Studio</h1>
+      <p data-i18n="t_mockup_d">Showcase screenshots, logos, and artwork locally inside 33 realistic devices, print frames, apparel, polo shirts, coffee mugs, packaging boxes, and storefront signs with AI logo background removal, 36+ studio backgrounds, and up to 3000px export.</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html" data-i18n="bc_home">Home</a><span class="sep">/</span>
+        <a href="../../index.html#categories" data-i18n="nav_tools">Tools</a><span class="sep">/</span>
+        <a href="../categories/ai-design.html" data-i18n="cat_ai_t">Smart Studio</a><span class="sep">/</span>
+        <span data-i18n="t_mockup_t">Product &amp; Device Mockup Studio</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section-sm ms-section">
+    <div class="container ms-container">
+      <!-- Step-by-Step Usage Hint Banner -->
+      <div class="ms-usage-banner" role="note">
+        <svg class="ms-usage-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+        </svg>
+        <p data-i18n="ms_usage_hint">How to use: 1. Choose from 33 Devices, Print Frames, Mugs, Apparel &amp; Storefront Signs → 2. Upload your screenshot/logo (or press Ctrl+V / drag onto stage) &amp; optionally remove logo background with AI → 3. Pick a studio background or Transparent PNG + customize shadows &amp; headline → 4. Export up to 3x Retina PNG/JPG.</p>
+      </div>
+
+      <div class="ms-studio" id="msStudio">
+        <!-- Hidden File Inputs -->
+        <input type="file" id="msDesignInput" accept="image/jpeg,image/png,image/webp,image/bmp,image/gif,image/svg+xml,.svg" hidden>
+        <input type="file" id="msDesign2Input" accept="image/jpeg,image/png,image/webp,image/bmp,image/gif,image/svg+xml,.svg" hidden>
+        <input type="file" id="msCustomBgInput" accept="image/jpeg,image/png,image/webp,image/bmp,image/gif,image/svg+xml,.svg" hidden>
+
+        <!-- Left Showcase Stage -->
+        <div class="ms-stage-col">
+          <div class="ms-stage-card">
+            <div class="ms-stage-topbar">
+              <div class="ms-topbar-row1">
+                <div class="ms-stage-info">
+                  <span class="ms-tpl-label" id="msActiveTplLabel">iPhone 16 Pro Max</span>
+                  <span class="ms-meta-sep" aria-hidden="true">·</span>
+                  <span class="ms-meta-text" id="msSpecMeta">16:9 · 1920 × 1080 px</span>
+                </div>
+                <div class="ms-topbar-actions">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnTopUpload" data-i18n="ms_btn_upload">Upload Design</button>
+                  <button type="button" class="btn btn-primary btn-sm" id="btnOpenExportModal" data-i18n="ms_btn_export">Export &amp; Download</button>
+                </div>
+              </div>
+
+              <!-- Canvas Aspect Presets + Quick Transparent Toggle -->
+              <div class="ms-aspect-bar" id="msAspectBar" role="group" aria-label="Canvas aspect presets">
+                <button type="button" class="ms-aspect-btn active" data-aspect="16:9" data-i18n="ms_asp_169">Presentation 16:9</button>
+                <button type="button" class="ms-aspect-btn" data-aspect="1:1" data-i18n="ms_asp_11">Square 1:1</button>
+                <button type="button" class="ms-aspect-btn" data-aspect="4:5" data-i18n="ms_asp_45">Portrait 4:5</button>
+                <button type="button" class="ms-aspect-btn" data-aspect="9:16" data-i18n="ms_asp_916">Story 9:16</button>
+                <button type="button" class="ms-aspect-btn" id="btnQuickTransparent" aria-pressed="false" data-i18n="ms_btn_trans_short">Transparent BG</button>
+              </div>
+            </div>
+
+            <div class="ms-viewport" id="msViewport">
+              <div class="ms-canvas-wrap" id="msCanvasWrap">
+                <canvas id="msPreviewCanvas" aria-label="Mockup Studio Live Canvas"></canvas>
+                <canvas id="msPeekCanvas" class="hide" aria-hidden="true"></canvas>
+              </div>
+              <div class="ms-drop-hint" id="msDropHint" data-i18n="ms_drop_hint">Drag &amp; drop an image or press Ctrl+V to apply</div>
+              <div class="ms-ai-overlay hide" id="msAiOverlay" aria-live="polite">
+                <div class="ms-spinner" aria-hidden="true"></div>
+                <span id="msAiStatusText" data-i18n="ms_ai_wait">Removing logo background locally with AI…</span>
+              </div>
+            </div>
+
+            <!-- Mobile & Tablet Quick-Shortcut Bar (<= 900px) -->
+            <div class="ms-mobile-quickbar" id="msMobileQuickbar" aria-label="Mobile quick actions">
+              <button type="button" class="ms-mq-btn ms-mq-primary" id="btnMqExport">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span data-i18n="ms_mq_download">Download / Export</span>
+              </button>
+              <button type="button" class="ms-mq-btn" id="btnMqUpload">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                <span data-i18n="ms_mq_upload">Upload Design</span>
+              </button>
+              <button type="button" class="ms-mq-btn" id="btnMqCenter">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/>
+                </svg>
+                <span data-i18n="ms_mq_center">Center</span>
+              </button>
+              <button type="button" class="ms-mq-btn" id="btnMqUndo" disabled>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/>
+                </svg>
+                <span data-i18n="tc_undo">Undo</span>
+              </button>
+            </div>
+
+            <!-- Stage Footer & Desktop Shortcuts Legend -->
+            <div class="ms-stage-footer">
+              <div class="ms-stage-actions">
+                <button type="button" class="btn btn-secondary btn-sm" id="btnStageCenter" data-i18n="ms_btn_center">Center Design</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnStagePeek" data-i18n="ms_btn_peek">Hold to Peek</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnStageUndo" disabled data-i18n="tc_undo">Undo</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnStageRedo" disabled data-i18n="ms_redo">Redo</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnResetDesign" data-i18n="ms_btn_reset_design">Reset Placement</button>
+              </div>
+              <div class="ms-shortcuts-bar" data-i18n="ms_shortcuts_legend">
+                Drag Move · Wheel Zoom · Arrows Nudge · +/- Zoom · C Center · Space (Hold) Peek · Ctrl+V Paste · Ctrl+Z Undo · Ctrl+S Export
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 3-Tab Studio Dock -->
+        <aside class="ms-dock" aria-label="Mockup Studio Controls">
+          <div class="ms-dock-tabs" role="tablist" aria-label="Mockup Studio tabs">
+            <button type="button" class="ms-dock-tab active" data-tab="mockup" role="tab" aria-selected="true">
+              <span class="ms-tab-num">1</span>
+              <span data-i18n="ms_tab_mockup">Mockup &amp; Upload</span>
+            </button>
+            <button type="button" class="ms-dock-tab" data-tab="background" role="tab" aria-selected="false">
+              <span class="ms-tab-num">2</span>
+              <span data-i18n="ms_tab_bg">Background &amp; Color</span>
+            </button>
+            <button type="button" class="ms-dock-tab" data-tab="text" role="tab" aria-selected="false">
+              <span class="ms-tab-num">3</span>
+              <span data-i18n="ms_tab_text">Text &amp; Shadows</span>
+            </button>
+          </div>
+
+          <div class="ms-dock-body">
+            <!-- TAB 1: MOCKUP TEMPLATES & DESIGN UPLOAD -->
+            <div class="ms-step-pane active" data-pane="mockup">
+              <div class="ms-group">
+                <div class="ms-group-head">
+                  <h3 data-i18n="ms_tpl_title">Mockup Library (33 Templates)</h3>
+                </div>
+                <div class="ms-chip-row" id="msTplCatRow" role="tablist" aria-label="Mockup categories">
+                  <button type="button" class="ms-chip-btn active" data-cat="all" data-i18n="ms_cat_all">All (33)</button>
+                  <button type="button" class="ms-chip-btn" data-cat="devices" data-i18n="ms_cat_devices">Devices (14)</button>
+                  <button type="button" class="ms-chip-btn" data-cat="print" data-i18n="ms_cat_print">Frames &amp; Print (8)</button>
+                  <button type="button" class="ms-chip-btn" data-cat="products" data-i18n="ms_cat_products">Products &amp; Signs (11)</button>
+                </div>
+                <div class="ms-tpl-grid" id="msTemplateGrid" role="radiogroup" aria-label="Mockup templates"></div>
+              </div>
+
+              <div class="ms-group">
+                <div class="ms-group-head">
+                  <h3 data-i18n="ms_upload_title">Artwork &amp; Screenshot Upload</h3>
+                  <button type="button" class="btn btn-secondary btn-sm hide" id="btnUseDemoArt" data-i18n="ms_btn_demo">Use Sample UI</button>
+                </div>
+                <div class="ms-btn-2">
+                  <button type="button" class="btn btn-primary btn-sm btn-block" id="btnDockUpload" data-i18n="ms_btn_upload_main">Upload Image / Logo</button>
+                  <button type="button" class="btn btn-secondary btn-sm btn-block hide" id="btnClearDesign1" data-i18n="ms_btn_clear_art">Clear Upload</button>
+                </div>
+                <div class="ms-ai-row hide" id="msAiRow">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnAiRemoveBg" data-i18n="ms_btn_ai_bg">Remove Logo Background (AI)</button>
+                  <button type="button" class="btn btn-secondary btn-sm hide" id="btnAiRestoreOrig" data-i18n="ms_btn_ai_restore">Restore Original</button>
+                </div>
+                <p class="ms-note" data-i18n="ms_upload_note">Supports JPG, PNG, WebP, BMP, GIF &amp; clean SVG (max 30MB). You can also press Ctrl+V or drag &amp; drop.</p>
+
+                <!-- Secondary Slot for Dual Multi-Device Scenes -->
+                <div class="hide" id="msSlot2Box">
+                  <div class="ms-btn-2">
+                    <button type="button" class="btn btn-secondary btn-sm btn-block" id="btnDockUpload2" data-i18n="ms_btn_upload_2">Upload Screen 2</button>
+                    <button type="button" class="btn btn-secondary btn-sm btn-block hide" id="btnClearDesign2" data-i18n="ms_btn_clear_2">Reset Screen 2</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ms-group">
+                <div class="ms-group-head">
+                  <h3 data-i18n="ms_fit_title">Design Placement &amp; Framing</h3>
+                  <span class="ms-fit-badge" id="msFitModeBadge" data-i18n="ms_fit_auto_badge">Smart Fit</span>
+                </div>
+
+                <!-- Orientation Toggle (Wall Frames, Canvas Wraps & Posters) -->
+                <div class="ms-sub-block hide" id="msOrientationGroup">
+                  <div class="ms-slider-head">
+                    <span data-i18n="ms_orient_lbl">Frame Orientation</span>
+                  </div>
+                  <div class="ms-chip-row" id="msOrientationRow" role="radiogroup" aria-label="Frame orientation">
+                    <button type="button" class="ms-chip-btn active" data-orient="portrait" role="radio" aria-checked="true" data-i18n="ms_orient_portrait">Portrait</button>
+                    <button type="button" class="ms-chip-btn" data-orient="landscape" role="radio" aria-checked="false" data-i18n="ms_orient_landscape">Landscape</button>
+                  </div>
+                </div>
+
+                <div class="ms-chip-row" id="msFitModeRow" role="radiogroup" aria-label="Design fit mode">
+                  <button type="button" class="ms-chip-btn" data-fit="contain" role="radio" aria-checked="false" data-i18n="ms_fit_contain">Fit Entire Logo (Contain)</button>
+                  <button type="button" class="ms-chip-btn active" data-fit="cover" role="radio" aria-checked="true" data-i18n="ms_fit_cover">Fill Frame (Cover)</button>
+                </div>
+
+                <div class="ms-slider-row">
+                  <div class="ms-slider-head">
+                    <label for="msDesignZoom" data-i18n="ms_zoom">Logo / Design Scale</label>
+                    <span class="ms-val-num" id="msDesignZoomVal">100%</span>
+                  </div>
+                  <input type="range" id="msDesignZoom" class="range-input" min="15" max="250" step="1" value="100">
+                </div>
+
+                <div class="ms-btn-2">
+                  <div class="ms-slider-row">
+                    <div class="ms-slider-head">
+                      <label for="msPanX" data-i18n="ms_pan_x">Pan X</label>
+                      <span class="ms-val-num" id="msPanXVal">0%</span>
+                    </div>
+                    <input type="range" id="msPanX" class="range-input" min="-100" max="100" step="1" value="0">
+                  </div>
+                  <div class="ms-slider-row">
+                    <div class="ms-slider-head">
+                      <label for="msPanY" data-i18n="ms_pan_y">Pan Y</label>
+                      <span class="ms-val-num" id="msPanYVal">0%</span>
+                    </div>
+                    <input type="range" id="msPanY" class="range-input" min="-100" max="100" step="1" value="0">
+                  </div>
+                </div>
+
+                <div class="ms-slider-row">
+                  <div class="ms-slider-head">
+                    <label for="msDesignRot" data-i18n="ms_rotate">Design Rotation</label>
+                    <span class="ms-val-num" id="msDesignRotVal">0°</span>
+                  </div>
+                  <input type="range" id="msDesignRot" class="range-input" min="-180" max="180" step="1" value="0">
+                </div>
+
+                <div class="ms-btn-2">
+                  <button type="button" class="btn btn-secondary btn-sm btn-block" id="btnDockCenter" data-i18n="ms_btn_center_dock">Center Design</button>
+                  <button type="button" class="btn btn-secondary btn-sm btn-block" id="btnDockReset" data-i18n="ms_btn_reset_dock">Reset Placement</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 2: STUDIO BACKGROUNDS & PRODUCT COLOR -->
+            <div class="ms-step-pane" data-pane="background">
+              <div class="ms-group" id="msSwatchGroup">
+                <div class="ms-group-head">
+                  <h3 data-i18n="ms_color_title">Device / Product Color</h3>
+                </div>
+                <div class="ms-swatch-row" id="msColorSwatches"></div>
+                <label class="ms-color-field">
+                  <span data-i18n="ms_custom_prod_col">Custom Finish Color</span>
+                  <input type="color" id="msProductColorPicker" value="#B8B3AA">
+                </label>
+              </div>
+
+              <div class="ms-group">
+                <div class="ms-group-head">
+                  <h3 data-i18n="ms_bg_title">Studio Backgrounds (36+)</h3>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnToggleTransparent" data-i18n="ms_btn_trans_bg">Transparent PNG</button>
+                </div>
+                <div class="ms-chip-row" id="msBgCatRow">
+                  <button type="button" class="ms-chip-btn active" data-bgcat="all" data-i18n="ms_bgcat_all">All (36)</button>
+                  <button type="button" class="ms-chip-btn" data-bgcat="solid" data-i18n="ms_bgcat_solid">Solids</button>
+                  <button type="button" class="ms-chip-btn" data-bgcat="gradient" data-i18n="ms_bgcat_grad">Gradients</button>
+                  <button type="button" class="ms-chip-btn" data-bgcat="surface" data-i18n="ms_bgcat_surf">Walls &amp; Desks</button>
+                  <button type="button" class="ms-chip-btn" data-bgcat="dark" data-i18n="ms_bgcat_dark">Dark Showcase</button>
+                </div>
+                <div class="ms-bg-grid" id="msBgGrid" role="radiogroup" aria-label="Studio background presets"></div>
+              </div>
+
+              <div class="ms-group">
+                <div class="ms-group-head">
+                  <h3 data-i18n="ms_custom_bg_title">Custom Background Photo / SVG</h3>
+                  <button type="button" class="btn btn-secondary btn-sm hide" id="btnClearCustomBg" data-i18n="ms_btn_clear_bg">Remove BG</button>
+                </div>
+                <button type="button" class="btn btn-secondary btn-sm btn-block" id="btnUploadCustomBg" data-i18n="ms_btn_upload_bg">Upload Custom Background</button>
+              </div>
+            </div>
+
+            <!-- TAB 3: MARKETING HEADLINES, SHADOWS & SHEEN -->
+            <div class="ms-step-pane" data-pane="text">
+              <div class="ms-group">
+                <div class="ms-group-head">
+                  <h3 data-i18n="ms_realism_title">Shadows &amp; Surface Realism</h3>
+                </div>
+                <div class="ms-slider-row">
+                  <div class="ms-slider-head">
+                    <label for="msShadowIntensity" data-i18n="ms_shadow_lbl">Contact &amp; Ambient Shadow</label>
+                    <span class="ms-val-num" id="msShadowVal">70%</span>
+                  </div>
+                  <input type="range" id="msShadowIntensity" class="range-input" min="0" max="100" step="1" value="70">
+                </div>
+
+                <label class="ms-check-row" for="msSheenToggle">
+                  <input type="checkbox" id="msSheenToggle" checked>
+                  <span data-i18n="ms_sheen_toggle">Glass Reflection &amp; Specular Sheen</span>
+                </label>
+
+                <div class="ms-slider-row">
+                  <div class="ms-slider-head">
+                    <label for="msSheenIntensity" data-i18n="ms_sheen_lbl">Reflection / Gloss Intensity</label>
+                    <span class="ms-val-num" id="msSheenVal">48%</span>
+                  </div>
+                  <input type="range" id="msSheenIntensity" class="range-input" min="0" max="100" step="1" value="48">
+                </div>
+              </div>
+
+              <div class="ms-group">
+                <div class="ms-group-head">
+                  <h3 data-i18n="ms_headline_title">Marketing &amp; App Store Headline</h3>
+                </div>
+                <div class="ms-chip-row" id="msHeadlinePosRow">
+                  <button type="button" class="ms-chip-btn active" data-hpos="none" data-i18n="ms_hpos_none">Off</button>
+                  <button type="button" class="ms-chip-btn" data-hpos="top" data-i18n="ms_hpos_top">Top Header</button>
+                  <button type="button" class="ms-chip-btn" data-hpos="side" data-i18n="ms_hpos_side">Side Showcase</button>
+                </div>
+
+                <label class="ms-field">
+                  <span data-i18n="ms_hl_input">Headline Text</span>
+                  <input type="text" id="msHeadlineInput" class="text-input" maxlength="60" data-i18n-placeholder="ms_hl_ph" placeholder="Launch Your Product in Style">
+                </label>
+
+                <label class="ms-field">
+                  <span data-i18n="ms_sub_input">Subheadline</span>
+                  <input type="text" id="msSublineInput" class="text-input" maxlength="90" data-i18n-placeholder="ms_sub_ph" placeholder="100% client-side studio showcase">
+                </label>
+
+                <div class="ms-btn-2">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnPickFont">
+                    <span data-i18n="ms_font_lbl">Font:</span> <strong id="msFontName">Cairo</strong>
+                  </button>
+                  <label class="ms-color-field">
+                    <span data-i18n="ms_text_col">Text Color</span>
+                    <input type="color" id="msTextColor" value="#0F172A">
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 24-Font Library Picker Modal -->
+  <div class="ms-modal-backdrop hide" id="msFontModal" role="dialog" aria-modal="true" aria-labelledby="msFontModalTitle">
+    <div class="ms-modal-dialog ms-font-dialog">
+      <div class="ms-modal-head">
+        <div>
+          <h2 id="msFontModalTitle" data-i18n="ms_font_modal_t">Select Font (24 Studio Arabic &amp; English Fonts)</h2>
+          <p data-i18n="ms_font_modal_d">Choose a crisp display or Arabic typeface for App Store &amp; marketing headlines.</p>
+        </div>
+        <button type="button" class="ms-modal-close" id="btnCloseFontModal" aria-label="Close">×</button>
+      </div>
+      <div class="ms-modal-body" id="msFontList"></div>
+    </div>
+  </div>
+
+  <!-- Dedicated Export & Resolution Modal -->
+  <div class="ms-modal-backdrop hide" id="msExportModal" role="dialog" aria-modal="true" aria-labelledby="msExportModalTitle">
+    <div class="ms-modal-dialog">
+      <div class="ms-modal-head">
+        <div>
+          <h2 id="msExportModalTitle" data-i18n="ms_btn_export">Export &amp; Download</h2>
+          <p data-i18n="ms_export_modal_d">Render locally up to 3x Ultra Retina resolution (up to 3000 px) with optional transparent PNG background.</p>
+        </div>
+        <button type="button" class="ms-modal-close" id="btnCloseExportModal" aria-label="Close">×</button>
+      </div>
+      <div class="ms-modal-body">
+        <div class="ms-chip-row" id="msScaleRow" role="radiogroup" aria-label="Export scale">
+          <button type="button" class="ms-chip-btn" data-scale="1" data-i18n="ms_scale_1x">1x Standard</button>
+          <button type="button" class="ms-chip-btn active" data-scale="2" data-i18n="ms_scale_2x">2x High HD</button>
+          <button type="button" class="ms-chip-btn" data-scale="3" data-i18n="ms_scale_3x">3x Ultra Retina (up to 3000px)</button>
+        </div>
+        <div class="ms-export-summary" id="msExportSummary">2560 × 1440 px · PNG Ready</div>
+        <div class="ms-export-actions">
+          <button type="button" class="btn btn-primary btn-block" id="btnExportPng">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span data-i18n="ms_btn_dl_png">Download PNG (Supports Transparent)</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn-block" id="btnExportJpg" data-i18n="ms_btn_dl_jpg">Download High-Quality JPG</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script type="module" src="/js/mockup-studio.js"></script>
+</body>
+</html>

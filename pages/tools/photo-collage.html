@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Photo Collage Maker — imgsfix</title>
+  <meta name="description" content="Create stunning 2-to-12 photo collages, Bento grids, editorial magazine layouts, cinema filmstrips, Polaroid clusters, and geometric mosaics 100% locally in your browser with 60+ layouts, 40+ backgrounds, 24 EN/AR fonts, and up to 3000px PNG or 300 DPI A4/Letter PDF export.">
+  <link rel="stylesheet" href="/assets/cairo.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="pc-page">
+  <section class="page-head pc-page-head">
+    <div class="container">
+      <span class="badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/>
+        </svg>
+        <span data-i18n="t_collage_t">Smart Photo Collage Maker</span>
+      </span>
+      <h1 data-i18n="t_collage_t">Smart Photo Collage Maker</h1>
+      <p data-i18n="t_collage_d">Arrange 2 to 12 photos locally into 60+ Bento grids, magazine spreads, filmstrips, Polaroids, and geometric mosaics with custom spacing, 40+ backgrounds, filters, 24 EN/AR fonts, and 3000px PNG or 300 DPI PDF export.</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html" data-i18n="bc_home">Home</a><span class="sep">/</span>
+        <a href="../../index.html#categories" data-i18n="nav_tools">Tools</a><span class="sep">/</span>
+        <a href="../categories/ai-design.html" data-i18n="cat_ai_t">Smart Studio</a><span class="sep">/</span>
+        <span data-i18n="t_collage_t">Smart Photo Collage Maker</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section-sm pc-section">
+    <div class="container pc-container">
+      <!-- Step-by-Step Usage Hint Banner -->
+      <div class="pc-usage-banner" role="note">
+        <svg class="pc-usage-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+        </svg>
+        <p data-i18n="pc_usage_hint">How to use: 1. Add 2–12 photos (or drag/paste onto canvas) → 2. Pick from 60+ Grids, Editorial, Filmstrip, Polaroid &amp; Geometric layouts and drag/zoom/swap inside any frame → 3. Adjust spacing, corner radius, 40+ studio backgrounds, color filters &amp; EN/AR title → 4. Export up to 3000px PNG/JPG or 300 DPI A4/Letter PDF.</p>
+      </div>
+
+      <div class="pc-studio" id="pcStudio">
+        <!-- Hidden File Inputs -->
+        <input type="file" id="pcPhotosInput" accept="image/jpeg,image/png,image/webp,image/bmp,image/gif,image/svg+xml,.svg" multiple hidden>
+        <input type="file" id="pcReplaceInput" accept="image/jpeg,image/png,image/webp,image/bmp,image/gif,image/svg+xml,.svg" hidden>
+        <input type="file" id="pcCustomBgInput" accept="image/jpeg,image/png,image/webp,image/bmp,image/gif,image/svg+xml,.svg" hidden>
+
+        <!-- Left Live Collage Stage -->
+        <div class="pc-stage-col">
+          <div class="pc-stage-card">
+            <div class="pc-stage-topbar">
+              <div class="pc-topbar-row1">
+                <div class="pc-stage-info">
+                  <span class="pc-layout-label" id="pcActiveLayoutLabel">2 × 2 Classic Grid</span>
+                  <span class="pc-meta-sep" aria-hidden="true">·</span>
+                  <span class="pc-meta-text" id="pcSpecMeta">1:1 · 2000 × 2000 px</span>
+                </div>
+                <div class="pc-topbar-actions">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnPcTopUpload" data-i18n="pc_btn_add_photos">Add Photos</button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnPcTopShuffle" data-i18n="pc_btn_shuffle">Smart Shuffle</button>
+                  <button type="button" class="btn btn-primary btn-sm" id="btnPcOpenExportModal" data-i18n="pc_btn_export">Export &amp; Print</button>
+                </div>
+              </div>
+
+              <!-- Canvas Aspect Ratio & A4 Presets -->
+              <div class="pc-aspect-bar" id="pcAspectBar" role="group" aria-label="Collage aspect presets">
+                <button type="button" class="pc-aspect-btn active" data-aspect="1:1" data-i18n="pc_asp_11">Square 1:1</button>
+                <button type="button" class="pc-aspect-btn" data-aspect="4:5" data-i18n="pc_asp_45">Portrait 4:5</button>
+                <button type="button" class="pc-aspect-btn" data-aspect="9:16" data-i18n="pc_asp_916">Story 9:16</button>
+                <button type="button" class="pc-aspect-btn" data-aspect="16:9" data-i18n="pc_asp_169">Landscape 16:9</button>
+                <button type="button" class="pc-aspect-btn" data-aspect="a4_p" data-i18n="pc_asp_a4">A4 Portrait 300 DPI</button>
+                <button type="button" class="pc-aspect-btn" data-aspect="a4_l" data-i18n="pc_asp_a4l">A4 Landscape</button>
+              </div>
+            </div>
+
+            <div class="pc-viewport" id="pcViewport">
+              <div class="pc-canvas-wrap" id="pcCanvasWrap">
+                <canvas id="pcPreviewCanvas" aria-label="Smart Photo Collage Live Canvas"></canvas>
+              </div>
+              <div class="pc-drop-hint" id="pcDropHint" data-i18n="pc_drop_hint">Click any frame to pan/zoom · Drag &amp; drop or Ctrl+V to add photos</div>
+            </div>
+
+            <!-- Mobile & Tablet Quick-Shortcut Bar (<= 900px) -->
+            <div class="pc-mobile-quickbar" id="pcMobileQuickbar" aria-label="Mobile quick actions">
+              <button type="button" class="pc-mq-btn pc-mq-primary" id="btnPcMqExport">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span data-i18n="pc_mq_download">Download / Export</span>
+              </button>
+              <button type="button" class="pc-mq-btn" id="btnPcMqUpload">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                <span data-i18n="pc_mq_add">Add Photos</span>
+              </button>
+              <button type="button" class="pc-mq-btn" id="btnPcMqShuffle">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/>
+                </svg>
+                <span data-i18n="pc_mq_shuffle">Shuffle</span>
+              </button>
+              <button type="button" class="pc-mq-btn" id="btnPcMqUndo" disabled>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/>
+                </svg>
+                <span data-i18n="tc_undo">Undo</span>
+              </button>
+            </div>
+
+            <!-- Stage Footer & Desktop Shortcuts Legend -->
+            <div class="pc-stage-footer">
+              <div class="pc-stage-actions">
+                <button type="button" class="btn btn-secondary btn-sm" id="btnPcStageShuffle" data-i18n="pc_btn_shuffle">Smart Shuffle</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnPcResetSlots" data-i18n="pc_btn_reset_crop">Reset Crops</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnPcUndo" disabled data-i18n="tc_undo">Undo</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnPcRedo" disabled data-i18n="ms_redo">Redo</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnPcClearAll" data-i18n="pc_btn_clear_all">Reset to Demo</button>
+              </div>
+              <div class="pc-shortcuts-bar" data-i18n="pc_shortcuts_legend">
+                Click Slot Select · Drag Pan · Wheel Zoom · Arrows Nudge · +/- Zoom · S Shuffle · Del Clear Slot · Ctrl+Z Undo · Ctrl+S Export
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 3-Tab Studio Dock -->
+        <aside class="pc-dock" aria-label="Photo Collage Studio Controls">
+          <div class="pc-dock-tabs" role="tablist" aria-label="Collage tabs">
+            <button type="button" class="pc-dock-tab active" data-tab="layouts" role="tab" aria-selected="true">
+              <span class="pc-tab-num">1</span>
+              <span data-i18n="pc_tab_layouts">Layouts (60+) &amp; Photos</span>
+            </button>
+            <button type="button" class="pc-dock-tab" data-tab="spacing" role="tab" aria-selected="false">
+              <span class="pc-tab-num">2</span>
+              <span data-i18n="pc_tab_spacing">Spacing &amp; Background</span>
+            </button>
+            <button type="button" class="pc-dock-tab" data-tab="filters" role="tab" aria-selected="false">
+              <span class="pc-tab-num">3</span>
+              <span data-i18n="pc_tab_filters">Filters &amp; Text</span>
+            </button>
+          </div>
+
+          <div class="pc-dock-body">
+            <!-- TAB 1: LAYOUTS (60+) & PHOTOS -->
+            <div class="pc-step-pane active" data-pane="layouts">
+              <div class="pc-group">
+                <div class="pc-group-head">
+                  <h3 data-i18n="pc_photos_title">Photos (2–12 Slots)</h3>
+                  <span class="pc-count-badge" id="pcPhotoCountBadge">4 Demo Photos</span>
+                </div>
+                <div class="pc-btn-2">
+                  <button type="button" class="btn btn-primary btn-sm btn-block" id="btnPcDockUpload" data-i18n="pc_btn_add_photos">Add Photos</button>
+                  <button type="button" class="btn btn-secondary btn-sm btn-block" id="btnPcDockShuffle" data-i18n="pc_btn_shuffle">Smart Shuffle</button>
+                </div>
+                <div class="pc-photo-strip" id="pcPhotoStrip" aria-label="Uploaded photos"></div>
+                <p class="pc-note" data-i18n="pc_photos_note">Supports up to 12 photos (JPG, PNG, WebP, BMP, GIF, clean SVG · max 30MB). Drop files onto any canvas frame to assign directly.</p>
+              </div>
+
+              <!-- Selected Frame Slot Controls -->
+              <div class="pc-slot-panel" id="pcSlotPanel">
+                <div class="pc-slot-head">
+                  <strong id="pcSlotTitle">Frame #1</strong>
+                  <div style="display:flex;gap:6px;">
+                    <button type="button" class="pc-chip-btn" id="btnPcSwapMode" data-i18n="pc_btn_swap">Swap Photo</button>
+                    <button type="button" class="pc-chip-btn" id="btnPcSlotClear" data-i18n="pc_btn_clear_slot">Clear</button>
+                  </div>
+                </div>
+                <div class="pc-slider-row">
+                  <div class="pc-slider-head">
+                    <label for="pcSlotZoom" data-i18n="pc_slot_zoom">Frame Zoom</label>
+                    <span class="pc-val-num" id="pcSlotZoomVal">100%</span>
+                  </div>
+                  <input type="range" id="pcSlotZoom" class="range-input" min="50" max="250" step="1" value="100">
+                </div>
+                <div class="pc-btn-3">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnPcSlotRotate" data-i18n="pc_btn_rot90">Rotate 90°</button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnPcSlotFlip" data-i18n="pc_btn_flip">Flip H</button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnPcSlotReplace" data-i18n="pc_btn_replace">Replace</button>
+                </div>
+              </div>
+
+              <div class="pc-group">
+                <div class="pc-group-head">
+                  <h3 data-i18n="pc_layouts_title">60+ Collage Layouts</h3>
+                  <label class="pc-check-row" for="pcMatchCountToggle">
+                    <input type="checkbox" id="pcMatchCountToggle">
+                    <span data-i18n="pc_match_count">Match Photo Count</span>
+                  </label>
+                </div>
+                <div class="pc-chip-row" id="pcLayoutCatRow" role="tablist" aria-label="Layout categories">
+                  <button type="button" class="pc-chip-btn active" data-lcat="all" data-i18n="pc_lcat_all">All (60)</button>
+                  <button type="button" class="pc-chip-btn" data-lcat="grids" data-i18n="pc_lcat_grids">Grids (16)</button>
+                  <button type="button" class="pc-chip-btn" data-lcat="editorial" data-i18n="pc_lcat_editorial">Editorial (16)</button>
+                  <button type="button" class="pc-chip-btn" data-lcat="film" data-i18n="pc_lcat_film">Film &amp; Polaroid (14)</button>
+                  <button type="button" class="pc-chip-btn" data-lcat="shapes" data-i18n="pc_lcat_shapes">Shapes (14)</button>
+                </div>
+                <div class="pc-layout-grid" id="pcLayoutGrid" role="radiogroup" aria-label="Collage layouts"></div>
+              </div>
+            </div>
+
+            <!-- TAB 2: SPACING, RADIUS & 40+ BACKGROUNDS -->
+            <div class="pc-step-pane" data-pane="spacing">
+              <div class="pc-group">
+                <div class="pc-group-head">
+                  <h3 data-i18n="pc_spacing_title">Spacing, Margin &amp; Corners</h3>
+                </div>
+                <div class="pc-slider-row">
+                  <div class="pc-slider-head">
+                    <label for="pcGapRange" data-i18n="pc_gap_lbl">Inner Spacing / Gap</label>
+                    <span class="pc-val-num" id="pcGapVal">14 px</span>
+                  </div>
+                  <input type="range" id="pcGapRange" class="range-input" min="0" max="40" step="1" value="14">
+                </div>
+                <div class="pc-slider-row">
+                  <div class="pc-slider-head">
+                    <label for="pcPadRange" data-i18n="pc_pad_lbl">Outer Border Margin</label>
+                    <span class="pc-val-num" id="pcPadVal">24 px</span>
+                  </div>
+                  <input type="range" id="pcPadRange" class="range-input" min="0" max="60" step="1" value="24">
+                </div>
+                <div class="pc-slider-row">
+                  <div class="pc-slider-head">
+                    <label for="pcRadiusRange" data-i18n="pc_rad_lbl">Frame Corner Radius</label>
+                    <span class="pc-val-num" id="pcRadiusVal">14 px</span>
+                  </div>
+                  <input type="range" id="pcRadiusRange" class="range-input" min="0" max="50" step="1" value="14">
+                </div>
+                <label class="pc-check-row" for="pcFrameShadowToggle">
+                  <input type="checkbox" id="pcFrameShadowToggle" checked>
+                  <span data-i18n="pc_shadow_toggle">Soft Depth Frame Shadows</span>
+                </label>
+              </div>
+
+              <div class="pc-group">
+                <div class="pc-group-head">
+                  <h3 data-i18n="pc_bg_title">40+ Collage Backgrounds</h3>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnPcTransparent" data-i18n="ms_btn_trans_bg">Transparent PNG</button>
+                </div>
+                <div class="pc-chip-row" id="pcBgCatRow">
+                  <button type="button" class="pc-chip-btn active" data-bgcat="all" data-i18n="pc_bgcat_all">All (42)</button>
+                  <button type="button" class="pc-chip-btn" data-bgcat="solid" data-i18n="pc_bgcat_solid">Solids</button>
+                  <button type="button" class="pc-chip-btn" data-bgcat="gradient" data-i18n="pc_bgcat_grad">Aurora</button>
+                  <button type="button" class="pc-chip-btn" data-bgcat="texture" data-i18n="pc_bgcat_tex">Paper &amp; Marble</button>
+                  <button type="button" class="pc-chip-btn" data-bgcat="dark" data-i18n="pc_bgcat_dark">Dark Editorial</button>
+                </div>
+                <div class="pc-bg-grid" id="pcBgGrid" role="radiogroup" aria-label="Collage backgrounds"></div>
+              </div>
+
+              <div class="pc-group">
+                <div class="pc-group-head">
+                  <h3 data-i18n="pc_custom_bg_title">Custom Canvas Background</h3>
+                  <button type="button" class="btn btn-secondary btn-sm hide" id="btnPcClearBg" data-i18n="ms_btn_clear_bg">Remove BG</button>
+                </div>
+                <button type="button" class="btn btn-secondary btn-sm btn-block" id="btnPcUploadBg" data-i18n="ms_btn_upload_bg">Upload Custom Background</button>
+              </div>
+            </div>
+
+            <!-- TAB 3: COLOR FILTERS & TYPOGRAPHY -->
+            <div class="pc-step-pane" data-pane="filters">
+              <div class="pc-group">
+                <div class="pc-group-head">
+                  <h3 data-i18n="pc_filters_title">Color Filters</h3>
+                </div>
+                <div class="pc-chip-row" id="pcFilterScopeRow">
+                  <button type="button" class="pc-chip-btn active" data-fscope="global" data-i18n="pc_fscope_all">All Photos</button>
+                  <button type="button" class="pc-chip-btn" data-fscope="slot" data-i18n="pc_fscope_slot">Selected Frame Only</button>
+                </div>
+                <div class="pc-filter-grid" id="pcFilterGrid" role="radiogroup" aria-label="Color filters">
+                  <button type="button" class="pc-filter-btn active" data-filter="none" data-i18n="pc_flt_none">Original</button>
+                  <button type="button" class="pc-filter-btn" data-filter="warm" data-i18n="pc_flt_warm">Warm</button>
+                  <button type="button" class="pc-filter-btn" data-filter="vivid" data-i18n="pc_flt_vivid">Vivid</button>
+                  <button type="button" class="pc-filter-btn" data-filter="cinematic" data-i18n="pc_flt_cine">Cinematic</button>
+                  <button type="button" class="pc-filter-btn" data-filter="vintage" data-i18n="pc_flt_vint">Vintage</button>
+                  <button type="button" class="pc-filter-btn" data-filter="bw" data-i18n="pc_flt_bw">B&amp;W Classic</button>
+                </div>
+              </div>
+
+              <div class="pc-group">
+                <div class="pc-group-head">
+                  <h3 data-i18n="pc_text_title">Title &amp; Caption Overlay</h3>
+                </div>
+                <div class="pc-chip-row" id="pcTextPosRow">
+                  <button type="button" class="pc-chip-btn active" data-tpos="none" data-i18n="pc_tpos_none">Off</button>
+                  <button type="button" class="pc-chip-btn" data-tpos="top" data-i18n="pc_tpos_top">Top Header</button>
+                  <button type="button" class="pc-chip-btn" data-tpos="bottom" data-i18n="pc_tpos_bot">Bottom Caption</button>
+                  <button type="button" class="pc-chip-btn" data-tpos="center" data-i18n="pc_tpos_center">Center Badge</button>
+                </div>
+
+                <label class="pc-field">
+                  <span data-i18n="pc_title_lbl">Collage Title</span>
+                  <input type="text" id="pcTitleInput" class="text-input" maxlength="64" data-i18n-placeholder="pc_title_ph" placeholder="Summer Memories 2026">
+                </label>
+                <label class="pc-field">
+                  <span data-i18n="pc_sub_lbl">Subtitle / Date</span>
+                  <input type="text" id="pcSubInput" class="text-input" maxlength="90" data-i18n-placeholder="pc_sub_ph" placeholder="Curated Photo Collection">
+                </label>
+
+                <div class="pc-btn-2">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnPcPickFont">
+                    <span data-i18n="ms_font_lbl">Font:</span> <strong id="pcFontName">Cairo</strong>
+                  </button>
+                  <label class="pc-color-field">
+                    <span data-i18n="ms_text_col">Text Color</span>
+                    <input type="color" id="pcTextColor" value="#0F172A">
+                  </label>
+                </div>
+
+                <div class="pc-slider-row">
+                  <div class="pc-slider-head">
+                    <label for="pcTextSizeRange" data-i18n="pc_tsize_lbl">Title Size</label>
+                    <span class="pc-val-num" id="pcTextSizeVal">46 px</span>
+                  </div>
+                  <input type="range" id="pcTextSizeRange" class="range-input" min="24" max="88" step="1" value="46">
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 24-Font Library Picker Modal -->
+  <div class="pc-modal-backdrop hide" id="pcFontModal" role="dialog" aria-modal="true" aria-labelledby="pcFontModalTitle">
+    <div class="pc-modal-dialog pc-font-dialog">
+      <div class="pc-modal-head">
+        <div>
+          <h2 id="pcFontModalTitle" data-i18n="ms_font_modal_t">Select Font (24 Studio Arabic &amp; English Fonts)</h2>
+          <p data-i18n="pc_font_modal_d">Choose from 12 Arabic &amp; 12 English studio typefaces for your collage title.</p>
+        </div>
+        <button type="button" class="pc-modal-close" id="btnPcCloseFontModal" aria-label="Close">×</button>
+      </div>
+      <div class="pc-modal-body" id="pcFontList"></div>
+    </div>
+  </div>
+
+  <!-- Dedicated Export & Print Modal -->
+  <div class="pc-modal-backdrop hide" id="pcExportModal" role="dialog" aria-modal="true" aria-labelledby="pcExportModalTitle">
+    <div class="pc-modal-dialog">
+      <div class="pc-modal-head">
+        <div>
+          <h2 id="pcExportModalTitle" data-i18n="pc_btn_export">Export &amp; Print</h2>
+          <p data-i18n="pc_export_modal_d">Export locally in crisp PNG (up to 3000px, supports transparency), JPG, or 300 DPI print-ready PDF.</p>
+        </div>
+        <button type="button" class="pc-modal-close" id="btnPcCloseExportModal" aria-label="Close">×</button>
+      </div>
+      <div class="pc-modal-body">
+        <div class="pc-chip-row" id="pcScaleRow" role="radiogroup" aria-label="Export resolution scale">
+          <button type="button" class="pc-chip-btn" data-scale="1" data-i18n="ms_scale_1x">1x Standard</button>
+          <button type="button" class="pc-chip-btn active" data-scale="2" data-i18n="ms_scale_2x">2x High HD</button>
+          <button type="button" class="pc-chip-btn" data-scale="3" data-i18n="ms_scale_3x">3x Ultra Retina (up to 3000px)</button>
+        </div>
+        <div class="pc-chip-row" id="pcPdfPaperRow" role="radiogroup" aria-label="PDF print paper format">
+          <button type="button" class="pc-chip-btn active" data-paper="a4" data-i18n="pc_pdf_a4">PDF: A4 Sheet</button>
+          <button type="button" class="pc-chip-btn" data-paper="letter" data-i18n="pc_pdf_letter">PDF: US Letter</button>
+        </div>
+        <div class="pc-export-summary" id="pcExportSummary">2000 × 2000 px (2x) · Ready</div>
+        <div class="pc-export-actions">
+          <button type="button" class="btn btn-primary btn-block" id="btnPcExportPng">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span data-i18n="ms_btn_dl_png">Download PNG (Supports Transparent)</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn-block" id="btnPcExportJpg" data-i18n="ms_btn_dl_jpg">Download High-Quality JPG</button>
+          <button type="button" class="btn btn-secondary btn-block" id="btnPcExportPdf" data-i18n="pc_btn_dl_pdf">Download 300 DPI Print PDF</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script type="module" src="/js/photo-collage.js"></script>
+</body>
+</html>

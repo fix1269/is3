@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Filters — imgsfix</title>
+  <meta name="description" content="Apply 18 photographic and cinematic color-grading filters with 60fps real-time sliders, before/after comparison, and original-format export locally in your browser.">
+  <link rel="stylesheet" href="/assets/cairo.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <section class="page-head">
+    <div class="container">
+      <span class="badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v4"/><path d="M12 17v4"/><path d="m4.93 7.93 2.83 2.83"/><path d="m16.24 13.24 2.83 2.83"/><path d="M3 12h4"/><path d="M17 12h4"/></svg><span data-i18n="t_filters_t">Filters</span></span>
+      <h1 data-i18n="t_filters_t">Filters</h1>
+      <p data-i18n="t_filters_d">Apply 18 cinematic &amp; photographic color filters with 60fps real-time controls.</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html" data-i18n="bc_home">Home</a><span class="sep">/</span>
+        <a href="../../index.html#categories" data-i18n="nav_tools">Tools</a><span class="sep">/</span>
+        <a href="../categories/images.html" data-i18n="cat_images_t">Images &amp; Design</a><span class="sep">/</span>
+        <span data-i18n="t_filters_nav">Filters</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container tool-shell">
+      <aside class="tool-panel">
+        <div class="panel-section">
+          <h4 data-i18n="tc_filters_settings">Filter Presets</h4>
+          <div class="filter-studio-grid" id="filterGrid" role="radiogroup" aria-label="Filter Presets"></div>
+        </div>
+
+        <div class="panel-section">
+          <h4 data-i18n="tc_filter_adjustments">Fine-Tune Adjustments</h4>
+          <div class="setting-row">
+            <label for="intensity"><span data-i18n="tc_intensity">Filter Intensity</span>: <span id="intVal">100%</span></label>
+            <input type="range" id="intensity" class="range-input" min="0" max="100" value="100">
+          </div>
+          <div class="setting-row">
+            <label for="brightness"><span data-i18n="tc_brightness">Brightness</span>: <span id="brightVal">0</span></label>
+            <input type="range" id="brightness" class="range-input" min="-50" max="50" value="0">
+          </div>
+          <div class="setting-row">
+            <label for="contrast"><span data-i18n="tc_contrast">Contrast</span>: <span id="contrastVal">0</span></label>
+            <input type="range" id="contrast" class="range-input" min="-50" max="50" value="0">
+          </div>
+          <div class="setting-row">
+            <label for="saturation"><span data-i18n="tc_saturation">Saturation</span>: <span id="satVal">0</span></label>
+            <input type="range" id="saturation" class="range-input" min="-50" max="50" value="0">
+          </div>
+          <div class="setting-row">
+            <label for="vignette"><span data-i18n="tc_vignette">Vignette</span>: <span id="vigVal">0%</span></label>
+            <input type="range" id="vignette" class="range-input" min="0" max="100" value="0">
+          </div>
+          <button type="button" class="btn btn-secondary btn-block" id="btnNoFilter" style="margin-top:8px" data-i18n="tc_no_filter">Reset Filter &amp; Adjustments</button>
+          <button type="button" class="btn btn-primary btn-block" id="btnApply" style="margin-top:8px" disabled data-i18n="tc_apply">Apply</button>
+        </div>
+      </aside>
+
+      <div class="tool-stage" id="toolStage">
+        <div class="tool-stage-header">
+          <h3 data-i18n="t_filters_t">Filters</h3>
+          <div class="result-actions" id="resultActions" style="display:none">
+            <button type="button" class="btn btn-primary btn-sm" id="btnDownload" data-i18n="tc_download">Download</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnClear" data-i18n="tc_clear">Clear</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnReset" data-i18n="tc_reset">Reset</button>
+          </div>
+        </div>
+        <div class="tool-stage-body">
+          <div class="empty-state" id="emptyState">
+            <div class="es-icon">
+              <svg class="ic-upload" viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 20h14"/></svg>
+            </div>
+            <p data-i18n="tc_drop">Drop your image here or click to browse</p>
+            <p style="font-size:12px;color:var(--text-faint)" data-i18n="tc_supported">JPG · PNG · WebP · GIF · BMP</p>
+            <button type="button" class="btn btn-primary btn-sm" id="btnUpload" data-i18n="t_upload">Upload Image</button>
+          </div>
+
+          <div class="ba-wrap hide" id="baWrap">
+            <canvas id="beforeCanvas"></canvas>
+            <div class="ba-clip" style="width:50%">
+              <canvas id="afterCanvas"></canvas>
+            </div>
+            <div class="ba-slider" style="left:50%"></div>
+            <div class="ba-handle" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 16-4-4 4-4"/><path d="m17 8 4 4-4 4"/><path d="M3 12h18"/></svg>
+            </div>
+            <span class="ba-label ba-label-before" data-i18n="tc_original">Before</span>
+            <span class="ba-label ba-label-after" data-i18n="tc_result">After</span>
+          </div>
+
+          <input type="file" id="fileInput" accept="image/*" class="hide">
+          <div class="drop-zone hide" id="dropZone" style="margin-top:16px">
+            <span class="dz-icon">
+              <svg class="ic-upload" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 20h14"/></svg>
+            </span>
+            <span data-i18n="tc_drop">Drop your image here or click to browse</span>
+          </div>
+          <div class="progress hide" id="progress" style="max-width:400px">
+            <div class="progress-bar"></div>
+            <div class="progress-text" id="progressText"></div>
+          </div>
+          <div id="infoBar" style="font-size:13px;color:var(--text-faint)"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="/js/main.js"></script>
+  <script type="module" src="/js/filters.js"></script>
+</body>
+</html>
